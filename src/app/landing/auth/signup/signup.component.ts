@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
 
   register() {
     this.loading = true;
-    this.serv.registerUser(this.signupForm.value.email, this.signupForm.value.pass)
+    this.serv.registerUser(this.signupForm.value.email, this.signupForm.value.pass, 'student')
     .pipe(first())
       .subscribe(
         data => {

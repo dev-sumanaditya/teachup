@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class PanelComponent implements OnInit {
 
-  public loggedIn = false;
+  public loggedIn = true;
 
   @ViewChild('dropmenu') drop: ElementRef;
   @ViewChild('accountMenu') accMenu: ElementRef;

@@ -1,8 +1,25 @@
-export class User {
-  id: number;
+export class GetUser {
+  uuid: string;
   username: string;
-  password: string;
   firstName: string;
   lastName: string;
-  token?: string;
+  role: {
+    name: string,
+    uuid: string
+  };
+  createdAt: string;
+}
+
+export class User {
+  uuid: string;
+  token: string;
+  refreshToken: string;
+  expiresAt: string;
+}
+
+
+export class PostUser {
+  email: string;
+  password: string;
+  role: string;
 }

@@ -11,9 +11,6 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  private loginUrl = '';
-  private registerUrl = '';
-
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
@@ -26,8 +23,8 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/auth`, { username, password })
+  login(email: string, password: string) {
+    return this.http.post<any>(`${environment.apiUrl}/auth`, { email, password })
         .pipe(map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -42,8 +39,9 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
-  registerUser(email: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/users`, {email, password})
+
+  registerUser(email: string, password: string, role: string) {
+    return this.http.post<any>(`${environment.apiUrl}/users`, {email, password, role})
     .pipe(map(user => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem('currentUser', JSON.stringify(user));
