@@ -1,1 +1,104 @@
-/* You can add global styles to this file, and also import other style files */
+// colors
+.blue {
+  color: #0052CC;
+}
+.blue-bg {
+  background-color: #0052CC;
+}
+.danger {
+  color: red;
+}
+
+
+
+
+// layout
+.wide {
+  width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.f1 {
+  flex: 1;
+}
+.f2 {
+  flex: 2;
+}
+.f3 {
+  flex: 3;
+}
+.f4 {
+  flex: 4;
+}
+.f5 {
+  flex: 5;
+}
+.f6 {
+  flex: 6;
+}
+
+
+// components
+.btn {
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    filter: brightness(90%);
+  }
+}
+
+//utility
+.spin {
+  animation: rotating 2s linear infinite;
+  -webkit-animation: rotating 2s linear infinite;
+  width: 50px;
+  height: 50px;
+}
+@-webkit-keyframes rotating {
+    from{
+        -webkit-transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+
+// shadow
+.sha1 {
+  box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+  transition-duration: 0.3s;
+  &:hover {
+    box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);
+  }
+}
+
+//global fixes
+a {
+  text-decoration: none;
+  width: max-content;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+body,html {
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,100 @@
+<div class="ctr">
+  <div class="wide">
+    <div class="main row">
+      <div class="l col">
+        <h1>Learn Skills from Top Instructors</h1>
+        <p>Explore our top online courses and live lectures taught by expert instructors.</p>
+        <a href="/courses" class="btn blue-bg">Explore courses</a>
+      </div>
+      <div class="r">
+        <img src="/assets/images/home/main.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="cta col">
+      <h2>Register now and get 40% off on your first course.</h2>
+      <div class="row">
+        <input type="text" placeholder="Your Email">
+        <button class="btn blue-bg">Sign Up</button>
+      </div>
+    </div>
+
+    <div class="video row">
+      <div class="l f3">
+        <video
+          #mainVideo
+          class="video-js vjs-default-skin vjs-big-play-centered"
+          controls muted playsinline preload="auto"
+        >
+        </video>
+      </div>
+      <div class="r f2 col">
+        <div class="item row">
+          <img src="/assets/icons/features/1.png" alt="">
+          <div class="txt col">
+            <h6>Certification Courses</h6>
+            <p>Online certification courses taught by expert instructors.</p>
+          </div>
+        </div>
+
+        <div class="item row">
+          <img src="/assets/icons/features/2.png" alt="">
+          <div class="txt col">
+            <h6>Live Q&A</h6>
+            <p>Get live answers to all your doubts instantly.</p>
+          </div>
+        </div>
+
+        <div class="item row">
+          <img src="/assets/icons/features/3.png" alt="">
+          <div class="txt col">
+            <h6>Expert Instructors</h6>
+            <p>Courses taught by industry leading subject matter experts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popular">
+      <div class="head blue">Popular Courses</div>
+      <div class="items row" *ngIf="!static">
+        <div class="itm" *ngFor="let i of dummy"><app-course></app-course></div>
+      </div>
+      <div class="col static">
+        <img src="/assets/images/home/courses.png" alt="">
+        <p>Upcoming courses will appear here</p>
+      </div>
+    </div>
+
+    <div class="popular" style="margin-top: 40px;" *ngIf="!static">
+      <div class="head blue">Editors Pick</div>
+      <div class="items row">
+        <div class="itm" *ngFor="let i of dummy"><app-course></app-course></div>
+      </div>
+    </div>
+
+    <div class="updates" *ngIf="!static">
+      <div class="head blue"><strong>Latest Updates</strong></div>
+      <div class="items row">
+        <div class="item" *ngFor="let i of dummy2">
+          <app-updates></app-updates>
+        </div>
+      </div>
+    </div>
+
+    <div class="banner col">
+      <div class="content">
+        <h2>Join millions of learners online and enhance your skills.</h2>
+      </div>
+    </div>
+
+    <div class="cta2 col">
+      <h2>Register now and get 40% off on your first course</h2>
+      <div class="btns">
+        <a href="/auth/signup" class="btn blue-bg">Register Now</a>
+        <a href="/courses" class="btn blue-ot">Explore Courses</a>
+      </div>
+    </div>
+
+  </div>
+</div>

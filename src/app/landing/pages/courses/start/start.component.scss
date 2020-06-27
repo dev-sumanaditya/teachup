@@ -1,0 +1,36 @@
+.categories {
+  .items {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0;
+    .item {
+      width: 24%;
+      cursor: pointer;
+      padding: 10px 15px;
+      align-items: center;
+      box-sizing: border-box;
+      margin-bottom: 15px;
+      img {
+        margin-right: 15px;
+        height: 32px;
+      }
+      span {
+        color: #444;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.popular {
+  margin: 40px 0;
+  .items {
+    margin-top: 15px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .item {
+      width: 32%;
+      margin-bottom: 20px;
+    }
+  }
+}

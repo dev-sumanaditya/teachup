@@ -1,0 +1,45 @@
+<div class="wide">
+  <div class="top row">
+    <div class="bar blue-bg"></div>
+    <h2>Account Settings</h2>
+  </div>
+
+  <div class="info col card">
+    <strong class="blue head">Account Information</strong>
+    <h2>John Doe</h2>
+    <small>johndoe@gmail.com</small>
+    <small><strong class="blue">Learner</strong></small>
+  </div>
+
+    <div class="card col">
+      <strong class="blue head">Change Password</strong>
+      <form action="" class="form col">
+        <div class="formItm col" *ngIf="!verified">
+          <label for="password">Current Password</label>
+          <input type="password" id="password">
+        </div>
+        <a *ngIf="!verified" href="/auth/forgot" class="link blue"><small><strong>Forgot password?</strong></small></a>
+        <button *ngIf="!verified" type="button" (click)="verify()" class="btn blue-bg">Continue</button>
+      </form>
+      <img *ngIf="verifying" src="/assets/icons/utility/spinner.png" alt="" class="spin">
+
+      <div class="verified" *ngIf="verified">
+        <form action="" class="form col">
+          <div class="formItm col">
+            <label for="password2">New Password</label>
+            <input type="password" id="password2">
+          </div>
+          <div class="formItm col">
+            <label for="password3">Confirm Password</label>
+            <input type="password" id="password3">
+          </div>
+          <button type="submit" (click)="changePass()" class="btn blue-bg">Continue</button>
+        </form>
+      </div>
+    </div>
+
+
+  <div class="card">
+    <a href="" class="link blue"><strong>Sign up as Instructor</strong></a>
+  </div>
+</div>

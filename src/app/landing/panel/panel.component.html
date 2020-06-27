@@ -1,0 +1,101 @@
+<nav class="navbar" [class.shrink]="shrink">
+  <div class="wide row">
+    <a href="" class="brand blue">Teachup.io</a>
+    <div class="navs row">
+      <a class="nav" (click)="showdrop()" #dropmenu>
+        <span>Courses</span>
+        <img class="dropic" src="/assets/icons/utility/down.png" alt="">
+        <div class="dropdown"  [class.showDrop]="dropdown">
+          <div class="content col">
+            <div class="row">
+              <a routerLink="/courses" class="item link row">
+                <img src="/assets/icons/courses/1.png" alt="">
+                <div class="text">
+                  <h4>Courses on Technology</h4>
+                  <p>C++ | Java | Python | Javascript</p>
+                </div>
+              </a>
+              <a class="item row link">
+                <img src="/assets/icons/courses/3.png" alt="">
+                <div class="text">
+                  <h4>Courses on Management</h4>
+                  <p>C++ | Java | Python | Javascript</p>
+                </div>
+              </a>
+            </div>
+            <div class="row">
+              <a class="item row link">
+                <img src="/assets/icons/courses/2.png" alt="">
+                <div class="text">
+                  <h4>Courses on Science</h4>
+                  <p>C++ | Java | Python | Javascript</p>
+                </div>
+              </a>
+              <a class="item row link">
+                <img src="/assets/icons/courses/4.png" alt="">
+                <div class="text">
+                  <h4>Courses on finance</h4>
+                  <p>C++ | Java | Python | Javascript</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a routerLink="/about" class="nav">
+        <span>About Us</span>
+      </a>
+
+      <a routerLink="/webinars" class="nav">
+        <span>Webinars</span>
+      </a>
+
+      <!-- <a routerLink="/faq" class="nav">
+        <span>FAQs</span>
+      </a> -->
+    </div>
+
+    <div class="flex-grow"></div>
+
+    <div class="navs row">
+      <a href="/auth" class="nav" *ngIf="!loggedIn">
+        <span>login</span>
+      </a>
+      <a class="nav account" *ngIf="loggedIn" (click)="showAccount()" #accountMenu>
+        <span><strong>John Doe</strong></span>
+        <img class="dropic" src="/assets/icons/utility/down.png" alt="">
+        <div class="dropdown" [class.showDrop]="showAcc">
+          <div class="col">
+            <a href="/user" class="link">Dashboard</a>
+            <a href="/user/courses" class="link">My Courses</a>
+            <a href="/user/wishlist" class="link">Wishlist</a>
+            <a href="/user/cart" class="link">My Cart</a>
+            <a href="/user/settings" class="link">Account Settings</a>
+            <a href="" class="link logout" (click)="logout()">Logout</a>
+          </div>
+        </div>
+      </a>
+      |
+      <a href="/user/cart" class="navbtn" *ngIf="loggedIn">
+        <img src="/assets/icons/utility/cart.png" alt="">
+      </a>
+      <a href="" class="navbtn">
+        <img src="/assets/icons/utility/search.png" alt="">
+      </a>
+    </div>
+  </div>
+</nav>
+<div style="margin-top: 120px; min-height: 90vh;" class="outlet">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="footer">
+  <div class="wide row">
+    <div class="sec">
+      <h2>Teachup.io</h2>
+    </div>
+    <div class="sec"></div>
+    <div class="sec"></div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+.top {
+  margin-bottom: 40px;
+  .bar {
+    width: 4px;
+    margin-right: 15px;
+  }
+  h2 {
+    margin: 0;
+  }
+}
+.card {
+  box-shadow: 0px 1px 10px -6px #333;
+  margin-bottom: 40px;
+  padding: 20px;
+}
+.info {
+  .head {
+    margin-bottom: 20px;
+  }
+  h2 {
+    margin: 0;
+    color: #444;
+  }
+  small {
+    margin-top: 4px;
+  }
+}
+.head {
+  margin-bottom: 20px;
+}
+.form {
+  .formItm {
+    label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    input {
+      margin-top: 3px;
+      padding: 3px 10px;
+      width: 220px;
+    }
+  }
+  .btn {
+    color: white;
+    border: none;
+    width: max-content;
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,151 @@
+.navbar {
+  padding: 5vh;
+  user-select: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+  z-index: 5000;
+  transition-duration: 0.3s;
+
+  .wide {
+    align-items: center;
+
+    .brand {
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .navs {
+      margin-left: 35px;
+      align-items: center;
+
+      .nav {
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+
+        span {
+          color: #333;
+          font-size: 15px;
+          font-weight: 500;
+        }
+        .dropic {
+          height: 10px;
+          margin-left: 3px;
+          margin-top: 2px;
+        }
+
+        .dropdown {
+          position: absolute;
+          top: 30px;
+          left: 0;
+          border: none;
+          border-radius: 4px;
+          box-shadow: 0px 2px 6px -4px #333;
+          overflow: hidden;
+          max-height: 0px;
+          transition-duration: 0.3s;
+          opacity: 0;
+          margin-top: -10px;
+          background-color: white;
+
+          .content {
+            padding: 20px 30px;
+            border: 2px solid rgb(213, 219, 230);
+
+            .item {
+              padding: 10px;
+              width: 250px;
+              color: #333;
+              &:hover {
+                h4 {
+                  color: #0052cc;
+                }
+              }
+
+              img {
+                height: 40px !important;
+                max-width: 40px !important;
+                margin-right: 10px;
+              }
+              .text {
+                h4 {
+                  margin: 0;
+                  font-size: 16px;
+                  font-weight: 600;
+                  width: max-content;
+                }
+                p {
+                  margin: 0;
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+        .showDrop {
+          max-height: 600px !important;
+          opacity: 1;
+          margin-top: 0px;
+        }
+      }
+      .account {
+        strong {
+          margin-right: 5px;
+        }
+        .dropdown {
+
+          .col {
+            padding: 10px 20px;
+            a {
+              padding: 5px 0;
+              margin-right: 20px;
+              color: #222;
+              &:hover {
+                color: #0052cc;
+              }
+            }
+            .logout {
+              color: red;
+              &:hover {
+                color: red;
+                text-shadow: 0px 0px 1px red;
+              }
+            }
+          }
+        }
+      }
+
+      .navbtn {
+        margin-left: 15px;
+        img {
+          height: 30px;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+.shrink {
+  padding: 2vh 5vh !important;
+  box-shadow: 0px 1px 10px -6px #444;
+}
+
+
+.footer {
+  background-color: #0052cc;
+  color: white;
+  padding: 20px;
+  .row {
+    padding: 20px 0;
+
+    .sec {
+      h2 {
+        margin: 0;
+      }
+    }
+  }
+}

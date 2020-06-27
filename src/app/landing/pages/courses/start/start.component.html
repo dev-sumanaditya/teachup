@@ -1,0 +1,26 @@
+<div class="wide">
+  <div class="categories">
+    <strong>Categories</strong>
+    <div class="items row">
+      <a href="/courses/category" class="item row sha1" *ngFor="let i of dummy">
+        <img src="/assets/images/demo/code.png" alt="">
+        <span>Item Name</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="popular">
+    <strong>Popular Courses</strong>
+    <div class="items row">
+      <div class="item sha1" *ngFor="let i of dummy"><app-course></app-course></div>
+    </div>
+  </div>
+
+  <div class="popular">
+    <strong>Upcoming Courses</strong>
+    <div class="items row">
+      <div class="item sha1" *ngFor="let i of [1,1,1]"><app-course></app-course></div>
+    </div>
+  </div>
+
+</div>

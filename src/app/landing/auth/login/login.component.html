@@ -1,0 +1,30 @@
+<div class="ctr row">
+  <div class="l f5 col">
+    <h1 class="blue brand">SohoLearn</h1>
+    <h2>Join millions of developers online and enhance your skills</h2>
+    <strong>Dont have an account? <a href="/auth/signup" class="link blue">Get started</a> </strong>
+    <a href="/" class="link blue"><strong>Continue to website</strong></a>
+  </div>
+  <div class="r f2 col">
+    <strong class="blue">Log in to your account</strong>
+    <form class="col" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="f-item col">
+        <label for="email">Email Address</label>
+        <input type="text" name="email" id="email" placeholder="Your Email" formControlName="email">
+      </div>
+      <div class="f-item col">
+        <label for="pass">Password</label>
+        <input type="password" name="pass" id="pass" placeholder="Your Password" formControlName="pass">
+      </div>
+      <a href="/auth/forgot" class="link blue"><small>Forgot password?</small></a>
+      <button class="btn blue-bg loginbtn">Continue</button>
+      <small class="danger" *ngIf="submitted && LoginFormControl.email.errors">Enter a valid email address.</small>
+      <small class="danger" *ngIf="submitted && LoginFormControl.pass.errors">Password must be 8 characters long</small>
+      <small class="danger" *ngIf="error && submitted">{{error}}</small>
+    </form>
+    <small class="or">OR</small>
+    <div class="btn social row"> <img src="/assets/images/auth/google.png" alt=""> Continue with Google</div>
+    <div class="btn social row"> <img src="/assets/images/auth/microsoft.png" alt=""> Continue with Microsoft</div>
+    <a href="/auth/signup" class="link register blue">Sign up for an account</a>
+  </div>
+</div>

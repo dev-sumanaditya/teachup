@@ -1,0 +1,22 @@
+.top {
+  padding: 60px 0;
+
+  .l {
+    justify-content: center;
+    h1 {
+      font-size: 40px;
+      margin: 0;
+      font-weight: 800;
+    }
+    h2 {
+      font-size: 32px;
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+  .r {
+    img {
+      max-width: 100%;
+    }
+  }
+}

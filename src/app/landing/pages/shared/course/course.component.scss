@@ -1,0 +1,25 @@
+.ctrr {
+  .image {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 2px solid #0052cc;
+  }
+  .info {
+    padding: 10px 15px;
+    h2 {
+      font-size: 16px;
+      margin: 0;
+      font-weight: 500;
+    }
+    strong {
+      color: #45aaa1;
+      margin-top: 10px;
+    }
+    .btn {
+      color: white;
+      width: max-content;
+      margin-top: 10px;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "/api/*": {
+    "target": "https://teachup.io",
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

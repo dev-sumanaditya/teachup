@@ -1,0 +1,76 @@
+.catname {
+  margin-bottom: 40px;
+  .bar {
+    width: 4px;
+    margin-right: 20px;
+  }
+  h4 {
+    margin: 0;
+  }
+}
+
+.featured {
+  margin-bottom: 40px;
+  .banner {
+    margin-top: 15px;
+    padding: 10px 15px;
+    .l {
+      img {
+        height: 220px;
+        box-shadow: 0px 2px 2px -2px #333;
+      }
+    }
+    .r {
+      padding-left: 20px;
+      position: relative;
+      .like {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      h2 {
+        margin: 0;
+        font-size: 18px;
+        color: #444;
+      }
+      .row {
+        align-items: flex-end;
+        margin-bottom: 5px;
+        .btn {
+          color: white;
+        }
+        strong {
+          color: #45AAB5;
+          font-size: 18px;
+        }
+      }
+
+      .like {
+        filter: grayscale(100);
+        img {
+          opacity: 0.6;
+          cursor: pointer;
+        }
+        &:hover {
+          filter: grayscale(0);
+          img {
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.popular {
+  .items {
+    margin-top: 15px;
+    flex-wrap: wrap;
+
+    .item {
+      width: 24%;
+      margin: 1%;
+    }
+  }
+}
