@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ErrorInterceptor } from './landing/helpers/error.interceptor';
 import { JwtInterceptor } from './landing/helpers/jwt.interceptor';
+import { AuthGuard } from './landing/helpers/auth.guard';
 @NgModule({
   declarations: [
     AppComponent
@@ -21,6 +22,7 @@ import { JwtInterceptor } from './landing/helpers/jwt.interceptor';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

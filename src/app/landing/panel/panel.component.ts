@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class PanelComponent implements OnInit {
 
-  public loggedIn = true;
+  public loggedIn = false;
 
   @ViewChild('dropmenu') drop: ElementRef;
   @ViewChild('accountMenu') accMenu: ElementRef;
@@ -37,6 +37,10 @@ export class PanelComponent implements OnInit {
         this.showAcc = false;
       }
     });
+
+    if (this.authService.currentUserValue) {
+      this.loggedIn = true;
+    }
   }
 
   ngOnInit(): void {
