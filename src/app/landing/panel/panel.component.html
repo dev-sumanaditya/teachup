@@ -1,3 +1,31 @@
+<div class="loading hide" #loading></div>
+<div class="sidemenu col" [class.shrinked]="!sidemenu">
+  <div class="row tp">
+    <div class="col">
+      <a href="/" class="link blue">Teachup.io</a>
+      <small *ngIf="user">{{user.username}}</small>
+    </div>
+    <div class="flex-grow"></div>
+    <img (click)="closeSideMenu()" src="/assets/icons/utility/close2.png" alt="">
+  </div>
+  <div class="col menu">
+    <a routerLink="/courses" (click)="closeSideMenu()" class="link">Courses</a>
+    <a routerLink="/about" (click)="closeSideMenu()" class="link">About Us</a>
+    <a routerLink="/webinars" (click)="closeSideMenu()" class="link">Webinars</a>
+  </div>
+  <div class="col menu2" *ngIf="!user">
+    <a [routerLink]="['/auth']" (click)="closeSideMenu()" class="link">Login</a>
+    <a routerLink="/auth/signup" (click)="closeSideMenu()" class="link">Sign up</a>
+  </div>
+  <div class="col menu2" *ngIf="user">
+    <a routerLink="/user" (click)="closeSideMenu()" class="link">Dashboard</a>
+    <a routerLink="/user/cart" (click)="closeSideMenu()" class="link">Cart</a>
+    <a routerLink="/user/courses" (click)="closeSideMenu()" class="link">My Courses</a>
+    <a routerLink="/user/wishlist" (click)="closeSideMenu()" class="link">My Wishlist</a>
+    <a routerLink="/user/settings" (click)="closeSideMenu()" class="link">Account Settings</a>
+    <a class="link danger" (click)="logout2()">Logout</a>
+  </div>
+</div>
 <nav class="navbar" [class.shrink]="shrink">
   <div class="wide row">
     <a href="" class="brand blue">Teachup.io</a>
@@ -59,11 +87,11 @@
     <div class="flex-grow"></div>
 
     <div class="navs row">
-      <a href="/auth" class="nav" *ngIf="!loggedIn">
+      <a routerLink="/auth" class="nav" *ngIf="!user">
         <span>login</span>
       </a>
-      <a class="nav account" *ngIf="loggedIn" (click)="showAccount()" #accountMenu>
-        <span><strong>John Doe</strong></span>
+      <a class="nav account" *ngIf="user" (click)="showAccount()" #accountMenu>
+        <span><strong>{{user.username}}</strong></span>
         <img class="dropic" src="/assets/icons/utility/down.png" alt="">
         <div class="dropdown" [class.showDrop]="showAcc">
           <div class="col">
@@ -77,12 +105,17 @@
         </div>
       </a>
       |
-      <a href="/user/cart" class="navbtn" *ngIf="loggedIn">
+      <a href="/user/cart" class="navbtn" *ngIf="user">
         <img src="/assets/icons/utility/cart.png" alt="">
       </a>
       <a href="" class="navbtn">
         <img src="/assets/icons/utility/search.png" alt="">
       </a>
+    </div>
+    <div class="navs2 row">
+      <div class="nav" (click)="openSideMenu()">
+        <img src="/assets/icons/utility/menu.png" alt="">
+      </div>
     </div>
   </div>
 </nav>

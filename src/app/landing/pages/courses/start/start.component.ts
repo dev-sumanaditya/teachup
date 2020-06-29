@@ -7,7 +7,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartComponent implements OnInit {
 
-  public dummy = [1,1,1,1,1,1,1,1,1];
+  public static = true;
+  public categories = [
+    {
+      name: 'Technology',
+      img: 'technology'
+    },
+    {
+      name: 'Finance',
+      img: 'finance'
+    },
+    {
+      name: 'Marketing',
+      img: 'marketing'
+    },
+    {
+      name: 'Photography',
+      img: 'photography'
+    },
+    {
+      name: 'Kids',
+      img: 'kids'
+    },
+    {
+      name: 'Management',
+      img: 'management'
+    },
+    {
+      name: 'Arts',
+      img: 'arts'
+    }
+  ];
 
   constructor() { }
 

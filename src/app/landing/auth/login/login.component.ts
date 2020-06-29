@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
-import { first } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { AuthService } from "../services/auth.service";
+import { first } from "rxjs/operators";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-
   public submitted = false;
   public loginForm: FormGroup;
   public loading = false;
   public returnUrl: string;
-  public error = '';
+  public error = "";
 
   constructor(
     private serv: AuthService,
@@ -24,15 +22,30 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    if (this.serv.currentUserValue) {
-      this.router.navigate(['/']);
+    if (localStorage.getItem("currentUser")) {
+      this.router.navigate(["/"]);
     }
   }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(60), Validators.minLength(5)]],
-      pass: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(60)]]
+      email: [
+        "",
+        [
+          Validators.required,
+          Validators.email,
+          Validators.maxLength(60),
+          Validators.minLength(5),
+        ],
+      ],
+      pass: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(60),
+        ],
+      ],
     });
   }
   get LoginFormControl() {
@@ -50,17 +63,18 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
-    this.serv.login(this.loginForm.value.email, this.loginForm.value.pass)
-      .pipe(first())
+    this.serv
+      .login(this.loginForm.value.email, this.loginForm.value.pass)
+      .pipe()
       .subscribe(
-        data => {
-          this.router.navigate(['/']);
+        (data) => {
+          this.serv.currentUserSubject.next(data);
+          this.router.navigate(["/"]);
         },
-        error => {
+        (error) => {
           this.error = error;
           this.loading = false;
         }
       );
   }
-
 }

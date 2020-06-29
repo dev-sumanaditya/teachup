@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { AuthGuard } from './helpers/auth.guard';
+import { AuthService } from './auth/services/auth.service';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { AuthGuard } from './helpers/auth.guard';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthGuard
+    AuthGuard,
+    AuthService
   ]
 })
 export class LandingModule { }

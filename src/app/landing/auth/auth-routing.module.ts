@@ -6,9 +6,12 @@ import { ForgotComponent } from './forgot/forgot.component';
 
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: 'instructor', loadChildren: () => import('./instructor/instructor.module').then(m => m.InstructorModule)},
   {path: 'signup', component: SignupComponent},
-  {path: 'forgot', component: ForgotComponent}
+  {path: 'forgot', component: ForgotComponent},
+  {path: 'info', loadChildren: () => import('./info/info.module').then(m => m.InfoModule)},
+  {path: '', component: LoginComponent}
+
 ];
 
 @NgModule({

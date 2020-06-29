@@ -1,10 +1,10 @@
 .categories {
   .items {
     flex-wrap: wrap;
-    justify-content: space-between;
     margin: 20px 0;
     .item {
       width: 24%;
+      margin-right: 1%;
       cursor: pointer;
       padding: 10px 15px;
       align-items: center;
@@ -31,6 +31,53 @@
     .item {
       width: 32%;
       margin-bottom: 20px;
+    }
+  }
+  .static {
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+  .categories {
+    .items {
+      .item {
+        width: max-content;
+        margin-right: 3%;
+      }
     }
   }
 }

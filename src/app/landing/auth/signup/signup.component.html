@@ -1,6 +1,10 @@
+<div class="loading col" #loading *ngIf="loading">
+  <img src="/assets/icons/utility/spinner.png" alt="" class="spin">
+  <p>Submitting</p>
+</div>
 <div class="ctr row">
   <div class="l f5 col">
-    <h1 class="blue brand">Teachup.io</h1>
+    <h1 class="blue brand" routerLink="/">Teachup.io</h1>
     <h2>Join millions of developers online and enhance your skills</h2>
     <strong>Already have an account? <a href="/auth" class="link blue">Login</a> </strong>
     <a href="/" class="link blue"><strong>Continue to website</strong></a>

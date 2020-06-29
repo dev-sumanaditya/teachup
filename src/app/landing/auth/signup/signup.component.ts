@@ -45,11 +45,24 @@ export class SignupComponent implements OnInit {
 
   register() {
     this.loading = true;
-    this.serv.registerUser(this.signupForm.value.email, this.signupForm.value.pass, 'student')
+    const email = this.signupForm.value.email;
+    const pass = this.signupForm.value.pass;
+    this.serv.registerUser(email, pass, 'student')
     .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['/']);
+          // this.serv.login(email, pass)
+          // .pipe(first())
+          // .subscribe(
+          //   data => {
+          //       this.router.navigate(['/']);
+          //   },
+          //   error => {
+          //     this.error = error;
+          //     this.loading = false;
+          //   }
+          // );
+          this.router.navigate(['auth']);
         },
         error => {
           this.error = error;

@@ -8,11 +8,11 @@
         <small>Add Image</small>
       </div>
     </div>
-    <h3 class="name blue">Jonathan Doe</h3>
-    <h4>jonathandoe@gmail.com</h4>
-    <small>Learner</small>
+    <h3 class="name blue">User - {{userdata.firstName}} {{userdata.lastName}}</h3>
+    <h4>{{userdata.username}}</h4>
+    <small>{{userdata.role.name}}</small>
   </div>
-  <div class="card enrolled">
+  <div class="card enrolled" *ngIf="!static">
     <strong class="blue">Enrolled Courses</strong>
     <div class="slider">
       <ngx-slick-carousel class="carousel"
@@ -33,7 +33,7 @@
   <div class="card coupons">
     <strong class="blue">My Coupons</strong>
     <div class="items row">
-      <div class="item sha1 col" *ngFor="let i of [1,1,1,1,1]">
+      <div class="item sha1 col" *ngFor="let i of [1]">
         <img src="/assets/images/coupon/40.png" alt="">
         <h2>40% OFF</h2>
         <small>Validity: July 2021</small>

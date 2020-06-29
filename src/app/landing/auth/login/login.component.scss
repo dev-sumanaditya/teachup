@@ -72,3 +72,71 @@
     }
   }
 }
+
+.loading {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  z-index: 5001;
+}
+
+
+
+
+
+
+
+
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+  .ctr {
+    background-position: center;
+    height: auto;
+    padding: 20px;
+    flex-direction: column;
+    .l {
+      margin-bottom: 20px;
+      .brand {
+        font-weight: 800;
+        font-size: 32px;
+      }
+      h2 {
+        font-size: 28px;
+        width: 100%;
+      }
+      strong {
+        margin-top: 10px;
+      }
+    }
+
+    .r {
+      width: 100%;
+      padding: 30px 20px;
+      box-sizing: border-box;
+    }
+  }
+}

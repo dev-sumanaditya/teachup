@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/landing/auth/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +12,20 @@ export class DashboardComponent implements OnInit {
     image: '/assets/images/demo/avatar.jpg'
   };
   public imgx = false;
+  public static = true;
+  public userdata = {
+    firstName: '',
+    lastName: '',
+    username: '',
+    role: {
+      name: '',
+      uuid: ''
+    },
+    uuid: '',
+    createdAt: ''
+  };
 
-  public slides = [1,1,1,1,1,1,1,1,1,1];
+  public slides = [1,1,1,1,1,1,1];
 
   slideConfig = {
     slidesToShow: 4,
@@ -27,9 +40,17 @@ export class DashboardComponent implements OnInit {
     arrows: false
   };
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+    const uuid = JSON.parse(localStorage.getItem('currentUser')).uuid;
+    this.auth.getUserData(uuid)
+    .subscribe(data => {
+      this.userdata = data;
+    },
+    err => {
+      console.log(err);
+    });
   }
 
 }

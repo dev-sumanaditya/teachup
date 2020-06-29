@@ -20,3 +20,49 @@
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .upcoming {
+    .static {
+      align-items: center;
+      justify-content: center;
+      padding: 30px 0;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
