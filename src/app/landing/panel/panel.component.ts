@@ -95,7 +95,10 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
       this.user = user;
     }),
     filter(user => !user.firstName),
-    tap(user => this.router.navigate(['auth', 'info']))
+    tap(user => {
+      console.log('no name - temp disabled');
+      // this.router.navigate(['auth', 'info']);
+    })
     )
     .subscribe();
 

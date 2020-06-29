@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
     public fb: FormBuilder,
     private router: Router
   ) {
-    if (this.serv.currentUserValue) {
+    if (localStorage.getItem('currentUser')) {
       this.router.navigate(['/']);
     }
   }

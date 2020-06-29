@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
-import { map, tap, shareReplay } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { map, tap, shareReplay } from 'rxjs/operators';
 
-import { User } from "../../models/user.model";
-import { environment } from "src/environments/environment";
-import { error } from "protractor";
+import { User } from '../../models/user.model';
+import { environment } from 'src/environments/environment';
+import { error } from 'protractor';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService {
   currentUserSubject = new ReplaySubject<User>(1);
@@ -16,7 +16,7 @@ export class AuthService {
   public userInfo;
 
   constructor(private http: HttpClient) {
-    const user = localStorage.getItem("currentUser");
+    const user = localStorage.getItem('currentUser');
     console.log(user);
     if (user) {
       try {
@@ -35,19 +35,19 @@ export class AuthService {
       .pipe(
         tap((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem("currentUser", JSON.stringify(user));
+          localStorage.setItem('currentUser', JSON.stringify(user));
         })
       );
   }
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem("currentUser");
+    localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
 
   checkUser() {
-    return localStorage.getItem("currentUser");
+    return localStorage.getItem('currentUser');
   }
 
   registerUser(email: string, password: string, role: string) {
@@ -55,11 +55,11 @@ export class AuthService {
       .post<any>(`${environment.apiUrl}/users`, { email, password, role })
       .pipe(
         map(
-          (user) => {
+          user => {
             return user;
           },
-          (error) => {
-            return error;
+          err => {
+            return err;
           }
         )
       );

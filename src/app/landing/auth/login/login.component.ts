@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, Validators, FormBuilder } from "@angular/forms";
-import { AuthService } from "../services/auth.service";
-import { first } from "rxjs/operators";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { first } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   public submitted = false;
   public loginForm: FormGroup;
   public loading = false;
   public returnUrl: string;
-  public error = "";
+  public error = '';
 
   constructor(
     private serv: AuthService,
@@ -22,15 +22,15 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    if (localStorage.getItem("currentUser")) {
-      this.router.navigate(["/"]);
+    if (localStorage.getItem('currentUser')) {
+      this.router.navigate(['/']);
     }
   }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: [
-        "",
+        '',
         [
           Validators.required,
           Validators.email,
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         ],
       ],
       pass: [
-        "",
+        '',
         [
           Validators.required,
           Validators.minLength(8),
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data) => {
           this.serv.currentUserSubject.next(data);
-          this.router.navigate(["/"]);
+          this.router.navigate(['/']);
         },
         (error) => {
           this.error = error;

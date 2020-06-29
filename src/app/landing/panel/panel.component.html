@@ -95,20 +95,20 @@
         <img class="dropic" src="/assets/icons/utility/down.png" alt="">
         <div class="dropdown" [class.showDrop]="showAcc">
           <div class="col">
-            <a href="/user" class="link">Dashboard</a>
-            <a href="/user/courses" class="link">My Courses</a>
-            <a href="/user/wishlist" class="link">Wishlist</a>
-            <a href="/user/cart" class="link">My Cart</a>
-            <a href="/user/settings" class="link">Account Settings</a>
-            <a href="" class="link logout" (click)="logout()">Logout</a>
+            <a routerLink="/user" class="link">Dashboard</a>
+            <a routerLink="/user/courses" class="link">My Courses</a>
+            <a routerLink="/user/wishlist" class="link">Wishlist</a>
+            <a routerLink="/user/cart" class="link">My Cart</a>
+            <a routerLink="/user/settings" class="link">Account Settings</a>
+            <a routerLink="" class="link logout" (click)="logout()">Logout</a>
           </div>
         </div>
       </a>
       |
-      <a href="/user/cart" class="navbtn" *ngIf="user">
+      <a routerLink="/user/cart" class="navbtn" *ngIf="user">
         <img src="/assets/icons/utility/cart.png" alt="">
       </a>
-      <a href="" class="navbtn">
+      <a class="navbtn">
         <img src="/assets/icons/utility/search.png" alt="">
       </a>
     </div>
