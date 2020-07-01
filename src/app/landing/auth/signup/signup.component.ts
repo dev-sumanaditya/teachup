@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
   public error = '';
 
   constructor(
-    private serv: AuthService,
+    private authService: AuthService,
     public fb: FormBuilder,
     private router: Router
   ) {
@@ -43,32 +43,12 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  register() {
+  async register() {
     this.loading = true;
     const email = this.signupForm.value.email;
     const pass = this.signupForm.value.pass;
-    this.serv.registerUser(email, pass, 'student')
-    .pipe(first())
-      .subscribe(
-        data => {
-          // this.serv.login(email, pass)
-          // .pipe(first())
-          // .subscribe(
-          //   data => {
-          //       this.router.navigate(['/']);
-          //   },
-          //   error => {
-          //     this.error = error;
-          //     this.loading = false;
-          //   }
-          // );
-          this.router.navigate(['auth']);
-        },
-        error => {
-          this.error = error;
-          this.loading = false;
-        }
-      );
+    const user = await this.authService.registerUser(email, pass);
+    console.log(user);
   }
 
   get SignupFormControl() {

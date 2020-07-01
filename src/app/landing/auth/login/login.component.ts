@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   public error = '';
 
   constructor(
-    private serv: AuthService,
+    private authService: AuthService,
     public fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router
@@ -61,20 +61,14 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login() {
+  async login() {
     this.loading = true;
-    this.serv
-      .login(this.loginForm.value.email, this.loginForm.value.pass)
-      .pipe()
-      .subscribe(
-        (data) => {
-          this.serv.currentUserSubject.next(data);
-          this.router.navigate(['/']);
-        },
-        (error) => {
-          this.error = error;
-          this.loading = false;
-        }
-      );
+    const user = await this.authService.login(this.loginForm.value.email, this.loginForm.value.pass);
+    console.log(user);
+  }
+
+  async loginWithGoogle(){
+    const {user} = await this.authService.loginWithGoogle();
+    console.log(user);
   }
 }

@@ -9,6 +9,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorInterceptor } from './landing/helpers/error.interceptor';
 import { JwtInterceptor } from './landing/helpers/jwt.interceptor';
 import { AuthGuard } from './landing/helpers/auth.guard';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -17,12 +21,14 @@ import { AuthGuard } from './landing/helpers/auth.guard';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthGuard
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
-import { map, tap, shareReplay } from 'rxjs/operators';
-
+import { map, tap, shareReplay, retry } from 'rxjs/operators';
+import { } from 'firebase/auth';
 import { User } from '../../models/user.model';
 import { environment } from 'src/environments/environment';
 import { error } from 'protractor';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -15,29 +17,22 @@ export class AuthService {
   currentUser = this.currentUserSubject.asObservable().pipe(shareReplay(1));
   public userInfo;
 
-  constructor(private http: HttpClient) {
-    const user = localStorage.getItem('currentUser');
-    console.log(user);
-    if (user) {
-      try {
-        this.currentUserSubject.next(JSON.parse(user));
-      } catch (error) {
-        this.currentUserSubject.next(null);
-      }
-    } else {
-      this.currentUserSubject.next(null);
-    }
+  constructor(private http: HttpClient, private afAuth: AngularFireAuth) {
+    //   const user = localStorage.getItem('currentUser');
+    //   console.log(user);
+    //   if (user) {
+    //     try {
+    //       this.currentUserSubject.next(JSON.parse(user));
+    //     } catch (error) {
+    //       this.currentUserSubject.next(null);
+    //     }
+    //   } else {
+    //     this.currentUserSubject.next(null);
+    //   }
   }
 
-  login(email: string, password: string) {
-    return this.http
-      .post<any>(`${environment.apiUrl}/auth`, { email, password })
-      .pipe(
-        tap((user) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-        })
-      );
+  async login(email: string, password: string) {
+    return await this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
   logout() {
@@ -50,19 +45,15 @@ export class AuthService {
     return localStorage.getItem('currentUser');
   }
 
-  registerUser(email: string, password: string, role: string) {
-    return this.http
-      .post<any>(`${environment.apiUrl}/users`, { email, password, role })
-      .pipe(
-        map(
-          user => {
-            return user;
-          },
-          err => {
-            return err;
-          }
-        )
-      );
+  async loginWithGoogle() {
+    return await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+  }
+
+  async registerUser(email: string, password: string) {
+    await this.afAuth.createUserWithEmailAndPassword(email, password);
+    const user = await this.afAuth.currentUser;
+    await user.sendEmailVerification();
+    return user;
   }
 
   getUserData(uuid) {
