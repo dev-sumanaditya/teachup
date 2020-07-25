@@ -1,0 +1,146 @@
+.ctr {
+  background-image: url('/assets/images/auth/loginbg.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  padding: 0px 150px;
+  align-items: center;
+  .l {
+
+    .brand {
+      font-weight: 800;
+      font-size: 40px;
+      margin-top: 0;
+    }
+    h1 {
+      cursor: pointer;
+      width: max-content;
+    }
+    h2 {
+      font-size: 32px;
+      width: 60%;
+      margin: 0;
+    }
+    strong {
+      margin-top: 10px;
+    }
+  }
+
+  .r {
+    box-shadow: 0px 1px 10px -6px #444;
+    background-color: white;
+    padding: 40px;
+
+    strong {
+      margin-bottom: 30px;
+    }
+
+    .f-item {
+      margin-bottom: 10px;
+      label {
+        font-weight: 500;
+        margin-bottom: 2px;
+      }
+      input {
+        padding: 10px;
+      }
+    }
+    .loginbtn {
+      color: white;
+      border: 2px solid #0052cc;
+      margin-top: 5px;
+    }
+    .or {
+      margin: 20px;
+      text-align: center;
+      font-weight: 500;
+      color: #999;
+    }
+
+    .social {
+      box-shadow: 0px 0px 6px -2.5px #444;
+      align-items: center;
+      justify-content: center;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #444;
+      img {
+        height: 20px;
+        margin-right: 8px;
+      }
+    }
+    .register {
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+  }
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  z-index: 5001;
+}
+
+
+
+
+
+
+
+
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+  .ctr {
+    background-position: center;
+    height: auto;
+    padding: 20px;
+    flex-direction: column;
+    .l {
+      margin-bottom: 20px;
+      .brand {
+        font-weight: 800;
+        font-size: 32px;
+      }
+      h2 {
+        font-size: 28px;
+        width: 100%;
+      }
+      strong {
+        margin-top: 10px;
+      }
+    }
+
+    .r {
+      width: 100%;
+      padding: 30px 20px;
+      box-sizing: border-box;
+    }
+  }
+}

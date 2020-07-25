@@ -2,15 +2,15 @@
   <div class="row cat"><div class="bar blue-bg"></div> <h2>Dashboard</h2></div>
   <div class="info card">
     <div class="image">
-      <img src="{{user.image}}" alt="" *ngIf="imgx">
-      <div class="add col" *ngIf="!imgx">
+      <img src="{{user.photoURL}}" alt="" *ngIf="user.photoURL">
+      <div class="add col" *ngIf="!user.photoURL">
         <img src="/assets/icons/utility/plus.png" alt="">
         <small>Add Image</small>
       </div>
     </div>
-    <h3 class="name blue">User - {{userdata.firstName}} {{userdata.lastName}}</h3>
-    <h4>{{userdata.username}}</h4>
-    <small>{{userdata.role.name}}</small>
+    <h3 class="name blue">{{user.displayName}}</h3>
+    <h4>{{user.email}}</h4>
+    <small><strong>Learner Account</strong></small>
   </div>
   <div class="card enrolled" *ngIf="!static">
     <strong class="blue">Enrolled Courses</strong>

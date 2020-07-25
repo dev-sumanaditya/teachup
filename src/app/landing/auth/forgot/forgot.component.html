@@ -1,1 +1,35 @@
-<p>forgot works!</p>
+<div class="loading col" #loading *ngIf="loading">
+  <img src="/assets/icons/utility/spinner.png" alt="" class="spin">
+  <p>Logging in</p>
+</div>
+<div class="ctr row">
+  <div class="l f5 col">
+    <h1 class="blue brand" routerLink="/">Teachup.io</h1>
+    <h2>Join millions of learners online and enhance your skills</h2>
+    <strong>Dont have an account? <a href="/auth/signup" class="link blue">Get started</a> </strong>
+    <a href="/" class="link blue"><strong>Continue to website</strong></a>
+  </div>
+  <div class="r f2 col" >
+    <strong class="blue">Forgot Password</strong>
+    <form class="col" [formGroup]="ForgotForm" (ngSubmit)="onSubmit()" *ngIf="!success && !submitted">
+      <div class="f-item col">
+        <label for="email">Email Address</label>
+        <input type="email" name="email" id="email" placeholder="Your Email" formControlName="email">
+      </div>
+      <br>
+      <button class="btn blue-bg loginbtn">Continue</button>
+      <small class="danger" *ngIf="submitted && ForgotFormControl.email.errors">Enter a valid email address.</small>
+      <small class="danger" *ngIf="error && submitted">{{error}}</small>
+    </form>
+    <div class="col" *ngIf="submitted">
+      <img src="/assets/icons/utility/spinner.png" class="spin" alt="">
+    </div>
+    <div class="col" *ngIf="success">
+      <strong class="blue">Great! We've sent you an email with the password reset link.</strong>
+      <strong class="blue">Please check your inbox to reset your password.</strong>
+      <br>
+      <small>OR</small>
+    </div>
+    <a href="/auth/signup" class="link register blue">Sign up for an account</a>
+  </div>
+</div>

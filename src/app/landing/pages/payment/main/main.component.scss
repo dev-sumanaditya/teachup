@@ -1,0 +1,70 @@
+.l {
+  margin-right: 20px;
+  .mn {
+    margin: 0;
+  }
+  .details {
+    .items {
+      .item {
+        padding: 10px;
+        margin-bottom: 8px;
+        box-shadow: 0px 0px 4px -2px #333;
+        .lft {
+          margin-right: 10px;
+          img {
+            max-width: 160px;
+            border: 1px solid #ddd;
+          }
+        }
+        .ryt {
+          .name {
+            margin: 0;
+            font-size: 14px;
+          }
+        }
+        .end {
+          margin-left: 10px;
+          img {
+            height: 20px;
+            cursor: pointer;
+            filter: grayscale(1);
+            &:hover {
+              filter: grayscale(0);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.r {
+  .card {
+    box-shadow: 0px 1px 6px -3px #333;
+    padding: 20px 20px;
+    position: sticky;
+    top: 110px;
+    h2 {
+      margin: 0;
+    }
+    .prices {
+      font-size: 14px;
+      margin-top: 20px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #ddd;
+      .price {
+        margin-bottom: 4px;
+      }
+    }
+    .total {
+      margin-top: 6px;
+      font-size: 18px;
+    }
+    .btn {
+      padding: 15px 20px;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+  }
+}

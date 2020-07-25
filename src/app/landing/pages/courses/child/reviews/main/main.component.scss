@@ -1,0 +1,38 @@
+.review {
+  background-color: #f3f3f3;
+  padding: 20px;
+  .user {
+    margin-right: 10px;
+    img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 10px;
+    }
+    h4 {
+      margin: 0;
+      font-size: 14px;
+    }
+  }
+
+  .cmnt {
+    .tp {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+      .main {
+        p {
+          margin: 0;
+          font-weight: 600;
+        }
+      }
+    }
+    .text {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .time {
+      align-items: flex-end;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<div class="loading col" #loading *ngIf="loading">
+  <img src="/assets/icons/utility/spinner.png" alt="" class="spin">
+  <p>Logging in</p>
+</div>
+<div class="ctr row">
+  <div class="l f5 col">
+    <h1 class="blue brand" routerLink="/">Teachup.io</h1>
+    <h2>Join millions of learners online and enhance your skills</h2>
+    <strong>Dont have an account? <a href="/auth/signup" class="link blue">Get started</a> </strong>
+    <a href="/" class="link blue"><strong>Continue to website</strong></a>
+  </div>
+  <div class="r f2 col" *ngIf="mode === 'resetPassword' && !resetDone">
+    <strong class="blue">Reset Password</strong>
+    <form class="col" [formGroup]="ResetForm" (ngSubmit)="onSubmit()">
+      <div class="f-item col">
+        <label for="pass">Password</label>
+        <input type="password" name="pass" id="pass" placeholder="Password" formControlName="pass">
+      </div>
+      <div class="f-item col">
+        <label for="pass2">Confirm Password</label>
+        <input type="password" name="pass2" id="pass2" placeholder="Confirm Password" formControlName="pass2">
+      </div>
+      <br>
+      <button type="submit" class="btn blue-bg loginbtn">Continue</button>
+      <small class="danger" *ngIf="submitted && (ResetFormControl.pass.errors || ResetFormControl.pass2.errors)">Enter a valid password.</small>
+      <small class="danger" *ngIf="error && submitted">{{error}}</small>
+    </form>
+    <a href="/auth/signup" class="link register blue">Sign up for an account</a>
+  </div>
+  <div class="r f2 col" *ngIf="resetDone">
+    <strong class="blue">Congratulations! Your password has been reset successfully.</strong>
+    <br>
+    <a href="/auth" class="link register blue">Continue to Login</a>
+  </div>
+  <div class="r f2 col verifyEmail" *ngIf="mode === 'verifyEmail' && !emailVerified">
+    <strong class="blue">Please wait while we verify your email</strong>
+    <img src="/assets/icons/utility/spinner.png" class="spin">
+    <p class="danger" *ngIf="error">Some error occured.</p>
+  </div>
+  <div class="r f2 col verifyEmail" *ngIf="mode === 'verifyEmail' && emailVerified">
+    <strong class="blue">Congratulations, your email has been verified</strong>
+    <a href="/auth" class="link register blue">Continue to Login</a>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="col">
+  <div class="top">
+    <div class="wide col">
+      <h1 class="name">Productivity Masterclass: Create a Custom System that Works</h1>
+      <strong class="author blue">Thomas Frank, YouTuber, Author, Entrepreneur</strong>
+    </div>
+    <div class="wide row cif">
+      <div class="f5 banner">
+        <img src="/assets/images/demo/Untitled design.jpg" alt="">
+      </div>
+      <div class="f2 col lessons">
+        <strong class="head">10 Lessons | 6 Days</strong>
+        <div class="xxcc col">
+          <div class="items col">
+            <div class="item row" *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1,1]; let x = index">
+              <!-- <div class="ix">
+                <img src="/assets/icons/courses/cert.png" alt="">
+              </div> -->
+              <div class="nm flex-grow row">
+                <div class="span">{{x+1}}.</div> Lesson name and info
+              </div>
+              <div class="tm"><small>1 hr</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="infz wide row">
+    <div class="l col f1">
+      <a
+      [routerLink]="[item.url.toLowerCase()]"
+      routerLinkActive="selected"
+      [routerLinkActiveOptions]="{exact:true}"
+      class="item blue"
+      *ngFor="let item of menu">
+        {{item.name}}
+      </a>
+    </div>
+    <div class="content f3">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="cta wide row">
+    <div class="btn btn1 blue-bg">Get 40% off / Get this course</div>
+    <div class="btn btn2 blue">Add to Cart</div>
+  </div>
+
+  <div class="related wide col">
+    <strong class="blue head">Related Courses</strong>
+    <div class="items row">
+      <div class="item sha1" *ngFor="let i of [1,1,1]"><app-course></app-course></div>
+    </div>
+  </div>
+</div>

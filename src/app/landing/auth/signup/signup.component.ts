@@ -44,14 +44,28 @@ export class SignupComponent implements OnInit {
   }
 
   async register() {
-    this.loading = true;
-    const email = this.signupForm.value.email;
-    const pass = this.signupForm.value.pass;
-    const user = await this.authService.registerUser(email, pass);
-    console.log(user);
+    try {
+      this.loading = true;
+      const email = this.signupForm.value.email;
+      const pass = this.signupForm.value.pass;
+      const user = await this.authService.registerUser(email, pass);
+      this.authService.currentUserSubject.next(user);
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.router.navigate(['/']);
+    } catch (err) {
+      this.loading = false;
+      this.error = err;
+    }
   }
 
   get SignupFormControl() {
     return this.signupForm.controls;
+  }
+
+  async googleLogin() {
+    const {user} = await this.authService.loginWithGoogle();
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.authService.currentUserSubject.next(user);
+    this.router.navigate(['/']);
   }
 }

@@ -10,7 +10,7 @@ export class StartComponent implements OnInit, OnDestroy {
 
   @ViewChild('mainVideo', { static: true }) target: ElementRef;
 
-  public static = true;
+  public static = false;
 
   public dummy = [1,1,1,1,1,1,1,1,1];
   public dummy2 = [1,1,1,1];

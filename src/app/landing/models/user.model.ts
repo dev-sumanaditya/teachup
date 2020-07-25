@@ -10,16 +10,7 @@ export class GetUser {
   createdAt: string;
 }
 
-export class User {
-  uuid: string;
-  token: string;
-  refreshToken: string;
-  expiresAt: string;
-}
-
-
 export class PostUser {
   email: string;
   password: string;
-  role: string;
 }

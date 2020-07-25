@@ -7,7 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ForgotComponent } from './forgot/forgot.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './services/auth.service';
+import { AntiAuthGuard } from '../helpers/antiauth.guard';
 
 
 @NgModule({

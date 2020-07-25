@@ -3,7 +3,7 @@
   <div class="row tp">
     <div class="col">
       <a href="/" class="link blue">Teachup.io</a>
-      <small *ngIf="user">{{user.username}}</small>
+      <small *ngIf="user">{{user.displayName}}</small>
     </div>
     <div class="flex-grow"></div>
     <img (click)="closeSideMenu()" src="/assets/icons/utility/close2.png" alt="">
@@ -91,7 +91,7 @@
         <span>login</span>
       </a>
       <a class="nav account" *ngIf="user" (click)="showAccount()" #accountMenu>
-        <span><strong>{{user.username}}</strong></span>
+        <span><strong>{{user.displayName}}</strong></span>
         <img class="dropic" src="/assets/icons/utility/down.png" alt="">
         <div class="dropdown" [class.showDrop]="showAcc">
           <div class="col">

@@ -2,8 +2,6 @@ import { Component, OnInit, Renderer2, ElementRef, ViewChild, Inject, HostListen
 import { DOCUMENT } from '@angular/common';
 import { AuthService } from '../auth/services/auth.service';
 import { Router, ActivatedRoute, RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import { switchMap, filter, tap } from 'rxjs/operators';
-import { GetUser } from '../models/user.model';
 
 @Component({
   selector: 'app-panel',
@@ -14,17 +12,15 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
 
   public loading = false;
   public requesting = false;
-  public user: GetUser;
   public sidemenu = false;
+  public dropdown = false;
+  public showAcc = false;
+  public shrink = false;
+  public user;
 
   @ViewChild('dropmenu') drop: ElementRef;
   @ViewChild('accountMenu') accMenu: ElementRef;
   @ViewChild('loading', { static: true }) loader: ElementRef;
-
-  public dropdown = false;
-  public showAcc = false;
-  public shrink = false;
-
 
   public subscriptions = [];
 
@@ -38,7 +34,6 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
       private authService: AuthService,
       private router: Router,
       private route: ActivatedRoute
-
     ) {
     renderer.listen('window', 'click', (e: Event) => {
       if (!this.drop.nativeElement.contains(e.target)) {
@@ -50,16 +45,6 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
         }
       }
     });
-
-    if (localStorage.getItem('currentUser')) {
-          // if (this.authService.currentUserValue) {
-      //   this.authService.getUserData(this.authService.currentUserValue.uuid).subscribe(data => {
-      //     if (!data.firstName) {
-      //       // this.router.navigate(['/', 'auth', 'info']);
-      //     }
-      //   });
-      // }
-    }
   }
 
   ngOnInit(): void {
@@ -86,21 +71,15 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
       }
     });
 
-    const sub = this.authService.currentUserSubject
-    .pipe(
-      tap(user => console.log(user)),
-    filter(user => !!user),
-    switchMap(user => this.authService.getUserData(user.uuid)),
-    tap(user => {
-      this.user = user;
-    }),
-    filter(user => !user.firstName),
-    tap(user => {
-      console.log('no name - temp disabled');
-      // this.router.navigate(['auth', 'info']);
-    })
-    )
-    .subscribe();
+    const sub = this.authService.currentUser
+    .subscribe(
+      data => {
+        if (!data.displayName) {
+          this.router.navigate(['auth', 'info']);
+        }
+        this.user = data;
+      }
+    );
 
 
     this.subscriptions = [...this.subscriptions, sub];
@@ -129,7 +108,7 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
   public logout() {
     this.authService.logout();
     this.user = null;
-    this.router.navigate(['/']);
+    this.router.navigate(['/auth']);
   }
   public logout2() {
     this.logout();
@@ -143,7 +122,7 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
     this.sidemenu = false;
   }
 
-  ngOnDestroy(){
-    // this.subscriptions.forEach(sub => sub.unsubscribe());
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

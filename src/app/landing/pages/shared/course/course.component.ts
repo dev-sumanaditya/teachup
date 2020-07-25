@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course',
@@ -11,9 +12,12 @@ export class CourseComponent implements OnInit {
     imageUrl: 'assets/images/demo/course.png'
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  openCourse() {
+    this.router.navigate(['/courses', 'course']);
+  }
 }

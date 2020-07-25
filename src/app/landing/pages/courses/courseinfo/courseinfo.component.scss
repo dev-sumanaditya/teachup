@@ -1,0 +1,139 @@
+.top {
+  background-color: #ddd;
+  padding: 30px 0;
+  .name {
+    font-size: 24px;
+    margin: 0;
+  }
+  .author {
+    font-size: 12px;
+    cursor: pointer;
+    border: 1.5px solid #0052cc;
+    padding: 3px 6px;
+    margin-top: 8px !important;
+    width: max-content;
+    &:hover {
+      box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);
+    }
+  }
+
+  .cif {
+    margin-top: 30px;
+    box-sizing: border-box;
+    .banner {
+      box-sizing: border-box;
+      img {
+        max-width: 100%
+      }
+    }
+    .lessons {
+      box-sizing: border-box;
+      margin-left: 20px;
+      position: relative;
+      .xxcc {
+        position: absolute;
+        overflow: hidden auto;
+        top: 30px;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+      }
+      .head {
+        padding-bottom: 5px;
+        border-bottom: 1px solid #333;
+      }
+      .items {
+        padding-top: 10px;
+        .item {
+          padding: 10px;
+          user-select: none;
+          align-items: center;
+          box-sizing: border-box;
+          border: 1px solid transparent;
+          &:hover {
+            border: 1px solid #888;
+            border-radius: 3px;
+          }
+          .ix {
+            display: flex;
+            margin-right: 10px;
+            align-items: center;
+            img {
+              width: 26px;
+            }
+          }
+          .nm {
+            font-size: 13px;
+            font-weight: 600;
+            .span {
+              width: 20px;
+            }
+          }
+          .tm {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.infz {
+  padding: 30px 0;
+  .l {
+    .item {
+      padding: 5px 10px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      &:hover {
+        border: 1px solid #0052cc;
+        cursor: pointer;
+      }
+    }
+    .selected {
+      background-color: #0052cc;
+      color: white;
+    }
+  }
+  .content {
+    box-sizing: border-box;
+    padding-left: 30px;
+  }
+}
+
+.cta {
+  background-color: #eee;
+  padding: 20px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+  .btn {
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .btn1 {
+    color: white;
+    margin-right: 20px;
+  }
+  .btn2 {
+      color: white !important;
+      background-color: #444;
+  }
+}
+
+.related {
+  margin-bottom: 40px;
+  .head {
+    font-size: 18px;
+  }
+  .items {
+    flex-wrap: wrap;
+    margin-top: 15px;
+    .item {
+      width: 32%;
+      margin-right: 1.33%;
+    }
+  }
+}

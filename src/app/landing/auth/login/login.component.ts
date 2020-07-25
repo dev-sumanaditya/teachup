@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { first } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-login',
@@ -20,11 +21,16 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     public fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private afAuth: AngularFireAuth
   ) {
-    if (localStorage.getItem('currentUser')) {
-      this.router.navigate(['/']);
-    }
+    // this.authService.currentUser.subscribe(
+    //   data => {
+    //     if (data) {
+    //       this.router.navigate(['/']);
+    //     }
+    //   }
+    // );
   }
 
   ngOnInit(): void {
@@ -63,12 +69,22 @@ export class LoginComponent implements OnInit {
 
   async login() {
     this.loading = true;
-    const user = await this.authService.login(this.loginForm.value.email, this.loginForm.value.pass);
-    console.log(user);
+    try {
+      const user = await this.authService.login(this.loginForm.value.email, this.loginForm.value.pass);
+      // localStorage.setItem('currentUser', JSON.stringify(user.user));
+      this.authService.currentUserSubject.next(user.user);
+      this.router.navigate(['/']);
+    } catch (err) {
+      this.loading = false;
+      this.error = err;
+    }
   }
 
-  async loginWithGoogle(){
+  async loginWithGoogle() {
     const {user} = await this.authService.loginWithGoogle();
+    // localStorage.setItem('currentUser', JSON.stringify(user));
+    this.authService.currentUserSubject.next(user);
     console.log(user);
+    this.router.navigate(['/']);
   }
 }

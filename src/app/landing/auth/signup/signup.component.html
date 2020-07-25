@@ -27,8 +27,8 @@
       <small class="danger" *ngIf="error">{{error}}</small>
     </form>
     <small class="or">OR</small>
-    <div class="btn social row"> <img src="/assets/images/auth/google.png" alt=""> Continue with Google</div>
-    <div class="btn social row"> <img src="/assets/images/auth/microsoft.png" alt=""> Continue with Microsoft</div>
+    <button class="btn social row"> <img src="/assets/images/auth/google.png" alt="" (click)="googleLogin()"> Continue with Google</button>
+    <button class="btn social row"> <img src="/assets/images/auth/microsoft.png" alt=""> Continue with Microsoft</button>
     <a href="/auth" class="link register blue">Log in to your account</a>
   </div>
 </div>

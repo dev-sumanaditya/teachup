@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseComponent } from './course/course.component';
 import { UpdatesComponent } from './updates/updates.component';
+import { RouterModule } from '@angular/router';
 
 
 

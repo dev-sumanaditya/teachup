@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartComponent implements OnInit {
 
-  public static = true;
+  public static = false;
   public categories = [
     {
       name: 'Technology',

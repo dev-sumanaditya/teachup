@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/landing/auth/services/auth.service';
 
 @Component({
@@ -6,24 +6,11 @@ import { AuthService } from 'src/app/landing/auth/services/auth.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
-  public user = {
-    image: '/assets/images/demo/avatar.jpg'
-  };
-  public imgx = false;
+  public imgx = true;
   public static = true;
-  public userdata = {
-    firstName: '',
-    lastName: '',
-    username: '',
-    role: {
-      name: '',
-      uuid: ''
-    },
-    uuid: '',
-    createdAt: ''
-  };
+  public user = null;
 
   public slides = [1,1,1,1,1,1,1];
 
@@ -40,17 +27,20 @@ export class DashboardComponent implements OnInit {
     arrows: false
   };
 
+  sub;
+
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    const uuid = JSON.parse(localStorage.getItem('currentUser')).uuid;
-    this.auth.getUserData(uuid)
-    .subscribe(data => {
-      this.userdata = data;
-    },
-    err => {
-      console.log(err);
-    });
+   this.sub = this.auth.currentUser.subscribe(
+     data => {
+       this.user = data;
+     }
+   );
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

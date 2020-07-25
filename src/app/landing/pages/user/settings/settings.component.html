@@ -4,10 +4,10 @@
     <h2>Account Settings</h2>
   </div>
 
-  <div class="info col card">
+  <div class="info col card" *ngIf="user">
     <strong class="blue head">Account Information</strong>
-    <h2>John Doe</h2>
-    <small>johndoe@gmail.com</small>
+    <h2>{{user.displayName}}</h2>
+    <small>{{user.email}}</small>
     <small><strong class="blue">Learner</strong></small>
   </div>
 

@@ -1,0 +1,23 @@
+.head {
+  margin: 0;
+}
+.items {
+  margin-top: 20px;
+}
+.item {
+  align-items: center;
+  background-color: #f4f4f4;
+  padding: 10px;
+  .im1 {
+    height: 50px;
+    margin-right: 5px;
+  }
+  .im2 {
+    height: 40px;
+    margin: 0 15px;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.08);
+    }
+  }
+}

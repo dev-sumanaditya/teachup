@@ -1,0 +1,104 @@
+.inf {
+  margin-bottom: 40px;
+  h2 {
+    font-size: 20px;
+    margin: 0;
+  }
+}
+
+.top {
+  align-items: center;
+  .itm {
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
+    img {
+      width: 40px;
+      height: 40px;
+    }
+    h2 {
+      margin: 0;
+      font-size: 34px;
+      height: 40px;
+    }
+    small {
+      margin-top: 10px;
+    }
+  }
+  .btn {
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+}
+.price {
+  margin-top: 40px;
+  .item {
+    align-items: center;
+    img {
+      height: 28px;
+      margin-right: 8px;
+    }
+    span {
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+}
+
+.deta {
+  margin-top: 40px;
+}
+.options {
+  margin-top: 20px;
+  .option {
+    font-weight: 600;
+    margin-right: 15px;
+    color: #0052cc;
+    padding: 4px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+      background-color: #0052cc;
+      color: white;
+    }
+  }
+}
+
+.instructor {
+  margin-top: 40px;
+  .avatar {
+    .l {
+      margin-right: 15px;
+      .img {
+        height: 60px;
+        width: 60px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+      }
+    }
+
+    .r {
+      .tag {
+        width: max-content;
+        margin-left: 15px;
+        user-select: none;
+        background-color: #222;
+        color: #00FF84;
+        padding: 0px 6px;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .text {
+        margin-top: 15px;
+        font-size: 14px;
+      }
+    }
+  }
+}

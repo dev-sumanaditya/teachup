@@ -1,29 +1,28 @@
 <div class="wide col">
   <div class="nav row">
     <h1 class="blue">Teachup.io</h1>
+    <div class="flex-grow"></div>
+    <button class="btn" (click)="logout()">Logout</button>
   </div>
   <div class="row card">
     <div class="f5 col l">
-      <h2>Welcome <span class="blue">johndoe@gmail.com</span></h2>
+      <h2>Welcome <span class="blue" *ngIf="user">{{user.email}}</span></h2>
       <h3>Please update the following details to access your account</h3>
     </div>
     <div class="f2 col r">
-      <form action="" class="col">
+      <form action="" class="col" [formGroup]="UserForm" (ngSubmit)="onSubmit()">
         <div class="formItem col">
           <label for="fname" class="blue"><strong>First name</strong></label>
-          <input type="text" id="fname">
+          <input type="text" id="fname" formControlName="fName">
         </div>
         <div class="formItem col">
-          <label for="lname" class="blue"><strong>Last name</strong></label>
-          <input type="text" id="lname">
-        </div>
-        <div class="formItem col">
-          <label for="phone" class="blue"><strong>Phone number</strong></label>
-          <input type="text" id="phone">
+          <label for="lname" class="blue" ><strong>Last name</strong></label>
+          <input type="text" id="lname" formControlName="lName">
         </div>
         <div class="row">
           <div class="flex-grow"></div>
           <button type="submit" class="btn blue-bg">Continue</button>
+
         </div>
       </form>
     </div>
