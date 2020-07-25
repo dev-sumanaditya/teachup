@@ -16,7 +16,7 @@ export class MainComponent implements OnInit {
   createRzpayOrder(data) {
     console.log(data);
     // call api to create order_id
-    this.payWithRazor(order_id);
+    // this.payWithRazor(order_id);
   }
 
   payWithRazor(val) {

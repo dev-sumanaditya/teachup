@@ -3,26 +3,26 @@
     <div class="bar blue-bg"></div>
     <h2>Cart</h2>
   </div>
-  <div class="notCourses col" *ngIf="data.length === 0">
+  <div class="notCourses col" *ngIf="!cartItems">
     <img src="/assets/images/user/cart2.png" alt="">
     <strong>Your cart is empty, add items to cart to continue.</strong>
     <a href="/courses" class="link blue">Explore Courses</a>
   </div>
-  <div class="cart row" *ngIf="data.length > 0">
+  <div class="cart row" *ngIf="cartItems">
     <div class="l f5 col">
       <strong class="blue">{{data.length}} Courses in cart</strong>
       <div class="courses col">
-        <div class="course row" *ngFor="let i of data">
+        <div class="course row" *ngFor="let i of cartItems | async">
           <div class="image">
             <img src="/assets/images/demo/course.png" alt="">
           </div>
           <div class="flex-grow col content">
-            <h5>Productivity Masterclass: Create a Custom System that Works</h5>
-            <small class="tm">By John Doe &nbsp;|&nbsp; 12 June 2020</small>
-            <strong><small class="blue">Rs 4999.00</small></strong>
+            <h5>{{i.name}} - Some text to fill space</h5>
+            <small class="tm">By {{i.authorName}} &nbsp;|&nbsp; {{i.startDate}}</small>
+            <strong><small class="blue">Rs {{i.price}}</small></strong>
           </div>
           <div class="options">
-            <img src="/assets/icons/utility/delete.png" alt="">
+            <img src="/assets/icons/utility/delete.png" alt="" (click)="deleteItem(i.id)">
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ import { AuthService } from './auth/services/auth.service';
 
 import { AuthGuard } from './helpers/auth.guard';
 import { AntiAuthGuard } from './helpers/antiauth.guard';
+import { CartState } from './store/states/cart.state';
 
 
 @NgModule({
@@ -22,16 +23,14 @@ import { AntiAuthGuard } from './helpers/antiauth.guard';
   imports: [
     CommonModule,
     LandingRoutingModule,
-    NgxsModule.forRoot(),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot(),
+    NgxsModule.forFeature([CartState]),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthGuard,
     AntiAuthGuard,
-    AuthService
+    AuthService,
   ]
 })
 export class LandingModule { }
