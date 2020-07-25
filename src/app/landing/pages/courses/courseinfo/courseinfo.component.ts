@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Course } from 'src/app/landing/store/models/course.model';
+import { CourseService } from '../../user/services/course.service';
 
 @Component({
   selector: 'app-courseinfo',
@@ -30,9 +32,17 @@ export class CourseinfoComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  public courseData: Course;
+
+  constructor(private cService: CourseService) {}
 
   ngOnInit(): void {
+    this.cService.getDefaultData().subscribe(
+      data => {
+        this.courseData = data[0];
+        this.cService.setDefaultData(data[0]);
+      }
+    );
   }
 
 }

@@ -39,10 +39,10 @@ export class CartState {
 
   @Action(CartActions.AddCartItem)
   addCartItem({getState, patchState}: StateContext<CartStateModel>, {payload}: CartActions.AddCartItem) {
-    return this.cartService.addItemToCart(payload.id).pipe(tap((result) => {
+    return this.cartService.addItemToCart(payload).pipe(tap((result) => {
       const state = getState();
       patchState({
-          courses: [...state.courses, result]
+          courses: [...state.courses, payload]
       });
     }));
   }

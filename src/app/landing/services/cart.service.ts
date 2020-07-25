@@ -13,8 +13,8 @@ export class CartService {
   getCartItems() {
     return this.http.get<CourseMin[]>('http://localhost:3000/items');
   }
-  addItemToCart(CourseId: string) {
-    return this.http.post<CourseMin>('http://localhost:3000/items', CourseId);
+  addItemToCart(Course: CourseMin) {
+    return this.http.post<CourseMin>('http://localhost:3000/items', Course);
   }
   deleteItemFromCart(CourseId: string) {
     return this.http.delete('http://localhost:3000/items/' + CourseId);

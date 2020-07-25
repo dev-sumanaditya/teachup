@@ -14,12 +14,22 @@ export class CartComponent implements OnInit {
 
   @Select(CartState.getCartItems) cartItems: Observable<CourseMin[]>;
 
-  public data = [1];
+  public data;
+  public loading = true;
 
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetCartItems());
+    this.cartItems.subscribe(
+      data => {
+        this.loading = false;
+        this.data = data;
+      },
+      error => {
+        this.loading = false;
+        console.error(error);
+      }
+    );
   }
 
   deleteItem(id): void {

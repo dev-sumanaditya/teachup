@@ -3,9 +3,10 @@ export interface Course {
   title: string; // 255 char
   author: string;
   authorId: string;
+  authorStatus: string;
   level: string;
   price: number;
-  applicableCoupons: string;
+  applicableCoupons: [];
   image: string;
   lessons: [];
   totalTime: string;

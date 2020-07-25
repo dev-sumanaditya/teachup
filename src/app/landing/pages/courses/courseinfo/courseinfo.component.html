@@ -1,18 +1,18 @@
 <div class="col">
-  <div class="top">
+  <div class="top" *ngIf="courseData">
     <div class="wide col">
-      <h1 class="name">Productivity Masterclass: Create a Custom System that Works</h1>
-      <strong class="author blue">Thomas Frank, YouTuber, Author, Entrepreneur</strong>
+      <h1 class="name">{{courseData.title}}</h1>
+      <strong class="author blue">{{courseData.author}} | {{courseData.authorStatus}}</strong>
     </div>
     <div class="wide row cif">
       <div class="f5 banner">
         <img src="/assets/images/demo/Untitled design.jpg" alt="">
       </div>
       <div class="f2 col lessons">
-        <strong class="head">10 Lessons | 6 Days</strong>
+        <strong class="head">{{courseData.lessons.length}} Lessons | {{courseData.totalTime}}</strong>
         <div class="xxcc col">
           <div class="items col">
-            <div class="item row" *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1,1]; let x = index">
+            <div class="item row" *ngFor="let i of courseData.lessons; let x = index">
               <!-- <div class="ix">
                 <img src="/assets/icons/courses/cert.png" alt="">
               </div> -->

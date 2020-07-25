@@ -1,7 +1,9 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild, Inject, HostListener, AfterViewInit, OnDestroy } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild, Inject, HostListener, AfterViewInit, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../auth/services/auth.service';
 import { Router, ActivatedRoute, RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { Store } from '@ngxs/store';
+import { GetCartItems } from '../store/actions/cart.action';
 
 @Component({
   selector: 'app-panel',
@@ -33,7 +35,9 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
       private renderer: Renderer2,
       private authService: AuthService,
       private router: Router,
-      private route: ActivatedRoute
+      private route: ActivatedRoute,
+      private store: Store,
+      @Inject(PLATFORM_ID) private platformId
     ) {
     renderer.listen('window', 'click', (e: Event) => {
       if (!this.drop.nativeElement.contains(e.target)) {
@@ -48,28 +52,31 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    this.router.events.forEach((event: RouterEvent) => {
-      if (event instanceof NavigationStart) {
-        this.loading = true;
-        this.loader.nativeElement.classList.remove('hide');
-        return;
-      }
-      if (event instanceof NavigationEnd) {
-        this.loading = false;
-        this.loader.nativeElement.classList.add('hide');
-        return;
-      }
-      if (event instanceof NavigationCancel) {
-        this.loading = false;
-        this.loader.nativeElement.classList.add('hide');
-        return;
-      }
-      if (event instanceof NavigationError) {
-        this.loading = false;
-        this.loader.nativeElement.classList.add('hide');
-        return;
-      }
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      this.router.events.forEach((event: RouterEvent) => {
+        if (event instanceof NavigationStart) {
+          this.loading = true;
+          this.loader.nativeElement.classList.remove('hide');
+          return;
+        }
+        if (event instanceof NavigationEnd) {
+          window.scroll(0, 0);
+          this.loading = false;
+          this.loader.nativeElement.classList.add('hide');
+          return;
+        }
+        if (event instanceof NavigationCancel) {
+          this.loading = false;
+          this.loader.nativeElement.classList.add('hide');
+          return;
+        }
+        if (event instanceof NavigationError) {
+          this.loading = false;
+          this.loader.nativeElement.classList.add('hide');
+          return;
+        }
+      });
+    }
 
     const sub = this.authService.currentUser
     .subscribe(
@@ -78,6 +85,7 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
           this.router.navigate(['auth', 'info']);
         }
         this.user = data;
+        this.store.dispatch(new GetCartItems());
       }
     );
 

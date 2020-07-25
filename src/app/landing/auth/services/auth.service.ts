@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
+import { CartState } from '../../store/states/cart.state';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {
     afAuth.onAuthStateChanged(user => {
       if (!user) {
@@ -58,6 +61,7 @@ export class AuthService {
   logout() {
     this.afAuth.signOut();
     this.currentUserSubject.next(null);
+    this.store.reset(CartState);
   }
 
   getUserData(uuid) {
