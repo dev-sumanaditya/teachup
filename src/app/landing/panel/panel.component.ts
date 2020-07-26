@@ -1,4 +1,15 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild, Inject, HostListener, AfterViewInit, OnDestroy, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ElementRef,
+  ViewChild,
+  Inject,
+  HostListener,
+  AfterViewInit,
+  OnDestroy,
+  PLATFORM_ID
+} from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../auth/services/auth.service';
 import { Router, ActivatedRoute, RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
@@ -10,7 +21,7 @@ import { GetCartItems } from '../store/actions/cart.action';
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss']
 })
-export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
+export class PanelComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public loading = false;
   public requesting = false;
@@ -37,7 +48,7 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
       private router: Router,
       private route: ActivatedRoute,
       private store: Store,
-      @Inject(PLATFORM_ID) private platformId
+      @Inject(PLATFORM_ID) private platformId,
     ) {
     renderer.listen('window', 'click', (e: Event) => {
       if (!this.drop.nativeElement.contains(e.target)) {
@@ -60,7 +71,6 @@ export class PanelComponent implements OnInit, AfterViewInit,OnDestroy {
           return;
         }
         if (event instanceof NavigationEnd) {
-          window.scroll(0, 0);
           this.loading = false;
           this.loader.nativeElement.classList.add('hide');
           return;

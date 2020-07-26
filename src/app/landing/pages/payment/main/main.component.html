@@ -4,18 +4,18 @@
     <div class="details col">
       <h3 class="blue">Order Details</h3>
       <div class="items col">
-        <div class="item row" *ngFor="let i of [1,1,1]">
+        <div class="item row" *ngFor="let i of orderDetails">
           <div class="lft">
             <img src="/assets/images/demo/course.png" alt="">
           </div>
-          <div class="ryt">
-            <h4 class="name">Productivity Masterclass: Create a Custom System that Works</h4>
-            <strong><small>By John Doe &nbsp;|&nbsp; 22 June 2020</small></strong>
+          <div class="ryt flex-grow">
+            <h4 class="name">{{i.name}}</h4>
+            <strong><small>{{i.authorName}} &nbsp;|&nbsp; {{i.startDate}}</small></strong>
             <br>
-            <strong><small class="blue">Rs 10,999.00</small></strong>
+            <strong><small class="blue">Rs {{i.price}}</small></strong>
           </div>
           <div class="end col">
-            <img src="/assets/icons/utility/close2.png" alt="">
+            <img src="/assets/icons/utility/close2.png" alt="" (click)="deleteItem(i.id)">
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@
         <div class="flex-grow"></div>
         <strong>Rs 1000.00</strong>
       </div>
-      <div class="btn blue-bg white">Complete Payment</div>
+      <div class="btn blue-bg white" (click)="completePayment()">Complete Payment</div>
     </div>
   </div>
 </div>

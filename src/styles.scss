@@ -68,6 +68,24 @@
     filter: brightness(90%);
   }
 }
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20000;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(4, 4, 4, 0.8);
+  padding: 20px;
+  .ctr {
+    background-color: #f4f4f4;
+    padding: 20px 30px;
+    border-radius: 6px;
+  }
+}
 
 //utility
 .spin {
@@ -107,6 +125,7 @@ a {
 body,html {
   margin: 0;
   padding: 0;
+  // scroll-behavior: smooth;
 }
 
 img {

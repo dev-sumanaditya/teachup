@@ -41,9 +41,10 @@
           }
         }
         .content {
-          h5 {
+          .title {
+            font-size: 14px;
             margin: 0;
-            width: max-content;
+            margin-right: 30px;
             cursor: pointer;
             &:hover {
               color: #0052cc;

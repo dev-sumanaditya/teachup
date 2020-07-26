@@ -1,16 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WindowRefService } from 'src/app/landing/services/window-ref.service';
+import { Subscription } from 'rxjs';
+import { CourseMin } from 'src/app/landing/store/models/cart.model';
+import { OrderService } from 'src/app/landing/services/order.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
 
-  constructor(private winRef: WindowRefService) { }
+  private subscription: Subscription;
+  public orderDetails: CourseMin[] = [];
+
+  constructor(
+    private winRef: WindowRefService,
+    private orderServ: OrderService
+  ) {
+    this.subscription = this.orderServ.getState().subscribe(
+      state => {
+        this.orderDetails = state;
+      }
+    );
+  }
 
   ngOnInit(): void {
+  }
+
+  completePayment() {
+    if (this.orderDetails.length > 0) {
+      alert('This will proceed to razorpay api call');
+    } else {
+      alert('No items');
+    }
+  }
+
+  deleteItem(id) {
+    this.orderServ.deleteItemFromList(id);
+    // recreate order on backend and refetch data;
   }
 
   createRzpayOrder(data) {
@@ -18,7 +46,6 @@ export class MainComponent implements OnInit {
     // call api to create order_id
     // this.payWithRazor(order_id);
   }
-
   payWithRazor(val) {
     const options: any = {
       key: 'rzp_test_key',
@@ -53,4 +80,7 @@ export class MainComponent implements OnInit {
     rzp.open();
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
