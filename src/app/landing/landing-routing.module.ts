@@ -12,6 +12,7 @@ const routes: Routes = [
     {path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule)},
     {path: 'courses', loadChildren: () => import('./pages/courses/courses.module').then(m => m.CoursesModule)},
     {path: 'user', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule), canActivate: [AuthGuard]},
+    {path: 'instructor', loadChildren: () => import('./pages/instructor/instructor.module').then(m => m.InstructorModule)},
     {path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
   ]}
 ];

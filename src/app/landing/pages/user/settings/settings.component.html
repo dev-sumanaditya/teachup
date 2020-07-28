@@ -11,7 +11,7 @@
     <small><strong class="blue">Learner</strong></small>
   </div>
 
-    <div class="card col">
+    <div class="card col" style="display: none;">
       <strong class="blue head">Change Password</strong>
       <form action="" class="form col">
         <div class="formItm col" *ngIf="!verified">
@@ -41,5 +41,16 @@
 
   <div class="card">
     <a href="/auth/instructor" class="link blue"><strong>Sign up as Instructor</strong></a>
+  </div>
+  <div class="card success">
+    <strong>Instructor - Your application is under review</strong>
+    <p>Please wait while we give you the access to your instructors profile.</p>
+  </div>
+  <div class="card fail">
+    <strong>We're sorry, Your application has been rejected.</strong>
+    <p>Your application has been rejected. If you think it's an error, please feel free to contact us on support@teachup.io</p>
+  </div>
+  <div class="card">
+    <a href="/instructor" class="link blue"><strong>Continue to instructor panel</strong></a>
   </div>
 </div>

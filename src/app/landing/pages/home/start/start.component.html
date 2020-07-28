@@ -1,8 +1,8 @@
 <div class="ctr">
   <div class="wide">
-    <div class="main row">
+    <div class="main row" *ngIf="!user">
       <div class="l col">
-        <h1>Bringing top instructors at  your doorstep</h1>
+        <h1>Bringing top instructors at your doorstep</h1>
         <p>Explore our top online courses and live lectures taught by expert instructors.</p>
         <a href="/courses" class="btn blue-bg">Explore courses</a>
       </div>
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="cta col">
+    <div class="cta col" *ngIf="!user">
       <h2>Register now and get <span class="blue">40% off</span> on your first course.</h2>
       <div class="row">
         <input type="text" placeholder="Your Email">
@@ -19,14 +19,15 @@
       </div>
     </div>
 
-    <div class="video row">
+    <div class="video row" *ngIf="!user">
       <div class="l f3">
-        <video
+        <img src="{{options.poster}}" alt="">
+        <!-- <video style="display: none;"
           #mainVideo
           class="video-js vjs-default-skin vjs-big-play-centered"
           controls muted playsinline preload="auto"
         >
-        </video>
+        </video> -->
       </div>
       <div class="r f2 col">
         <div class="item row">
@@ -55,12 +56,29 @@
       </div>
     </div>
 
+
+    <!-- signedin views -->
+    <div class="bannerImg col" [style.background]="'url(/assets/images/demo/cover-background.jpg)'" *ngIf="user">
+      <div class="cont col">
+        <h1>Bringing top instructors at your doorstep</h1>
+        <p>It’s your journey. Keep going with courses as low as ₹1900</p>
+      </div>
+    </div>
+
+    <div class="next" *ngIf="user">
+      <h2 class="dark">What to learn next</h2>
+      <h3 class="dark">Topics Recommended for you</h3>
+      <div class="topics row">
+        <a routerLink="/courses/category" class="topic blue col" *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1]"><span>Web Development</span></a>
+      </div>
+    </div>
+
     <div class="popular">
       <div class="head blue">Popular Courses</div>
       <div class="items row" *ngIf="!static">
         <div class="itm" *ngFor="let i of dummy"><app-course></app-course></div>
       </div>
-      <div class="col static">
+      <div class="col static" *ngIf="static">
         <img src="/assets/images/home/courses.png" alt="">
         <p>Upcoming courses will appear here</p>
       </div>
@@ -88,11 +106,42 @@
       </div>
     </div>
 
-    <div class="cta2 col">
+    <div class="cta2 col" *ngIf="!user">
       <h2>Register now and get 40% off on your first course</h2>
       <div class="btns">
         <a href="/auth/signup" class="btn blue-bg">Register Now</a>
         <a href="/courses" class="btn blue-ot">Explore Courses</a>
+      </div>
+    </div>
+
+    <div class="instructors col">
+      <h3 class="dark head">Meet Our Top Instructors</h3>
+      <div class="slider">
+        <ngx-slick-carousel class="carousel"
+                          #slickModal="slick-carousel"
+                          [config]="slideConfig">
+          <div ngxSlickItem *ngFor="let slide of [1,2,3,4,1,1,1]" class="slide col">
+            <div class="ct col">
+              <img src="/assets/images/demo/avatar2.webp" alt="">
+              <strong class="dark name">Thomas Frank</strong>
+              <small class="dark des">YouTuber, Author, Entrepreneur</small>
+              <div class="row social">
+                <a href="http://www.linkedin.com/company/deltacodes" target="_blank" rel="">
+                  <img src="/assets/icons/social/fb.png" alt="">
+                </a>
+                <a target="_blank" rel="noopener noreferrer">
+                  <img src="/assets/icons/social/insta.png" alt="">
+                </a>
+                <a target="_blank" rel="noopener noreferrer">
+                  <img src="/assets/icons/social/linkedin.png" alt="">
+                </a>
+                <a target="_blank" rel="noopener noreferrer">
+                  <img src="/assets/icons/social/twitter.png" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+      </ngx-slick-carousel>
       </div>
     </div>
 

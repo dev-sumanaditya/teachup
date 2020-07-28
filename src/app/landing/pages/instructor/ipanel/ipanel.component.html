@@ -1,0 +1,40 @@
+<div class="wide row">
+  <div class="left col">
+    <div class="card">
+      <img src="/assets/images/demo/avatar2.webp" alt="">
+    </div>
+    <strong class="name">{{user.displayName}}</strong>
+    <p class="about">YouTuber, Author, Entrepreneur</p>
+    <div class="details col">
+      <h5 class="hd">Active Courses:</h5>
+      <h2 class="blue">12 active courses</h2>
+      <br>
+      <h5 class="hd">Total Students:</h5>
+      <h2 class="blue">2200 Learners</h2>
+    </div>
+    <div class="topics col">
+      <strong class="dark">Badges:</strong>
+      <div class="items row">
+        <div class="item" *ngFor="let i of [1,1,1,1,1]">Verified</div>
+      </div>
+    </div>
+  </div>
+  <div class="right col flex-grow">
+    <div class="navigation row">
+      <a class="head blue" routerLink="/instructor">Instructor Panel</a>
+      <div class="flex-grow"></div>
+      <div class="navs row">
+        <a routerLink="/instructor/create" class="nav blue blue-ot btn">
+          <span>Create Course</span>
+        </a>
+        <a routerLink="/instructor/courses" class="nav blue blue-ot btn">
+          <span>My Courses</span>
+        </a>
+        <a routerLink="/instructor/profile" class="nav blue blue-ot btn">
+          <span>Profile</span>
+        </a>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

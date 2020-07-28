@@ -30,7 +30,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   completePayment() {
     if (this.orderDetails.length > 0) {
-      alert('This will proceed to razorpay api call');
+      this.createRzpayOrder('x');
     } else {
       alert('No items');
     }
@@ -42,17 +42,16 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   createRzpayOrder(data) {
-    console.log(data);
-    // call api to create order_id
-    // this.payWithRazor(order_id);
+    const orderid = 0; // call api to create order_id
+    this.payWithRazor(orderid);
   }
   payWithRazor(val) {
     const options: any = {
-      key: 'rzp_test_key',
+      key: 'rzp_live_Foon2tficwF6FF',
       amount: 125500, // amount should be in paise format to display Rs 1255 without decimal point
       currency: 'INR',
-      name: '', // company name or product name
-      description: '',  // product description
+      name: 'Teachup.io', // company name or product name
+      description: 'Product description',  // product description
       image: './assets/logo.png', // company logo or product image
       order_id: val, // order_id created by you in backend
       modal: {

@@ -1,0 +1,27 @@
+.not {
+  align-items: center;
+  h2 {
+    font-size: 28px;
+    margin-top: 60px;
+    font-weight: 500;
+  }
+  .bn {
+    padding: 5px 15px;
+    align-items: center;
+    border: 1px solid #bbb;
+    margin-top: 20px;
+    border-radius: 10px;
+    user-select: none;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0px 0px 6px -3px #333;
+    }
+    img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    strong {
+      font-size: 18px;
+    }
+  }
+}
