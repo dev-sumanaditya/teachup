@@ -33,6 +33,8 @@ export class AuthService {
     this.afAuth.user.subscribe(data => {
       if (data) {
         this.currentUserSubject.next(data);
+      } else {
+        this.currentUserSubject.next(null);
       }
     });
   }

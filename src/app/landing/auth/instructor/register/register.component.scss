@@ -50,3 +50,24 @@
     }
   }
 }
+.upload {
+  border: 2px solid #ddd;
+  width: max-content;
+  padding: 20px 30px;
+  border-radius: 5px;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+  &:hover {
+    background-color: #eee;
+  }
+  img {
+    height: 45px;
+  }
+  p {
+    margin: 0;
+  }
+}
+.formErr {
+  border: 2px solid crimson !important;
+}

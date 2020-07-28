@@ -5,7 +5,6 @@ import { ReviewComponent } from './review/review.component';
 
 
 const routes: Routes = [
-  {path: 'register', component: RegisterComponent},
   {path: 'review', component: ReviewComponent},
   {path: '', component: RegisterComponent}
 ];

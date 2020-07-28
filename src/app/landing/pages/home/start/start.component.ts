@@ -13,7 +13,7 @@ export class StartComponent implements OnInit, OnDestroy {
 
   public static = false;
   public user;
-
+  public pageLoaded = false;
   public dummy = [1,1,1,1,1,1,1,1,1];
   public dummy2 = [1,1,1,1];
 
@@ -46,7 +46,10 @@ export class StartComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService) {
     this.authService.currentUser.subscribe(
-      data => this.user = data
+      data => {
+        this.user = data;
+        this.pageLoaded = true;
+      }
     );
   }
 

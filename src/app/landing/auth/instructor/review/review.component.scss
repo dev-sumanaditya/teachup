@@ -1,0 +1,26 @@
+.nav {
+  padding: 15px 0;
+  .head {
+    font-size: 32px;
+    font-weight: 700;
+  }
+}
+
+.static {
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
+  img {
+    height: 180px;
+  }
+  p {
+    margin-top: 0;
+  }
+  .btn {
+    margin-top: 20px;
+    &:hover {
+      background-color: #0052cc;
+      color: white;
+    }
+  }
+}

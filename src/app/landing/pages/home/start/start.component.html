@@ -1,4 +1,8 @@
-<div class="ctr">
+<div class="col loader wide" *ngIf="!pageLoaded">
+  <img src="/assets/icons/utility/spinner.png" alt="" class="spin">
+</div>
+
+<div class="ctr" *ngIf="pageLoaded">
   <div class="wide">
     <div class="main row" *ngIf="!user">
       <div class="l col">
@@ -115,7 +119,7 @@
     </div>
 
     <div class="instructors col">
-      <h3 class="dark head">Meet Our Top Instructors</h3>
+      <h3 class="dark head">Meet Our Instructors</h3>
       <div class="slider">
         <ngx-slick-carousel class="carousel"
                           #slickModal="slick-carousel"
