@@ -16,6 +16,7 @@ export class AuthService {
   currentUserSubject = new ReplaySubject<any>(1);
   currentUser = this.currentUserSubject.asObservable().pipe(shareReplay(1));
   public userInfo;
+  jwtToken = '';
 
   constructor(
     private http: HttpClient,
@@ -23,26 +24,30 @@ export class AuthService {
     private router: Router,
     private store: Store
   ) {
-    afAuth.onAuthStateChanged(user => {
-      if (!user) {
-        return this.router.navigate['/'];
+    afAuth.onAuthStateChanged(async user => {
+      // if (!user) {
+      //   return this.router.navigate['/'];
+      // }
+      if (user) {
+        this.jwtToken = await (await this.afAuth.currentUser).getIdToken(true);
+      } else {
+        this.jwtToken = '';
       }
       this.currentUserSubject.next(user);
     });
 
-    this.afAuth.user.subscribe(data => {
-      if (data) {
-        this.currentUserSubject.next(data);
-      } else {
-        this.currentUserSubject.next(null);
-      }
-    });
+    // this.afAuth.user.subscribe(data => {
+    //   if (data) {
+    //     this.currentUserSubject.next(data);
+    //   } else {
+    //     this.currentUserSubject.next(null);
+    //   }
+    // });
   }
 
   async setAuthPersistance() {
     await this.afAuth.setPersistence(auth.Auth.Persistence.LOCAL);
   }
-
   async login(email: string, password: string) {
     await this.setAuthPersistance();
     return await this.afAuth.signInWithEmailAndPassword(email, password);
@@ -85,12 +90,6 @@ export class AuthService {
   async updateUser(fname, lname) {
     (await this.afAuth.currentUser).updateProfile({
       displayName: fname + ' ' + lname
-    });
-  }
-
-  async getUser() {
-    await this.afAuth.user.subscribe(e => {
-      console.log(e);
     });
   }
 }

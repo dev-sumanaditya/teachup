@@ -69,3 +69,94 @@
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+  .item {
+    margin-bottom: 30px;
+    .l {
+      margin-right: 10px;
+      img {
+        height: 30px;
+        width: 30px;
+      }
+    }
+    .ct {
+      .text {
+        font-size: 12px;
+      }
+      .btns {
+        font-size: 12px;
+        margin: 6px 0;
+      }
+
+      .replies {
+        margin-top: 8px;
+        .reply {
+          .lft {
+            margin-right: 7px;
+            img {
+              height: 25px;
+              width: 25px;
+            }
+          }
+          .ryt {
+            .nm {
+              font-size: 12px;
+            }
+            .timing {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+
+      .inp {
+        .lm {
+          margin-right: 7px;
+          img {
+            height: 25px;
+            width: 25px;
+          }
+        }
+        .rm {
+          textarea {
+            padding: 5px 7px;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+
+}

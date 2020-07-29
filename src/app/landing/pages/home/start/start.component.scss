@@ -399,4 +399,107 @@
     }
   }
 
+  .bannerImg {
+    height: auto;
+    padding: 20px;
+    .cont {
+      width: 100%;
+      h1 {
+        font-size: 24px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .next {
+    margin-bottom: 40px;
+    h2 {
+      font-size: 26px;
+      margin: 10px 0;
+    }
+    h3 {
+      font-size: 16px;
+    }
+    .topics {
+      justify-content: space-between;
+      .topic {
+        width: 49.5%;
+        margin-right: 0;
+        margin-bottom: 1.5%;
+        padding: 8px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .popular {
+    .head {
+      font-size: 22px;
+      font-weight: 500;
+    }
+    .items {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 20px;
+      .itm {
+        width: 100%;
+        margin-bottom: 3%;
+      }
+    }
+  }
+
+  .updates {
+    margin-top: 40px;
+    .items {
+      margin-top: 20px;
+      .item {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+  .instructors {
+    .head {
+      font-size: 24px;
+    }
+    .slider {
+      .slide {
+        display: flex;
+        .ct {
+          width: 98%;
+          box-shadow: 0px 1px 8px -4px #333;
+          margin: 10px 0;
+          padding: 20px;
+          box-sizing: border-box;
+          img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+          }
+          .name {
+            margin-top: 15px;
+            text-align: center;
+          }
+          .des {
+            text-align: center;
+          }
+          .social {
+            margin-top: 15px;
+            a {
+              margin: 2px 5px;
+              cursor: pointer;
+              img {
+                height: 30px;
+                width: 30px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
 }

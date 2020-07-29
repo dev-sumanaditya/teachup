@@ -24,13 +24,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private afAuth: AngularFireAuth
   ) {
-    // this.authService.currentUser.subscribe(
-    //   data => {
-    //     if (data) {
-    //       this.router.navigate(['/']);
-    //     }
-    //   }
-    // );
+
   }
 
   ngOnInit(): void {

@@ -21,3 +21,44 @@
     }
   }
 }
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+  .item {
+    padding: 10px 5px;
+    .im1 {
+      height: 40px;
+      margin-right: 5px;
+    }
+    .im2 {
+      height: 30px;
+      margin: 0 10px;
+    }
+    .txt {
+      strong {
+        font-size: 12px;
+      }
+      small {
+        font-size: 12px;
+      }
+    }
+  }
+}

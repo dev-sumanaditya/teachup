@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
@@ -22,9 +21,6 @@ export class SignupComponent implements OnInit {
     public fb: FormBuilder,
     private router: Router
   ) {
-    if (localStorage.getItem('currentUser')) {
-      this.router.navigate(['/']);
-    }
   }
 
   ngOnInit(): void {

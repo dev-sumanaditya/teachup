@@ -23,11 +23,6 @@
     .r {
       padding-left: 20px;
       position: relative;
-      .like {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
       h2 {
         margin: 0;
         font-size: 18px;
@@ -44,24 +39,9 @@
           font-size: 18px;
         }
       }
-
-      .like {
-        filter: grayscale(100);
-        img {
-          opacity: 0.6;
-          cursor: pointer;
-        }
-        &:hover {
-          filter: grayscale(0);
-          img {
-            opacity: 0.9;
-          }
-        }
-      }
     }
   }
 }
-
 
 .popular {
   margin-bottom: 60px;
@@ -71,6 +51,73 @@
     justify-content: space-between;
     .item {
       width: 24%;
+    }
+  }
+}
+
+
+
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+  .catname {
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+  }
+
+  .featured {
+    .banner {
+      padding: 10px;
+      flex-direction: column;
+      .l {
+        img {
+          height: auto;
+          width: 100%;
+        }
+        margin-bottom: 10px;
+      }
+      .r {
+        padding-left: 0;
+        h2 {
+          font-size: 16px;
+          color: #0052cc;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .popular {
+    margin-bottom: 60px;
+    .items {
+      margin-top: 15px;
+      flex-wrap: wrap;
+      .item {
+        width: 100%;
+        margin-bottom: 15px;
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 // import videojs from 'video.js';
 import { AuthService } from 'src/app/landing/auth/services/auth.service';
 
@@ -14,9 +14,8 @@ export class StartComponent implements OnInit, OnDestroy {
   public static = false;
   public user;
   public pageLoaded = false;
-  public dummy = [1,1,1,1,1,1,1,1,1];
+  public dummy = [1,1,1,1,1,1,1,1];
   public dummy2 = [1,1,1,1];
-
   public options = {
     fluid: true,
     autoplay: false,
@@ -25,6 +24,7 @@ export class StartComponent implements OnInit, OnDestroy {
     ],
     techOrder: ['html5'],
     fill: true,
+    // tslint:disable-next-line:max-line-length
     poster: 'https://i.ibb.co/YRBJKSJ/Fire-Shot-Capture-065-Bright-Green-Architectural-You-Tube-Thumbnail-You-Tube-Thumbnail-www-canva-com.png',
     controls: true,
   };
@@ -40,9 +40,22 @@ export class StartComponent implements OnInit, OnDestroy {
     pauseOnHover: false,
     pauseOnDotsHover: false,
     speed: 500,
-    arrows: false
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1
+        }
+      }
+    ]
   };
-
 
   constructor(private authService: AuthService) {
     this.authService.currentUser.subscribe(
