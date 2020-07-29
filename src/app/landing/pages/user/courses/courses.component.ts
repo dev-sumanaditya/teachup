@@ -8,7 +8,7 @@ import { CourseService } from '../services/course.service';
 })
 export class CoursesComponent implements OnInit {
 
-  items = [1,1,1,1];
+  items = [1];
 
   constructor(private courseService: CourseService) { }
 

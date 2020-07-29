@@ -90,3 +90,85 @@
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+  .main {
+    flex-direction: column;
+  }
+  .left {
+    width: 100%;
+    margin-right: 0;
+    .card {
+      margin-bottom: 90px;
+    }
+    .name {
+      font-size: 16px;
+    }
+    .about {
+      font-size: 14px;
+    }
+    .details {
+      margin: 20px 0;
+      .hd {
+        font-size: 14px;
+      }
+      h2 {
+        font-size: 18px;
+      }
+    }
+    .topics {
+      margin-bottom: 30px;
+    }
+  }
+
+  .right {
+    margin-bottom: 40px;
+    .navigation {
+      flex-direction: column;
+      padding-bottom: 12px;
+      .head {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      .navs {
+        width: 100%;
+        justify-content: space-between;
+        .nav {
+          box-sizing: border-box;
+          width: 33%;
+          font-size: 12px;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

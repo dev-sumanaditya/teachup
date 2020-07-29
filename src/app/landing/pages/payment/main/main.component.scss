@@ -69,3 +69,78 @@
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+  .main {
+    flex-direction: column;
+  }
+  .l {
+    margin-right: 0;
+    .details {
+      margin-bottom: 20px;
+      .items {
+        .item {
+          padding: 8px;
+          .lft {
+            img {
+              width: 100px;
+            }
+          }
+          .ryt {
+            .name {
+              font-size: 12px;
+              line-height: 12px;
+            }
+            .author {
+              font-size: 12px;
+              line-height: 12px;
+            }
+            .price {
+              font-size: 12px;
+              line-height: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .r {
+    .card {
+      padding: 15px;
+      position: static;
+      margin-bottom: 20px;
+    }
+  }
+}

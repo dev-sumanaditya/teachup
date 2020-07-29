@@ -2,7 +2,7 @@
 <div class="sidemenu col" [class.shrinked]="!sidemenu">
   <div class="row tp">
     <div class="col">
-      <a href="/" class="link blue">Teachup.io</a>
+      <a routerLink="/" class="link blue">Teachup.io</a>
       <small *ngIf="user">{{user.displayName}}</small>
     </div>
     <div class="flex-grow"></div>
@@ -28,7 +28,7 @@
 </div>
 <nav class="navbar" [class.shrink]="shrink">
   <div class="wide row">
-    <a href="" class="brand blue">Teachup.io</a>
+    <a routerLink="/" class="brand blue">Teachup.io</a>
     <div class="navs row">
       <a class="nav" (click)="showdrop()" #dropmenu>
         <span>Courses</span>

@@ -104,3 +104,105 @@
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .top {
+    margin-bottom: 30px;
+  }
+
+  .cart {
+    flex-direction: column;
+    .l {
+      margin-right: 0;
+      .courses {
+        margin: 20px 0 40px 0;
+        .course {
+          padding: 10px;
+          .image {
+            margin-right: 10px;
+            img {
+              width: 100px;
+            }
+          }
+          .content {
+            margin-right: 15px;
+            .title {
+              font-size: 12px;
+              margin-right: 0;
+            }
+            .tm {
+              font-size: 10px;
+            }
+            .price {
+              font-size: 12px;
+            }
+          }
+          .options {
+            img {
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    .r {
+      margin-bottom: 40px;
+      .head {
+        margin-bottom: 10px;
+      }
+      h2 {
+        font-size: 28px;
+      }
+      .checkout {
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+      .coupons {
+        .selector {
+          input {
+            border-radius: 0px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+          }
+          .btn {
+            border-radius: 0px;
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
+  }
+}
