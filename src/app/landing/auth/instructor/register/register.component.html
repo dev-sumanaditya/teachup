@@ -13,11 +13,11 @@
       <div class="row">
         <div class="formItem col">
           <label for="name">First name*</label>
-          <input type="text" formControlName="firstName" placeholder="eg: John" [class.formErr]="FormControl.firstName.errors && submitted">
+          <input type="text" formControlName="firstName" disabled placeholder="eg: John" [class.formErr]="FormControl.firstName.errors && submitted">
         </div>
         <div class="formItem col">
           <label for="name">Last name*</label>
-          <input type="text" formControlName="lastName" placeholder="eg: Doe" [class.formErr]="FormControl.lastName.errors && submitted">
+          <input type="text" formControlName="lastName" disabled placeholder="eg: Doe" [class.formErr]="FormControl.lastName.errors && submitted">
         </div>
       </div>
       <div class="row">
@@ -27,7 +27,7 @@
         </div>
         <div class="formItem col">
           <label for="name">Email address*</label>
-          <input type="email" formControlName="email" placeholder="eg: john@doe.com" [class.formErr]="FormControl.email.errors && submitted">
+          <input type="email" formControlName="email" disabled placeholder="eg: john@doe.com" [class.formErr]="FormControl.email.errors && submitted">
         </div>
       </div>
       <br>
@@ -106,12 +106,18 @@
       <strong class="blue">Upload resume</strong>
       <div class="bar blue-bg"></div>
       <div class="col">
-        <label for="info">Please upload your resume.</label>
+        <label for="info">Please upload your resume. (optional)</label>
         <small>Only docx, doc & pdf formats are allowed</small>
-        <input type="file" #upload name="" id="" style="visibility: hidden;" (change)="fileSelected($event)" formControlName="file">
+        <input type="file" #upload name="" id="" style="visibility: hidden;" (click)="upload.value = null" (change)="fileSelected($event)" formControlName="file">
         <div class="upload col" (click)="upload.click()" *ngIf="!selectedFile">
           <img src="/assets/icons/instructor/upload.png" alt="">
           <p>Upload file</p>
+        </div>
+        <div class="fileinfo row" *ngIf="selectedFile">
+          <strong class="blue">{{selectedFile.name}}</strong>
+          <img src="/assets/icons/utility/close2.png" *ngIf="!progress" alt="" (click)="this.selectedFile = null">
+          <div class="percent" *ngIf="progress">{{progress}} 22%</div>
+          <div class="progress" *ngIf="progress"></div>
         </div>
       </div>
       <br>

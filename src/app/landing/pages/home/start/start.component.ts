@@ -57,17 +57,16 @@ export class StartComponent implements OnInit, OnDestroy {
     ]
   };
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    // this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {});
     this.authService.currentUser.subscribe(
       data => {
         this.user = data;
         this.pageLoaded = true;
       }
     );
-  }
-
-  ngOnInit(): void {
-    // this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {});
   }
 
   ngOnDestroy(): void {

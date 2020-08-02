@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -11,27 +15,36 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   public instructorForm: FormGroup;
-  public selectedFile;
+  public selectedFile: File = null;
   public submitted = false;
   public dayError = false;
   public timeError = false;
+  public data = null;
+  public progress = null;
+
 
   constructor(
     public fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private auth: AuthService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
+    this.auth.currentUser.subscribe(
+      data => this.data = data
+    );
+
     this.instructorForm = this.fb.group({
       firstName: [
-        '',
+        this.data.displayName.split(' ')[0],
         [
           Validators.required,
           Validators.pattern('^[a-zA-Z]*$'),
         ]
       ],
       lastName: [
-        '',
+        this.data.displayName.split(' ')[1],
         [
           Validators.required,
           Validators.pattern('^[a-zA-Z]*$'),
@@ -45,7 +58,7 @@ export class RegisterComponent implements OnInit {
         ]
       ],
       email: [
-        '',
+        this.data.email,
         [
           Validators.required,
           Validators.email,
@@ -150,8 +163,34 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  fileSelected($e) {
-    console.log($e);
+  fileSelected(event) {
+    console.log('fired');
+    const file = (event.target as HTMLInputElement).files[0];
+    this.selectedFile = file;
+  }
+  uploadFile(data: File) {
+    return this.http.post<any>(environment.apiUrl + '/something', data, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(map(event => {
+      switch (event.type) {
+        case HttpEventType.Sent:
+          console.log('Request has been made!');
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log('Response header has been received!');
+          break;
+        case HttpEventType.UploadProgress:
+          this.progress = Math.round(event.loaded / event.total * 100);
+          console.log(`Uploaded! ${this.progress}%`);
+          break;
+        case HttpEventType.Response:
+          console.log('User successfully created!', event.body);
+          setTimeout(() => {
+            this.progress = 0;
+          }, 1500);
+      }
+    }));
   }
 
 }

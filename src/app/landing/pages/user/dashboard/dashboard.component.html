@@ -2,9 +2,10 @@
   <div class="row cat"><div class="bar blue-bg"></div> <h2>Dashboard</h2></div>
   <div class="info card">
     <div class="image">
-      <img src="{{user.photoURL}}" alt="" *ngIf="user.photoURL">
-      <div class="add col" *ngIf="!user.photoURL">
+      <img class="photo" src="{{user.photoURL}}" alt="" *ngIf="user.photoURL">
+      <div class="add col" *ngIf="!user.photoURL" (click)="fileInput.click()">
         <img src="/assets/icons/utility/plus.png" alt="">
+        <input #fileInput type="file" style="display: none;" (change)="fileChangeEvent($event)">
         <small>Add Image</small>
       </div>
     </div>
@@ -41,4 +42,19 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal col" *ngIf="imageChangedEvent">
+  <div class="content">
+    <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="1 / 1"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+  </div>
+  <br>
+  <div class="btn blue-bg white" (click)="upload()">Upload Image</div>
 </div>

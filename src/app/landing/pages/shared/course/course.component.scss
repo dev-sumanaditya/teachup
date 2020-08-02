@@ -1,25 +1,56 @@
 .ctrr {
+  border-radius: 5px;
+  overflow: hidden;
   .image {
-    height: 160px;
-    background-size: cover;
-    background-position: center;
+    position: relative;
+    padding-top: 56.3%;
     border-bottom: 2px solid #0052cc;
+    .img {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-size: cover;
+      background-position: center;
+    }
+    .overlay {
+      z-index: 10;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgb(0,0,0);
+      background: linear-gradient(0deg, rgba(0,0,0,0.1) 8%, rgba(0,0,0,0.2984944319524685) 77%, rgba(0,0,0,0.5598389697675946) 100%);
+    }
   }
   .info {
-    padding: 10px 15px;
-    h2 {
-      font-size: 16px;
+    padding: 5px 10px;
+    .title {
+      font-size: 13px;
       margin: 0;
       font-weight: 500;
+      max-height: 40px;
+      overflow: hidden;
     }
-    strong {
+    .author {
+      font-size: 12px;
+    }
+    .price {
       color: #45aaa1;
       margin-top: 10px;
+      font-size: 13px;
+    }
+    .time {
+      font-size: 12px;
     }
     .btn {
       color: white;
       width: max-content;
-      margin-top: 10px;
+      margin: 10px 0;
+      padding: 5px 10px;
+      font-size: 13px;
     }
   }
 }

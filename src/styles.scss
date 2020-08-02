@@ -157,13 +157,19 @@ img {
 
 /* Tab */
 @media (min-width: 768px) and (max-width: 1024px) {
-
+  .wide {
+    margin: 0 20px !important;
+    width: auto;
+  }
 }
 
 
 /* tab/cellphone */
 @media (min-width: 481px) and (max-width: 767px) {
-
+  .wide {
+    margin: 0 20px !important;
+    width: auto;
+  }
 }
 
 /* Smartphone */

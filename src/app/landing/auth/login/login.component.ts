@@ -64,9 +64,9 @@ export class LoginComponent implements OnInit {
   async login() {
     this.loading = true;
     try {
-      const user = await this.authService.login(this.loginForm.value.email, this.loginForm.value.pass);
+      const data = await this.authService.login(this.loginForm.value.email, this.loginForm.value.pass);
       // localStorage.setItem('currentUser', JSON.stringify(user.user));
-      this.authService.currentUserSubject.next(user.user);
+      this.authService.currentUserSubject.next(data.data);
       this.router.navigate(['/']);
     } catch (err) {
       this.loading = false;

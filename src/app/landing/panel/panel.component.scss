@@ -196,7 +196,30 @@
 
 /* Tab */
 @media (min-width: 768px) and (max-width: 1024px) {
-
+  .navbar {
+    padding: 25px 0;
+    .wide {
+      .navs {
+        margin-left: 30px;
+        .nav {
+          .dropdown {
+            top: 35px;
+            left: -80px;
+            margin-top: -10px;
+            .content {
+              padding: 15px 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .shrink {
+    padding: 25px 0 !important;
+  }
+  .footer {
+    padding: 0px;
+  }
 }
 
 

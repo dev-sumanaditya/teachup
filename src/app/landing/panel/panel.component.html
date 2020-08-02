@@ -1,4 +1,5 @@
 <div class="loading hide" #loading></div>
+ <!-- side menu -->
 <div class="sidemenu col" [class.shrinked]="!sidemenu">
   <div class="row tp">
     <div class="col">
@@ -26,6 +27,7 @@
     <a class="link danger" (click)="logout2()">Logout</a>
   </div>
 </div>
+<!-- navbar -->
 <nav class="navbar" [class.shrink]="shrink">
   <div class="wide row">
     <a routerLink="/" class="brand blue">Teachup.io</a>
@@ -120,7 +122,7 @@
   </div>
 </nav>
 <div style="margin-top: 120px; min-height: 90vh;" class="outlet">
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>
 
 <div class="footer">

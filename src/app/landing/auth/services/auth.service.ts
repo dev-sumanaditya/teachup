@@ -50,7 +50,8 @@ export class AuthService {
   }
   async login(email: string, password: string) {
     await this.setAuthPersistance();
-    return await this.afAuth.signInWithEmailAndPassword(email, password);
+    const user = await this.afAuth.signInWithEmailAndPassword(email, password);
+    return await this.http.post<any>(environment.apiUrl + '/user', user.user).toPromise();
   }
 
   async loginWithGoogle() {

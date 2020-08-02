@@ -6,7 +6,6 @@ export const environment = {
   production: false,
   apiUrl: 'https://teachup.io/api',
   firebase: {
-
     apiKey: "AIzaSyDowivQz5DRqQuMYQ-5aPS_jz8VnTwX22c",
     authDomain: "teachup-fa830.firebaseapp.com",
     databaseURL: "https://teachup-fa830.firebaseio.com",

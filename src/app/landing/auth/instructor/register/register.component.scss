@@ -68,6 +68,42 @@
     margin: 0;
   }
 }
+.fileinfo {
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  width: max-content;
+  align-items: center;
+  position: relative;
+  min-width: 180px;
+  overflow: hidden;
+  strong {
+    font-size: 14px;
+    flex-grow: 1;
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  img {
+    height: 25px;
+    cursor: pointer;
+    margin-left: 20px;
+  }
+  .progress {
+    position: absolute;
+    left: 0;
+    top: -1px;
+    bottom: 0;
+    background-color: rgba(137, 43, 226, 0.3);
+    width: 50%;
+    z-index: 10;
+  }
+  .percent {
+    margin-left: 20px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+}
 .formErr {
   border: 2px solid crimson !important;
 }

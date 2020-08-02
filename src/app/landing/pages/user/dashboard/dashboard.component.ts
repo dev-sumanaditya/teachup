@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/landing/auth/services/auth.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +31,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   sub;
 
-  constructor(private auth: AuthService) { }
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
+  constructor(
+    private auth: AuthService,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
    this.sub = this.auth.currentUser.subscribe(
@@ -37,6 +45,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
        this.user = data;
      }
    );
+  }
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+      this.croppedImage = event.base64;
+  }
+  loadImageFailed() {
+      console.log('failed to load image');
+  }
+
+  upload() {
+    this.userService.uploadImage(this.croppedImage).subscribe(
+      data => console.log(data)
+    );
   }
 
   ngOnDestroy() {

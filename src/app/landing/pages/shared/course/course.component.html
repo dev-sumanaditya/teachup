@@ -1,9 +1,12 @@
 <div class="ctrr col">
-  <div class="image" [style.backgroundImage]="'url('+ course.imageUrl +')'"></div>
+  <div class="image">
+    <div class="img" [style.backgroundImage]="'url('+ course.imageUrl +')'"></div>
+    <div class="overlay"></div>
+  </div>
   <div class="info col">
-    <h2>Python crash course for beginners</h2>
-    <small>By Amitabh Kant</small>
-    <strong>Rs 10,999.00</strong>
+    <h2 class="title">The Python Bible™ | Everything You Need to Program in Python</h2>
+    <small class="author">By Amitabh Kant</small>
+    <strong class="price">Rs 10,999.00</strong>
     <small class="time">12:00 hrs | 24 July 2020</small>
     <a (click)="openCourse()" routerLinkActive="router-link-active"   class="btn blue-bg">Enroll Now</a>
   </div>
