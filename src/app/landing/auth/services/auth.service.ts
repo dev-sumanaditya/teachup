@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ReplaySubject } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
@@ -22,27 +22,23 @@ export class AuthService {
     private http: HttpClient,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private ngZone: NgZone
+
   ) {
-    afAuth.onAuthStateChanged(async user => {
-      // if (!user) {
-      //   return this.router.navigate['/'];
-      // }
+    this.afAuth.onAuthStateChanged(async user => this.ngZone.run(async () => {
       if (user) {
         this.jwtToken = await (await this.afAuth.currentUser).getIdToken(true);
       } else {
         this.jwtToken = '';
       }
-      this.currentUserSubject.next(user);
-    });
-
-    // this.afAuth.user.subscribe(data => {
-    //   if (data) {
-    //     this.currentUserSubject.next(data);
-    //   } else {
-    //     this.currentUserSubject.next(null);
-    //   }
-    // });
+      try {
+        const data = await this.http.post<any>(environment.apiUrl + '/user', user, { headers: { Authorization: `${this.jwtToken}` } }).toPromise();
+        this.currentUserSubject.next(data.data);
+      } catch (err) {
+        this.currentUserSubject.next(null);
+      }
+    }));
   }
 
   async setAuthPersistance() {
@@ -51,7 +47,7 @@ export class AuthService {
   async login(email: string, password: string) {
     await this.setAuthPersistance();
     const user = await this.afAuth.signInWithEmailAndPassword(email, password);
-    return await this.http.post<any>(environment.apiUrl + '/user', user.user).toPromise();
+    return await this.http.get<any>(environment.apiUrl + '/user/' + user.user.uid).toPromise();
   }
 
   async loginWithGoogle() {
@@ -63,7 +59,7 @@ export class AuthService {
     await this.afAuth.createUserWithEmailAndPassword(email, password);
     const user = await this.afAuth.currentUser;
     await user.sendEmailVerification();
-    return user;
+    return await this.http.post<any>(environment.apiUrl + '/user', user).toPromise();
   }
 
   logout() {
@@ -88,9 +84,8 @@ export class AuthService {
     return await this.afAuth.applyActionCode(token);
   }
 
-  async updateUser(fname, lname) {
-    (await this.afAuth.currentUser).updateProfile({
-      displayName: fname + ' ' + lname
-    });
+  async updateUser(user) {
+    user = await this.http.put<any>(environment.apiUrl + '/user', user, { headers: { Authorization: `${this.jwtToken}` } }).toPromise();
+    this.currentUserSubject.next(user);
   }
 }

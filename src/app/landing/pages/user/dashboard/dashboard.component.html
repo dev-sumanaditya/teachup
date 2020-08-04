@@ -1,6 +1,6 @@
 <div class="wide">
   <div class="row cat"><div class="bar blue-bg"></div> <h2>Dashboard</h2></div>
-  <div class="info card">
+  <div class="info card row">
     <div class="image">
       <img class="photo" src="{{user.photoURL}}" alt="" *ngIf="user.photoURL">
       <div class="add col" *ngIf="!user.photoURL" (click)="fileInput.click()">
@@ -9,9 +9,16 @@
         <small>Add Image</small>
       </div>
     </div>
-    <h3 class="name blue">{{user.displayName}}</h3>
-    <h4>{{user.email}}</h4>
-    <small><strong>Learner Account</strong></small>
+    <div class="cnt col">
+      <h3 class="name blue">{{user.displayName}}</h3>
+      <h4 class="email">{{user.email}}</h4>
+      <div class="notVerified" *ngIf="!user.emailVerified">
+        <p class="danger">Please verify your email address.</p>
+        <p>Haven't received the verification email?</p>
+        <div class="primary resend btn btn-outline" *ngIf="!mailSent" (click)="sendMail()">Resend Verification Email</div>
+        <p class="primary" *ngIf="mailSent">Mail Sent</p>
+      </div>
+    </div>
   </div>
   <div class="card enrolled" *ngIf="!static">
     <strong class="blue">Enrolled Courses</strong>

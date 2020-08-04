@@ -1,0 +1,90 @@
+.top{
+  .info{
+    padding: 20px;
+    align-items: center;
+    width: 280px;
+    text-align: center;
+    margin-right: 30px;
+    margin-bottom: 40px;
+    .profileImg {
+      border-radius: 50%;
+      height: 130px;
+      width: 130px;
+      min-height: 130px;
+      min-width: 130px;
+      background: #ddd;
+      margin-bottom: 30px;
+      border: 3px solid #eee;
+      box-shadow: 0px 1px 6px -2px #666;
+    }
+    .name {
+      margin: 0;
+    }
+    .about {
+      font-size: 14px;
+      margin: 0;
+    }
+    .tags {
+      margin-top: 30px;
+      flex-wrap: wrap;
+      user-select: none;
+      .tag {
+        font-size: 12px;
+        padding: 2px 5px;
+        border: 1px solid #0052cc;
+        margin: 2px;
+        border-radius: 4px;
+      }
+    }
+    .count {
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      margin-top: 5px;
+      align-items: flex-start;
+      strong {
+        font-weight: 400;
+      }
+    }
+    .social {
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      img {
+        height: 30px;
+        margin: 3px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .content {
+    .card {
+      background: rgb(240, 240, 245);
+      box-shadow: 0px 1px 8px -4px #777;
+      padding: 20px;
+      margin-bottom: 20px;
+      .head {
+        font-weight: 500;
+      }
+    }
+    .on {
+      .text {
+        font-size: 14px;
+        margin: 5px 0 0 0;
+      }
+    }
+    .to {
+      .list {
+        flex-wrap: wrap;
+        margin-top: 20px;
+        .item {
+          width: 32.5%;
+          margin-right: 0.83%;
+          background-color: #fff;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}

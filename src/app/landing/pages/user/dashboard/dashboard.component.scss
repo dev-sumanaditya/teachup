@@ -26,6 +26,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    margin-right: 30px;
 
     img.photo {
       max-width: 100%;
@@ -51,12 +52,27 @@
     }
   }
 
-  h3 {
-    margin: 0 0 10px 0;
+  .name {
+    margin: 0;
   }
-  h4 {
+  .email {
     margin: 0 0 10px 0;
     color: #444;
+    font-weight: 400;
+  }
+  .notVerified {
+    font-size: 13px;
+    p {
+      margin: 0;
+    }
+    .resend {
+      font-size: 13px;
+      color: #0052cc;
+      cursor: pointer;
+      padding: 2px 4px;
+      border: 1px solid #0052cc;
+      margin-top: 5px !important;
+    }
   }
 }
 .enrolled {

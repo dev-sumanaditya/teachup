@@ -1,0 +1,35 @@
+<div class="col wide">
+  <div class="top row">
+    <div class="info col">
+      <img class="profileImg" src="/assets/images/demo/avatar2.webp" alt="">
+      <h3 class="name blue">John Doe</h3>
+      <p class="about">Youtuber | Author | Entrepreneur</p>
+      <div class="tags row">
+        <div class="tag blue" *ngFor="let i of [1,1,1,1]">Verified</div>
+      </div>
+      <div class="count col">
+        <strong>No of Courses: 12</strong>
+        <strong>Students: 49K</strong>
+        <strong>Categories - Photography</strong>
+      </div>
+      <div class="social row">
+        <img src="/assets/icons/social/fb.png" alt="">
+        <img src="/assets/icons/social/linkedin.png" alt="">
+        <img src="/assets/icons/social/insta.png" alt="">
+        <img src="/assets/icons/social/twitter.png" alt="">
+      </div>
+    </div>
+    <div class="content f1 col">
+      <div class="card on">
+        <div class="head blue">About Me</div>
+        <p class="text">I’m an author, YouTuber, and speaker who is passionate about helping students succeed. Most of my work today is done at College Info Geek – a site I created in 2010 in order to share my experiments in becoming a more effective student. Today, College Info Geek is one of the world’s largest and best-loved resources for students, and includes a blog, podcast, and a YouTube channel with over 1 million subscribers.</p>
+      </div>
+      <div class="card to">
+        <div class="head blue">Courses</div>
+        <div class="list row">
+          <div class="item" *ngFor="let i of [1,1,1,1,1,1,1]"><app-course></app-course></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

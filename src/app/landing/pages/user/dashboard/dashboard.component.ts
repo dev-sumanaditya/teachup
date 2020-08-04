@@ -13,6 +13,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public imgx = true;
   public static = true;
   public user = null;
+  public mailSent = false;
+
 
   public slides = [1,1,1,1,1,1,1];
 
@@ -61,6 +63,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.userService.uploadImage(this.croppedImage).subscribe(
       data => console.log(data)
     );
+  }
+
+  sendMail() {
+    this.mailSent = true;
   }
 
   ngOnDestroy() {

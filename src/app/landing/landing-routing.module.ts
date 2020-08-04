@@ -14,6 +14,7 @@ const routes: Routes = [
     {path: 'user', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule), canActivate: [AuthGuard]},
     // tslint:disable-next-line: max-line-length
     {path: 'instructor', loadChildren: () => import('./pages/instructor/instructor.module').then(m => m.InstructorModule), canActivate: [AuthGuard]},
+    {path: 'profile', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule)},
     {path: '404', loadChildren: () => import('./pages/notfound/notfound.module').then(m => m.NotfoundModule)},
     {path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
     {path: '**', redirectTo: '/404'}

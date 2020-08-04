@@ -32,9 +32,7 @@ export class StartComponent implements OnInit, OnDestroy {
         if (this.user.displayName) {
           this.router.navigate(['/']);
         }
-        console.log(data);
       }
-
     );
 
     this.UserForm = this.fb.group({
@@ -68,7 +66,12 @@ export class StartComponent implements OnInit, OnDestroy {
 
   async updateUser() {
     try {
-      await this.authService.updateUser(this.UserForm.value.fName, this.UserForm.value.lName);
+      const usr = {
+        ...this.user,
+        displayName: this.UserForm.value.fName + ' ' + this.UserForm.value.lName
+      };
+      delete usr.photoURL;
+      await this.authService.updateUser(usr);
     } catch (err) {
       console.log(err);
     }
