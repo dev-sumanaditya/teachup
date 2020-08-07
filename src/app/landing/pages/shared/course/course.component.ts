@@ -18,6 +18,6 @@ export class CourseComponent implements OnInit {
   }
 
   openCourse() {
-    this.router.navigate(['/courses', 'course']);
+    this.router.navigate(['/courses', 'course', ':id']);
   }
 }

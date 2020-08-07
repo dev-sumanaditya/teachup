@@ -4,7 +4,7 @@ import { InstructorProfileComponent } from './instructor-profile/instructor-prof
 
 
 const routes: Routes = [
-  {path: 'instructor', component: InstructorProfileComponent}
+  {path: 'instructor/:id', component: InstructorProfileComponent}
 ];
 
 @NgModule({

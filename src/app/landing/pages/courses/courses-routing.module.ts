@@ -6,8 +6,8 @@ import { CourseinfoComponent } from './courseinfo/courseinfo.component';
 
 
 const routes: Routes = [
-  {path: 'category', component: CategoryComponent},
-  {path: 'course', component: CourseinfoComponent, children: [
+  {path: 'category/:id', component: CategoryComponent},
+  {path: 'course/:id', component: CourseinfoComponent, children: [
     {path: 'about', loadChildren: () => import('./child/about/about.module').then(m => m.AboutModule)},
     {path: 'resources', loadChildren: () => import('./child/resources/resources.module').then(m => m.ResourcesModule)},
     {path: 'reviews', loadChildren: () => import('./child/reviews/reviews.module').then(m => m.ReviewsModule)},

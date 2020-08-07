@@ -30,9 +30,17 @@
     .title {
       font-size: 13px;
       margin: 0;
-      font-weight: 500;
-      max-height: 40px;
-      overflow: hidden;
+      font-weight: 600;
+      word-wrap: break-word;
+      color: #333;
+      width: 100%;
+      white-space: pre-wrap;       /* css-3 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;
+      &:hover {
+        color: #0052cc;
+      }
     }
     .author {
       font-size: 12px;

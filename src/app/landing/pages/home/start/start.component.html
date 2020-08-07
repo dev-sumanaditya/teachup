@@ -73,7 +73,7 @@
       <h2 class="dark">What to learn next</h2>
       <h3 class="dark">Topics Recommended for you</h3>
       <div class="topics row">
-        <a routerLink="/courses/category" class="topic blue col" *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1]"><span>Web Development</span></a>
+        <a routerLink="/courses/category/:id" class="topic blue col" *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1]"><span>Web Development</span></a>
       </div>
     </div>
 
@@ -127,7 +127,7 @@
           <div ngxSlickItem *ngFor="let slide of [1,2,3,4]" class="slide col">
             <div class="ct col">
               <img src="/assets/images/demo/avatar2.webp" alt="">
-              <a routerLink="/profile/instructor" class="blue name">Thomas Frank</a>
+              <a routerLink="/profile/instructor/:id" class="blue name">Thomas Frank</a>
               <small class="dark des">YouTuber, Author, Entrepreneur</small>
               <div class="row social">
                 <a href="http://www.linkedin.com/company/deltacodes" target="_blank" rel="">

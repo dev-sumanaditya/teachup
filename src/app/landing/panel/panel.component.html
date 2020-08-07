@@ -19,11 +19,11 @@
     <a routerLink="/auth/signup" (click)="closeSideMenu()" class="link">Sign up</a>
   </div>
   <div class="col menu2" *ngIf="user">
-    <a routerLink="/user" (click)="closeSideMenu()" class="link">Dashboard</a>
-    <a routerLink="/user/cart" (click)="closeSideMenu()" class="link">Cart</a>
     <a routerLink="/user/courses" (click)="closeSideMenu()" class="link">My Courses</a>
+    <a routerLink="/user/cart" (click)="closeSideMenu()" class="link">Cart</a>
     <a routerLink="/user/wishlist" (click)="closeSideMenu()" class="link">My Wishlist</a>
-    <a routerLink="/user/settings" (click)="closeSideMenu()" class="link">Account Settings</a>
+    <a routerLink="/user" (click)="closeSideMenu()" class="link">Account Settings</a>
+    <a routerLink="/instructor" class="link" (click)="closeSideMenu()" *ngIf="isInstructor">Instructor Panel</a>
     <a class="link danger" (click)="logout2()">Logout</a>
   </div>
 </div>
@@ -37,35 +37,44 @@
         <img class="dropic" src="/assets/icons/utility/down.png" alt="">
         <div class="dropdown"  [class.showDrop]="dropdown">
           <div class="content col">
-            <div class="row">
+            <div class="row" style="border-bottom: 2px solid #eee; margin-bottom: 5px;">
               <a routerLink="/courses" class="item link row">
+                <img src="/assets/icons/courses/all.png" alt="">
+                <div class="text">
+                  <h4>Explore All Courses</h4>
+                  <p>Explore all our courses in various categories</p>
+                </div>
+              </a>
+            </div>
+            <div class="row">
+              <a routerLink="/courses/category/:id" class="item link row">
                 <img src="/assets/icons/courses/1.png" alt="">
                 <div class="text">
-                  <h4>Courses on Technology</h4>
-                  <p>C++ | Java | Python | Javascript</p>
+                  <h4>Courses in Technology</h4>
+                  <p>C++ | Java | Python | Javascript | Robotics</p>
                 </div>
               </a>
               <a class="item row link">
                 <img src="/assets/icons/courses/3.png" alt="">
                 <div class="text">
-                  <h4>Courses on Management</h4>
-                  <p>C++ | Java | Python | Javascript</p>
+                  <h4>Courses in Management</h4>
+                  <p>Business Management | Marketting</p>
                 </div>
               </a>
             </div>
             <div class="row">
               <a class="item row link">
-                <img src="/assets/icons/courses/2.png" alt="">
+                <img src="/assets/icons/courses/art.png" alt="">
                 <div class="text">
-                  <h4>Courses on Science</h4>
-                  <p>C++ | Java | Python | Javascript</p>
+                  <h4>Courses in Art</h4>
+                  <p>Cooking | Illustration | Fashion Design</p>
                 </div>
               </a>
               <a class="item row link">
                 <img src="/assets/icons/courses/4.png" alt="">
                 <div class="text">
-                  <h4>Courses on finance</h4>
-                  <p>C++ | Java | Python | Javascript</p>
+                  <h4>Courses in finance</h4>
+                  <p>Financial Analysis | Capital Markets | Data visualization</p>
                 </div>
               </a>
             </div>
@@ -97,11 +106,11 @@
         <img class="dropic" src="/assets/icons/utility/down.png" alt="">
         <div class="dropdown" [class.showDrop]="showAcc">
           <div class="col">
-            <a routerLink="/user" class="link">Dashboard</a>
             <a routerLink="/user/courses" class="link">My Courses</a>
             <a routerLink="/user/wishlist" class="link">Wishlist</a>
             <a routerLink="/user/cart" class="link">My Cart</a>
-            <a routerLink="/user/settings" class="link">Account Settings</a>
+            <a routerLink="/user" class="link">Account Settings</a>
+            <a routerLink="/instructor" class="link" *ngIf="isInstructor">Instructor Panel</a>
             <a routerLink="" class="link logout" (click)="logout()">Logout</a>
           </div>
         </div>

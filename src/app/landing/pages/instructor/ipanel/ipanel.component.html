@@ -1,4 +1,4 @@
-<div class="wide row main">
+<div class="wide row main main-ctr">
   <div class="left col">
     <div class="card">
       <img src="/assets/images/demo/avatar2.webp" alt="">
@@ -15,7 +15,7 @@
     <div class="topics col">
       <strong class="dark">Badges:</strong>
       <div class="items row">
-        <div class="item blue" *ngFor="let i of [1,1,1,1,1]">Verified</div>
+        <div class="item" *ngFor="let i of [1,1,1,1,1]">Verified</div>
       </div>
     </div>
   </div>
@@ -24,14 +24,17 @@
       <a class="head blue" routerLink="/instructor">Instructor Panel</a>
       <div class="flex-grow"></div>
       <div class="navs row">
-        <a routerLink="/instructor/create" class="nav blue blue-ot btn">
-          <span>Create Course</span>
+        <a routerLink="/instructor/" routerLinkActive="navActive" class="nav blue" [routerLinkActiveOptions]="{ exact: true }">
+          <span>Home</span>
         </a>
-        <a routerLink="/instructor/courses" class="nav blue blue-ot btn">
+        <a routerLink="/instructor/create" routerLinkActive="navActive" class="nav blue">
+          <span>Create New</span>
+        </a>
+        <a routerLink="/instructor/courses" routerLinkActive="navActive" class="nav blue">
           <span>My Courses</span>
         </a>
-        <a routerLink="/instructor/profile" class="nav blue blue-ot btn">
-          <span>Profile</span>
+        <a routerLink="/instructor/profile" routerLinkActive="navActive" class="nav blue">
+          <span>Edit Profile</span>
         </a>
       </div>
     </div>

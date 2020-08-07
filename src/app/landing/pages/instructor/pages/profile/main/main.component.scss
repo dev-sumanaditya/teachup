@@ -1,4 +1,47 @@
-.not {
-  align-items: center;
-  margin-top: 60px;
+.top {
+  margin-top: 10px;
+  align-items: flex-start;
+  .image {
+    padding: 8px;
+    background-color: #eee;
+    border-radius: 4px;
+    img {
+      height: 100px;
+      width: 100px;
+      min-height: 100px;
+      min-width: 100px;
+      border-radius: 4px;
+    }
+    small {
+      font-size: 12px;
+      text-align: center;
+      padding: 2px;
+      background-color: #0052cc;
+      color: white;
+      margin-top: 8px;
+    }
+  }
+}
+
+.form {
+  margin-top: 20px;
+  .formItem {
+    margin-bottom: 15px;
+    padding: 8px 15px 15px 15px;
+    background-color: #eee;
+    border-radius: 4px;
+    label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    input {
+      margin-top: 5px;
+      padding: 4px 8px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: none;
+      padding: 4px 8px;
+    }
+  }
 }

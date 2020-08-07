@@ -30,6 +30,7 @@ export class PanelComponent implements OnInit, AfterViewInit, OnDestroy {
   public showAcc = false;
   public shrink = false;
   public user;
+  public isInstructor;
 
   @ViewChild('dropmenu') drop: ElementRef;
   @ViewChild('accountMenu') accMenu: ElementRef;
@@ -95,6 +96,10 @@ export class PanelComponent implements OnInit, AfterViewInit, OnDestroy {
           this.router.navigate(['auth', 'info']);
         }
         this.user = data;
+        const roles = data.roles;
+        if (roles.some(e => e.name === 'INSTRUCTOR')) {
+          this.isInstructor = true;
+        }
         this.store.dispatch(new GetCartItems());
       }
     );
@@ -116,7 +121,7 @@ export class PanelComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public checkScrollTop() {
-    if (this.document.documentElement.scrollTop > 2) {
+    if (this.document.documentElement.scrollTop > 50) {
       this.shrink = true;
     } else {
       this.shrink = false;

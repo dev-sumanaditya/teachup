@@ -19,19 +19,27 @@
     }
     .name {
       margin: 0;
+      text-align: center;
     }
     .about {
       font-size: 14px;
       margin: 0;
+      text-align: center;
+    }
+    .website {
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: center;
     }
     .tags {
-      margin-top: 30px;
+      margin-top: 20px;
       flex-wrap: wrap;
       user-select: none;
       .tag {
         font-size: 12px;
-        padding: 2px 5px;
-        border: 1px solid #0052cc;
+        padding: 2px 7px;
+        background-color: #333;
+        color: #00FF84;
         margin: 2px;
         border-radius: 4px;
       }
@@ -41,15 +49,19 @@
       padding: 20px;
       box-sizing: border-box;
       margin-top: 5px;
-      align-items: flex-start;
+      align-items: center;
       strong {
+        text-align: center;
         font-weight: 400;
+        font-size: 14px;
       }
     }
     .social {
       width: 100%;
       padding: 20px;
       box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
       img {
         height: 30px;
         margin: 3px;
@@ -83,6 +95,83 @@
           margin-right: 0.83%;
           background-color: #fff;
           margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+
+/* Tab */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+/* tab/cellphone */
+@media (min-width: 481px) and (max-width: 767px) {
+
+}
+
+/* Smartphone */
+@media (min-width: 320px) and (max-width: 480px) {
+  .top{
+    flex-direction: column;
+    .info{
+      padding: 0;
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+      .profileImg {
+        height: 110px;
+        width: 110px;
+        min-height: 110px;
+        min-width: 110px;
+        margin-bottom: 20px;
+      }
+      .count {
+        width: auto;
+        padding: 0px;
+        align-items: center;
+        margin-top: 10px;
+        strong {
+          text-align: center;
+        }
+      }
+      .social {
+        padding: 0px;
+        margin-bottom: 20px;
+      }
+    }
+
+    .content {
+      .to {
+        .list {
+          flex-wrap: wrap;
+          margin-top: 20px;
+          .item {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 20px;
+          }
         }
       }
     }

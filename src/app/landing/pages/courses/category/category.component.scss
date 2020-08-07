@@ -18,7 +18,7 @@
       .image {
         position: relative;
         min-width: 30vw;
-        padding-top: 56.5%;
+        padding-top: 56.25%;
         .img{
           position: absolute;
           top: 0;
@@ -35,10 +35,17 @@
     .r {
       padding-left: 20px;
       position: relative;
-      h2 {
+      .title {
         margin: 0;
         font-size: 18px;
-        color: #444;
+        color: #0052cc;
+        font-weight: 700;
+        word-wrap: break-word !important;
+        width: 100%;
+        white-space: pre-wrap;       /* css-3 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: -o-pre-wrap;
       }
       .row {
         align-items: flex-end;

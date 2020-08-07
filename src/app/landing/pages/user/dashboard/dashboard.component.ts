@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ɵConsole } from '@angular/core';
 import { AuthService } from 'src/app/landing/auth/services/auth.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { UserService } from '../services/user.service';
@@ -14,9 +14,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public static = true;
   public user = null;
   public mailSent = false;
+  public uploading = false;
 
 
-  public slides = [1,1,1,1,1,1,1];
+  public slides = [1, 1, 1, 1, 1, 1, 1];
+  public isInstructor = false;
 
   slideConfig = {
     slidesToShow: 4,
@@ -42,11 +44,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-   this.sub = this.auth.currentUser.subscribe(
-     data => {
-       this.user = data;
-     }
-   );
+    this.sub = this.auth.currentUser.subscribe(
+      data => {
+        this.user = data;
+        const roles = data.roles;
+        if (roles.some(e => e.name === 'INSTRUCTOR')) {
+          this.isInstructor = true;
+        }
+      }
+    );
   }
 
   fileChangeEvent(event: any): void {
@@ -56,12 +62,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.croppedImage = event.base64;
   }
   loadImageFailed() {
-      console.log('failed to load image');
+      alert('failed to load image');
   }
 
   upload() {
+    this.imageChangedEvent = null;
+    this.uploading = true;
     this.userService.uploadImage(this.croppedImage).subscribe(
-      data => console.log(data)
+      data => {
+        console.log(data);
+      }
     );
   }
 

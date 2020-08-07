@@ -1,3 +1,6 @@
+.main-ctr {
+  padding-bottom: 100px !important;
+}
 .left {
   width: 300px;
   margin-right: 60px;
@@ -29,7 +32,7 @@
     margin: 5px 0;
   }
   .details {
-    margin: 30px 0;
+    margin: 20px 0;
     .hd {
       font-size: 16px;
       color: #444;
@@ -37,6 +40,7 @@
     }
     h2 {
       margin: 0;
+      font-size: 16px;
     }
   }
   .topics {
@@ -44,15 +48,14 @@
     .items {
       flex-wrap: wrap;
       margin-top: 15px;
-      justify-content: space-between;
       .item {
         width: max-content;
-        padding: 5px;
+        padding: 5px 11px;
         box-sizing: border-box;
         font-size: 12px;
-        box-shadow: 0px 0px 4px 1px #0052cc;
+        background-color: #333;
         font-weight: 500;
-        width: 48%;
+        margin-right: 5px;
         margin-bottom: 8px;
         border-radius: 4px;
         text-align: center;
@@ -61,6 +64,7 @@
         display: inline-block;
         overflow: hidden;
         user-select: none;
+        color: #00FF84;
       }
     }
   }
@@ -70,22 +74,29 @@
   .navigation {
     align-items: center;
     border-bottom: 2px solid #ddd;
-    padding-bottom: 12px;
+    padding-bottom: 10px;
     margin-bottom: 12px;
     .head {
-      font-size: 28px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: 800;
       margin: 0;
       user-select: none;
     }
     .navs {
       .nav {
-        margin-right: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        border-right: 1px solid #ddd;
         padding: 4px 10px;
+        text-align: center;
         &:hover {
-          background-color: #0052cc;
+          background-color: #0052cc9c;
           color: white;
         }
+      }
+      .navActive {
+        background-color: #0052cc !important;
+        color: white;
       }
     }
   }

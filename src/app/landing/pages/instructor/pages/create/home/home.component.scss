@@ -1,4 +1,47 @@
-.not {
-  align-items: center;
-  margin-top: 60px;
+.main {
+  margin-top: 30px;
+}
+
+.formItem {
+  margin-bottom: 20px;
+  label {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  input {
+    margin-top: 8px;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  textarea {
+    margin-top: 8px;
+    padding: 5px 10px;
+    resize: none;
+  }
+  .spacer {
+    margin-top: 5px;
+    z-index: 0;
+  }
+  .ct {
+    margin-top: 10px;
+    .image {
+      position: relative;
+      padding-top: 56.25%;
+      background-color: #eee;
+      .ctr {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-size: cover !important;
+        background-position: center;
+        z-index: 10;
+      }
+      .add {
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
 }

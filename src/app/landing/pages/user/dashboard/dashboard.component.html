@@ -2,11 +2,15 @@
   <div class="row cat"><div class="bar blue-bg"></div> <h2>Dashboard</h2></div>
   <div class="info card row">
     <div class="image">
-      <img class="photo" src="{{user.photoURL}}" alt="" *ngIf="user.photoURL">
-      <div class="add col" *ngIf="!user.photoURL" (click)="fileInput.click()">
+      <img class="photo" src="{{user.photoURL}}" alt="" *ngIf="user.photoURL && !uploading">
+      <div class="add col" *ngIf="!user.photoURL && !uploading" (click)="fileInput.click()">
         <img src="/assets/icons/utility/plus.png" alt="">
         <input #fileInput type="file" style="display: none;" (change)="fileChangeEvent($event)">
         <small>Add Image</small>
+      </div>
+      <div class="uploading col" *ngIf="uploading">
+        <img class="spin" src="/assets/icons/utility/spinner.png" alt="">
+        <small>Uploading</small>
       </div>
     </div>
     <div class="cnt col">
@@ -20,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="card enrolled" *ngIf="!static">
+  <div class="card enrolled">
     <strong class="blue">Enrolled Courses</strong>
     <div class="slider">
       <ngx-slick-carousel class="carousel"
@@ -36,6 +40,21 @@
       <div class="arrow al" (click)="slickModal.slickPrev()"><img src="/assets/icons/courses/left.png" alt=""></div>
       <div class="arrow ar" (click)="slickModal.slickNext()"><img src="/assets/icons/courses/right.png" alt=""></div>
     </div>
+  </div>
+
+  <div class="card" *ngIf="!isInstructor">
+    <a href="/auth/instructor" class="link blue"><strong>Sign up as Instructor</strong></a>
+  </div>
+  <div class="card success" *ngIf="!isInstructor">
+    <strong>Instructor - Your application is under review</strong>
+    <p>Please wait while we give you the access to your instructors profile.</p>
+  </div>
+  <div class="card fail" *ngIf="!isInstructor">
+    <strong>We're sorry, Your application has been rejected.</strong>
+    <p>Your application has been rejected. If you think it's an error, please feel free to contact us on support@teachup.io</p>
+  </div>
+  <div class="card" *ngIf="isInstructor">
+    <a routerLink="/instructor" class="link blue"><strong>Continue to instructor panel</strong><img alt=""></a>
   </div>
 
   <div class="card coupons">

@@ -9,7 +9,8 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [CourseComponent, UpdatesComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     CourseComponent,

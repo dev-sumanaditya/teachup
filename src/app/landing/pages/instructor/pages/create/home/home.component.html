@@ -1,6 +1,70 @@
-<div class="col">
-  <div class="not col">
-    <img src="/assets/icons/instructor/edit.png" alt="">
-    <h2 class="dark">Coming Soon</h2>
+<div class="col main">
+  <div class="formItem col">
+    <label for="" class="blue">Title</label>
+    <input type="text" placeholder="Course Title">
   </div>
+  <div class="formItem col">
+    <label for="" class="blue">Sub Title</label>
+    <input type="text" placeholder="Sub Title">
+  </div>
+  <div class="formItem col">
+    <label for="" class="blue">Short Description</label>
+    <textarea name="" id="" cols="30" rows="6" placeholder="Short description about this course.."></textarea>
+  </div>
+  <div class="formItem col">
+    <label for="" class="blue">Price</label>
+    <input type="number" placeholder="Price in rupees">
+  </div>
+  <div class="formItem col">
+    <label for="" class="blue">Start Date</label>
+    <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="model" required></my-date-picker>
+  </div>
+  <div class="formItem">
+    <label for="" class="blue">About Course</label>
+    <div class="spacer"></div>
+    <div class="quill">
+      <quill-editor
+      [styles]="editorStyle"
+      (onEditorChanged)="changedEditor($event)"
+      [(ngModel)]="content"
+      trackChanges="all"
+      [modules]="modules"
+      placeholder="A detailed explation about your course in not more than 1500 words"
+    ></quill-editor>
+    </div>
+  </div>
+  <div class="formItem">
+    <label for="" class="blue">Cover Image</label>
+    <div class="ct">
+      <div class="image">
+        <div class="ctr" [style.background]="" *ngIf="croppedImage && !uploading">
+
+        </div>
+        <div class="ctr add col" *ngIf="!croppedImage && !uploading">
+          <div class="btn blue-bg white" (click)="upload.click()">Upload Image</div>
+        </div>
+        <div class="ctr add col" *ngIf="uploading">
+          <strong class="blue">Uploading 44%</strong>
+        </div>
+      </div>
+      <input #upload type="file" style="display: none;" (change)="fileChangeEvent($event)">
+    </div>
+  </div>
+  <br>
+  <div class="btn blue-bg white">Upload Course</div>
+</div>
+
+<div class="modal col" *ngIf="imageChangedEvent">
+  <div class="content" style="max-width: 70%; max-height: 60%;">
+    <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="16 / 9"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+  </div>
+  <br>
+  <div class="btn blue-bg white" (click)="uploadImage()">Upload Image</div>
 </div>

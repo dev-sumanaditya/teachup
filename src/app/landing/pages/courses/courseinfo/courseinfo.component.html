@@ -1,22 +1,27 @@
 <div class="col">
-  <div class="top" *ngIf="courseData">
-    <div class="wide col">
+  <div class="top">
+    <div class="wide col" *ngIf="courseData">
       <h1 class="name">{{courseData.title}}</h1>
       <strong class="author blue">{{courseData.author}} | {{courseData.authorStatus}}</strong>
     </div>
     <div class="wide row cif">
       <div class="f5 banner">
-        <img src="/assets/images/demo/Untitled design.jpg" alt="">
+        <div class="image loading">
+          <div class="img" [style.background]="'url(/assets/images/demo/banner.jpg)'"></div>
+        </div>
       </div>
       <div class="f2 col lessons">
-        <strong class="head">{{courseData.lessons.length}} Lessons | {{courseData.totalTime}}</strong>
-        <div class="xxcc col">
-          <div class="items col">
-            <div class="item row" *ngFor="let i of courseData.lessons; let x = index">
-              <div class="nm flex-grow row">
-                <div class="span">{{x+1}}.</div> Lesson name and info
+        <div class="loading animated-background" *ngIf="!courseData"></div>
+        <div class="col" *ngIf="courseData">
+          <strong class="head">{{courseData.lessons.length}} Lessons | {{courseData.totalTime}}</strong>
+          <div class="xxcc col">
+            <div class="items col">
+              <div class="item row" *ngFor="let i of courseData.lessons; let x = index">
+                <div class="nm flex-grow row">
+                  <div class="span">{{x+1}}.</div> Lesson name and info
+                </div>
+                <div class="tm"><small>1 hr</small></div>
               </div>
-              <div class="tm"><small>1 hr</small></div>
             </div>
           </div>
         </div>
