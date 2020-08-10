@@ -72,6 +72,7 @@ export class StartComponent implements OnInit, OnDestroy {
       };
       delete usr.photoURL;
       await this.authService.updateUser(usr);
+      this.router.navigate(['/']);
     } catch (err) {
       console.log(err);
     }

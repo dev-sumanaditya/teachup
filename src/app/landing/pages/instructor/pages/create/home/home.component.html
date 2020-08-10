@@ -8,6 +8,26 @@
     <input type="text" placeholder="Sub Title">
   </div>
   <div class="formItem col">
+    <label for="" class="blue">Lesson Plan</label>
+    <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()" class="row lssn">
+      <input type="text" [class.formError]="LessonFormControl.lessonName.errors && lessonSubmitted" formControlName="lessonName" class="flex-grow" placeholder="Lesson name max-60" maxlength="60">
+      <input type="number" [class.formError]="LessonFormControl.lessonDuration.errors && lessonSubmitted" formControlName="lessonDuration" placeholder="Duration in mins">
+      <button class="btn blue-bg white" type="Submit">Add</button>
+    </form>
+    <small class="danger" *ngIf="LessonFormControl.lessonDuration.errors && lessonSubmitted">Only multiples of 10 is allowed. Max 360 mins | Min 10 mins</small>
+    <div class="lessons col" *ngIf="lessons.length >= 1">
+      <div class="lesson row" *ngFor="let item of lessons; let i = index">
+        <h4>{{i}}</h4>
+        <div class="flex-grow">{{item.name}}</div>
+        <div class="duration">{{item.duration}}</div>
+        <img (click)="removeLesson(item.id)" src="/assets/icons/utility/delete2.png" alt="">
+      </div>
+    </div>
+    <div class="lessons" *ngIf="lessons.length === 0">
+      <small class="danger">Add at least one lesson to continue</small>
+    </div>
+  </div>
+  <div class="formItem col">
     <label for="" class="blue">Short Description</label>
     <textarea name="" id="" cols="30" rows="6" placeholder="Short description about this course.."></textarea>
   </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IMyDpOptions} from 'mydatepicker';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -31,8 +32,37 @@ export class HomeComponent implements OnInit {
   public model;
   public uploading = false;
 
+  public lessons = [];
+  public lessonForm: FormGroup;
+  public lessonSubmitted = false;
+  public lessonError = '';
 
-  constructor() {
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.lessonForm = this.fb.group({
+      lessonName: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(60),
+          Validators.minLength(10),
+        ],
+      ],
+      lessonDuration: [
+        '',
+        [
+          Validators.required,
+          Validators.min(10),
+          Validators.max(360),
+          Validators.pattern('^[1-9][0-9]*0$')
+        ],
+      ],
+    });
+
     this.modules = {
       toolbar: [
         ['bold', 'underline', 'strike'],
@@ -47,10 +77,17 @@ export class HomeComponent implements OnInit {
     };
   }
 
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
+  get LessonFormControl() {
+    return this.lessonForm.controls;
+  }
 
-  ngOnInit(): void {
+  onSubmit() {
+    this.lessonSubmitted = true;
+    if (this.lessonForm.valid) {
+      this.addLesson(this.lessonForm.value.lessonName, this.lessonForm.value.lessonDuration);
+    } else {
+      return;
+    }
   }
 
   changedEditor($event) {
@@ -69,5 +106,14 @@ export class HomeComponent implements OnInit {
   uploadImage() {
     this.imageChangedEvent = null;
     this.uploading = true;
+  }
+
+  addLesson(nm, dtn) {
+    this.lessons.push({id: Math.floor(Math.random() * 9999999), name: nm, duration: dtn});
+    this.lessonSubmitted = false;
+  }
+  removeLesson(id) {
+    const filteredArray = this.lessons.filter((item) => { return item.id !== id; });
+    this.lessons = filteredArray;
   }
 }

@@ -21,7 +21,7 @@
         <input type="password" name="pass" id="pass" placeholder="Your Password" formControlName="pass">
       </div>
       <a href="/auth/forgot" class="link blue"><small>Forgot password?</small></a>
-      <button class="btn blue-bg loginbtn">Continue</button>
+      <button class="btn blue-bg loginbtn" type="submit">Continue</button>
       <small class="danger" *ngIf="submitted && LoginFormControl.email.errors">Enter a valid email address.</small>
       <small class="danger" *ngIf="submitted && LoginFormControl.pass.errors">Password must be 8 characters long</small>
       <small class="danger" *ngIf="error && submitted">{{error}}</small>
