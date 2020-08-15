@@ -1,44 +1,51 @@
-import { Injectable, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ReplaySubject } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase';
-import { Router } from '@angular/router';
-import { Store } from '@ngxs/store';
-import { CartState } from '../../store/states/cart.state';
+import { Injectable, NgZone } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { ReplaySubject } from "rxjs";
+import { shareReplay } from "rxjs/operators";
+import { environment } from "src/environments/environment";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { auth } from "firebase";
+import { Router } from "@angular/router";
+import { Store } from "@ngxs/store";
+import { CartState } from "../../store/states/cart.state";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   currentUserSubject = new ReplaySubject<any>(1);
   currentUser = this.currentUserSubject.asObservable().pipe(shareReplay(1));
   public userInfo;
-  jwtToken = '';
+  jwtToken = "";
 
   constructor(
     private http: HttpClient,
     private afAuth: AngularFireAuth,
-    private router: Router,
     private store: Store,
     private ngZone: NgZone
-
   ) {
-    this.afAuth.onAuthStateChanged(async user => this.ngZone.run(async () => {
-      if (user) {
-        this.jwtToken = await (await this.afAuth.currentUser).getIdToken(true);
-      } else {
-        this.jwtToken = '';
-      }
-      try {
-        const data = await this.http.post<any>(environment.apiUrl + '/user', user, { headers: { Authorization: `${this.jwtToken}` } }).toPromise();
-        this.currentUserSubject.next(data.data);
-      } catch (err) {
-        this.currentUserSubject.next(null);
-      }
-    }));
+    this.afAuth.onAuthStateChanged(async (user) =>
+      this.ngZone.run(async () => {
+        if (user) {
+          this.jwtToken = await (await this.afAuth.currentUser).getIdToken(
+            true
+          );
+        } else {
+          this.jwtToken = "";
+        }
+        try {
+          // tslint:disable-next-line:max-line-length
+          const data = await this.http
+            .post<any>(environment.apiUrl + "/user", user, {
+              headers: { Authorization: `${this.jwtToken}` },
+            })
+            .toPromise();
+          this.currentUserSubject.next(data.data);
+        } catch (err) {
+          this.currentUserSubject.next(null);
+        }
+      })
+    );
   }
 
   async setAuthPersistance() {
@@ -47,7 +54,9 @@ export class AuthService {
   async login(email: string, password: string) {
     await this.setAuthPersistance();
     const user = await this.afAuth.signInWithEmailAndPassword(email, password);
-    return await this.http.get<any>(environment.apiUrl + '/user/' + user.user.uid).toPromise();
+    return await this.http
+      .get<any>(environment.apiUrl + "/user/" + user.user.uid)
+      .toPromise();
   }
 
   async loginWithGoogle() {
@@ -59,7 +68,9 @@ export class AuthService {
     await this.afAuth.createUserWithEmailAndPassword(email, password);
     const user = await this.afAuth.currentUser;
     await user.sendEmailVerification();
-    return await this.http.post<any>(environment.apiUrl + '/user', user).toPromise();
+    return await this.http
+      .post<any>(environment.apiUrl + "/user", user)
+      .toPromise();
   }
 
   logout() {
@@ -85,7 +96,11 @@ export class AuthService {
   }
 
   async updateUser(user) {
-    user = await this.http.put<any>(environment.apiUrl + '/user', user, { headers: { Authorization: `${this.jwtToken}` } }).toPromise();
+    user = await this.http
+      .put<any>(environment.apiUrl + "/user", user, {
+        headers: { Authorization: `${this.jwtToken}` },
+      })
+      .toPromise();
     this.currentUserSubject.next(user);
   }
 }

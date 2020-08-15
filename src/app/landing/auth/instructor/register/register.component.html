@@ -12,63 +12,105 @@
     <form [formGroup]="instructorForm" (ngSubmit)="Submit()">
       <div class="row">
         <div class="formItem col">
-          <label for="name">First name*</label>
-          <input type="text" formControlName="firstName" disabled placeholder="eg: John" [class.formErr]="FormControl.firstName.errors && submitted">
+          <label for="name">Full Name*</label>
+          <strong class="dark">{{ data.displayName }}</strong>
         </div>
         <div class="formItem col">
-          <label for="name">Last name*</label>
-          <input type="text" formControlName="lastName" disabled placeholder="eg: Doe" [class.formErr]="FormControl.lastName.errors && submitted">
+          <label for="name">Email address*</label>
+          <strong class="dark">{{ data.email }}</strong>
         </div>
       </div>
       <div class="row">
         <div class="formItem col">
           <label for="name">Phone number*</label>
-          <input type="text" formControlName="phone" placeholder="eg: 0000000000" [class.formErr]="FormControl.phone.errors && submitted">
+          <input
+            type="text"
+            formControlName="phoneNumber"
+            placeholder="eg: 0000000000"
+            [class.formErr]="FormControl.phoneNumber.errors && submitted"
+          />
         </div>
-        <div class="formItem col">
-          <label for="name">Email address*</label>
-          <input type="email" formControlName="email" disabled placeholder="eg: john@doe.com" [class.formErr]="FormControl.email.errors && submitted">
-        </div>
+        <div class="formItem col"></div>
       </div>
-      <br>
+      <br />
       <strong class="blue">Other</strong>
       <div class="bar blue-bg"></div>
       <div class="row">
         <div class="formItem col">
           <label for="name">Area of Expertise*</label>
-          <input type="text" formControlName="expertise" placeholder="Max 80 characters" [class.formErr]="FormControl.expertise.errors && submitted">
+          <input
+            type="text"
+            formControlName="areaOfExpertise"
+            placeholder="Max 80 characters"
+            [class.formErr]="FormControl.areaOfExpertise.errors && submitted"
+          />
         </div>
       </div>
-      <br>
+      <br />
       <strong class="blue">Availability</strong>
       <div class="bar blue-bg"></div>
       <div class="row">
         <div class="formItem col">
           <label for="name">Maximum number of students*</label>
-          <input type="text" formControlName="maxStudents" placeholder="Multiple of 10  (eg: 10, 40, 100)" [class.formErr]="FormControl.maxStudents.errors && submitted">
+          <input
+            type="number"
+            formControlName="maxNoOfStudents"
+            placeholder="Multiple of 10  (eg: 10, 40, 100)"
+            [class.formErr]="FormControl.maxNoOfStudents.errors && submitted"
+          />
         </div>
       </div>
-      <br>
+      <br />
       <div class="row">
         <div class="formItem col radio">
           <label for="days">Availability*</label>
           <div class="row">
-            <input type="checkbox" name="Weekdays" id="" formControlName="weekdays"><span>Weekdays</span><div class="flex-grow"></div>
+            <input
+              type="checkbox"
+              name="Weekdays"
+              id=""
+              formControlName="weekdays"
+            /><span>Weekdays</span>
+            <div class="flex-grow"></div>
           </div>
           <div class="row">
-            <input type="checkbox" name="Weekend" id="" formControlName="weekend"><span>Weekends</span><div class="flex-grow"></div>
+            <input
+              type="checkbox"
+              name="Weekend"
+              id=""
+              formControlName="weekend"
+            /><span>Weekends</span>
+            <div class="flex-grow"></div>
           </div>
         </div>
         <div class="formItem col radio">
           <label for="days">Time*</label>
           <div class="row">
-            <input type="checkbox" name="Weekdays" id="" formControlName="morning"><span>Morning (6 AM to 11AM)</span><div class="flex-grow"></div>
+            <input
+              type="checkbox"
+              name="Weekdays"
+              id=""
+              formControlName="morning"
+            /><span>Morning (6 AM to 11AM)</span>
+            <div class="flex-grow"></div>
           </div>
           <div class="row">
-            <input type="checkbox" name="Weekdays" id="" formControlName="afternoon"><span>Afternoon (11AM to 4PM)</span><div class="flex-grow"></div>
+            <input
+              type="checkbox"
+              name="Weekdays"
+              id=""
+              formControlName="afternoon"
+            /><span>Afternoon (11AM to 4PM)</span>
+            <div class="flex-grow"></div>
           </div>
           <div class="row">
-            <input type="checkbox" name="Weekdays" id="" formControlName="evening"><span>Evening (4PM to 9PM)</span><div class="flex-grow"></div>
+            <input
+              type="checkbox"
+              name="Weekdays"
+              id=""
+              formControlName="evening"
+            /><span>Evening (4PM to 9PM)</span>
+            <div class="flex-grow"></div>
           </div>
         </div>
       </div>
@@ -76,52 +118,90 @@
       <div class="bar blue-bg"></div>
       <div class="col">
         <label for="info">Write something about yourself*</label>
-        <textarea name="" id="" rows="8" formControlName="about" placeholder="Max 80 characters" style="padding: 5px 10px;" [class.formErr]="FormControl.about.errors && submitted"></textarea>
+        <textarea
+          name=""
+          id=""
+          rows="8"
+          formControlName="about"
+          placeholder="Max 80 characters"
+          style="padding: 5px 10px;"
+          [class.formErr]="FormControl.about.errors && submitted"
+        ></textarea>
       </div>
-      <br><br>
+      <br /><br />
       <strong class="blue">Social accounts</strong>
       <div class="bar blue-bg"></div>
       <div class="col">
         <div class="formItem col">
           <label for="name">Linkedin Profile</label>
-          <input type="text" formControlName="linkedin" [class.formErr]="FormControl.linkedin.errors && submitted">
+          <input
+            type="text"
+            formControlName="linkedin"
+            [class.formErr]="FormControl.linkedin.errors && submitted"
+          />
         </div>
-        <br>
+        <br />
         <div class="formItem col">
           <label for="name">Facebook Profile</label>
-          <input type="text" formControlName="facebook" [class.formErr]="FormControl.facebook.errors && submitted">
+          <input
+            type="text"
+            formControlName="facebook"
+            [class.formErr]="FormControl.facebook.errors && submitted"
+          />
         </div>
-        <br>
+        <br />
         <div class="formItem col">
           <label for="name">Twitter Profile</label>
-          <input type="text" formControlName="twitter" [class.formErr]="FormControl.twitter.errors && submitted">
+          <input
+            type="text"
+            formControlName="twitter"
+            [class.formErr]="FormControl.twitter.errors && submitted"
+          />
         </div>
-        <br>
+        <br />
         <div class="formItem col">
           <label for="name">Instagram Profile</label>
-          <input type="text" formControlName="instagram" [class.formErr]="FormControl.instagram.errors && submitted">
+          <input
+            type="text"
+            formControlName="instagram"
+            [class.formErr]="FormControl.instagram.errors && submitted"
+          />
         </div>
       </div>
-      <br><br>
+      <br /><br />
       <strong class="blue">Upload resume</strong>
       <div class="bar blue-bg"></div>
       <div class="col">
         <label for="info">Please upload your resume. (optional)</label>
         <small>Only docx, doc & pdf formats are allowed</small>
-        <input type="file" #upload name="" id="" style="visibility: hidden;" (click)="upload.value = null" (change)="fileSelected($event)" formControlName="file">
+        <input
+          type="file"
+          #upload
+          name=""
+          id=""
+          style="visibility: hidden;"
+          (click)="upload.value = null"
+          (change)="fileSelected($event)"
+          formControlName="file"
+        />
         <div class="upload col" (click)="upload.click()" *ngIf="!selectedFile">
-          <img src="/assets/icons/instructor/upload.png" alt="">
+          <img src="/assets/icons/instructor/upload.png" alt="" />
           <p>Upload file</p>
         </div>
         <div class="fileinfo row" *ngIf="selectedFile">
-          <strong class="blue">{{selectedFile.name}}</strong>
-          <img src="/assets/icons/utility/close2.png" *ngIf="!progress" alt="" (click)="this.selectedFile = null">
-          <div class="percent" *ngIf="progress">{{progress}} 22%</div>
+          <strong class="blue">{{ selectedFile.name }}</strong>
+          <img
+            src="/assets/icons/utility/close2.png"
+            *ngIf="!progress"
+            alt=""
+            (click)="this.selectedFile = null"
+          />
+          <div class="percent" *ngIf="progress">{{ progress }}%</div>
           <div class="progress" *ngIf="progress"></div>
         </div>
       </div>
-      <br>
-      <br>
+      <br />
+      <br />
       <div class="row">
         <div class="flex-grow"></div>
         <button type="submit" class="btn blue-bg">Submit for Review</button>
