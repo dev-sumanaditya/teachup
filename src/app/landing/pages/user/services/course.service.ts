@@ -1,24 +1,23 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Course } from 'src/app/landing/store/models/course.model';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Course } from "src/app/landing/store/models/course.model";
+import { ReplaySubject } from "rxjs";
+import { shareReplay } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CourseService {
+  dataSubject = new ReplaySubject<any>(1);
+  dataObs = this.dataSubject.asObservable().pipe(shareReplay(1));
 
-  public defaultData;
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getDefaultData() {
-    return this.http.get<Course>('http://localhost:3000/course');
-  }
-  setDefaultData(data) {
-    this.defaultData = data;
-  }
-  returnDefaultData() {
-    return this.defaultData;
+    return this.http.get<Course>("http://localhost:3000/course");
   }
 
+  passData(data) {
+    this.dataSubject.next(data);
+  }
 }

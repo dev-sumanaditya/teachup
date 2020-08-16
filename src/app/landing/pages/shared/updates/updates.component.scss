@@ -1,4 +1,13 @@
 .ctr {
+  text-decoration: none;
+  cursor: pointer;
+  display: flex !important;
+  &:hover {
+    background-color: #eee;
+    h5 {
+      color: #0052cc;
+    }
+  }
   .l {
     height: 200px;
     background-size: cover;
@@ -16,22 +25,16 @@
   }
 }
 
-
 /* Desktop */
 @media (min-width: 1025px) and (max-width: 1280px) {
-
 }
-
 
 /* Tab */
 @media (min-width: 768px) and (max-width: 1024px) {
-
 }
-
 
 /* tab/cellphone */
 @media (min-width: 481px) and (max-width: 767px) {
-
 }
 
 /* Smartphone */

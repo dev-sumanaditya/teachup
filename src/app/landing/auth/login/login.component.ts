@@ -1,36 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
-
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { AuthService } from "../services/auth.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
   public submitted = false;
   public loginForm: FormGroup;
   public loading = false;
   public returnUrl: string;
-  public error = '';
+  public error = "";
 
   constructor(
     private authService: AuthService,
     public fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
-    private afAuth: AngularFireAuth
-  ) {
-
-  }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl;
+
     this.loginForm = this.fb.group({
       email: [
-        '',
+        "",
         [
           Validators.required,
           Validators.email,
@@ -39,7 +37,7 @@ export class LoginComponent implements OnInit {
         ],
       ],
       pass: [
-        '',
+        "",
         [
           Validators.required,
           Validators.minLength(8),
@@ -64,10 +62,17 @@ export class LoginComponent implements OnInit {
   async login() {
     this.loading = true;
     try {
-      const data = await this.authService.login(this.loginForm.value.email, this.loginForm.value.pass);
+      const data = await this.authService.login(
+        this.loginForm.value.email,
+        this.loginForm.value.pass
+      );
       // localStorage.setItem('currentUser', JSON.stringify(user.user));
       this.authService.currentUserSubject.next(data.data);
-      this.router.navigate(['/']);
+      if (this.returnUrl) {
+        this.router.navigate([this.returnUrl]);
+      } else {
+        this.router.navigate(["/"]);
+      }
     } catch (err) {
       this.loading = false;
       this.error = err;
@@ -75,10 +80,19 @@ export class LoginComponent implements OnInit {
   }
 
   async loginWithGoogle() {
-    const {user} = await this.authService.loginWithGoogle();
-    // localStorage.setItem('currentUser', JSON.stringify(user));
-    this.authService.currentUserSubject.next(user);
-    console.log(user);
-    this.router.navigate(['/']);
+    this.loading = true;
+    try {
+      const { user } = await this.authService.loginWithGoogle();
+      this.authService.currentUserSubject.next(user);
+      this.loading = false;
+      if (this.returnUrl) {
+        this.router.navigate([this.returnUrl]);
+      } else {
+        this.router.navigate(["/"]);
+      }
+    } catch (error) {
+      this.error = error;
+      this.loading = false;
+    }
   }
 }

@@ -10,23 +10,17 @@ export interface Course {
   image: string;
   lessons: [];
   totalTime: string;
-  enrolled: boolean;
-}
-
-export interface CourseOverview {
-  id: string;
-  level: string;
   studentCount: number;
   startDate: string;
   startTime: string;
+  header: string;
   description: string;
 }
 
 export interface CourseAbout {
   id: string;
-  description: string;
+  longescription: string;
 }
-
 
 export interface CourseResources {
   id: string;
@@ -40,7 +34,6 @@ export interface File {
   downloadUrl: string;
   thumbnail: string; // thumbnail image of file
 }
-
 
 export interface CourseDiscussion {
   id: string;
@@ -63,7 +56,6 @@ export interface Replies {
   timeCreated: string;
   text: string;
 }
-
 
 export interface CourseReviews {
   id: string;
