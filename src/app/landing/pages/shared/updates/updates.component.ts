@@ -13,4 +13,11 @@ export class UpdatesComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  extractContent(s) {
+    const span = document.createElement("span");
+    span.innerHTML = s;
+    const str = span.textContent || span.innerText;
+    return str.substring(0, 120);
+  }
 }

@@ -1,12 +1,9 @@
-<div routerLink="/blog/123" class="ctr row">
-  <div class="l f2" [style.backgroundImage]="'url(' + demourl + ')'"></div>
+<div routerLink="/blog/{{ data.id }}" class="ctr row">
+  <div class="l f2" [style.backgroundImage]="'url(' + data.image + ')'"></div>
   <div class="r f3 col">
-    <h5>The importance of art in work life balance and growth</h5>
-    <p>
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-      accusantium doloremque
-    </p>
+    <h5>{{ data.title }}</h5>
+    <p>{{ extractContent(data.content) }}...</p>
     <div class="flex-grow"></div>
-    <small>12 July 2020</small>
+    <small>{{ data.createdAt | date: "mediumDate" }}</small>
   </div>
 </div>

@@ -1,26 +1,41 @@
 <div class="col">
   <div class="top">
-    <div class="wide col" *ngIf="courseData">
-      <h1 class="name">{{courseData.title}}</h1>
-      <strong class="author blue">{{courseData.author}} | {{courseData.authorStatus}}</strong>
+    <div class="wide col">
+      <h1 class="name" *ngIf="courseData">{{ courseData.title }}</h1>
+      <strong class="author blue" *ngIf="courseData"
+        >Author | AuthorStatus</strong
+      >
     </div>
     <div class="wide row cif">
       <div class="f5 banner">
-        <div class="image loading">
-          <div class="img" [style.background]="'url(/assets/images/demo/banner.jpg)'"></div>
+        <div class="image loading animated-background">
+          <div
+            *ngIf="courseData"
+            class="img"
+            [style.background]="'url(' + courseData.image + ')'"
+          ></div>
         </div>
       </div>
       <div class="f2 col lessons">
         <div class="loading animated-background" *ngIf="!courseData"></div>
         <div class="col" *ngIf="courseData">
-          <strong class="head">{{courseData.lessons.length}} Lessons | {{courseData.totalTime}}</strong>
+          <strong class="head"
+            >{{ courseData.lessons.length }} Lessons |
+            {{ courseData.totalTime }} Minutes</strong
+          >
           <div class="xxcc col">
             <div class="items col">
-              <div class="item row" *ngFor="let i of courseData.lessons; let x = index">
+              <div
+                class="item row"
+                *ngFor="let i of courseData.lessons; let x = index"
+              >
                 <div class="nm flex-grow row">
-                  <div class="span">{{x+1}}.</div> Lesson name and info
+                  <div class="span">{{ x + 1 }}.</div>
+                  {{ i.name }}
                 </div>
-                <div class="tm"><small>1 hr</small></div>
+                <div class="tm">
+                  <small>{{ i.duration }}</small>
+                </div>
               </div>
             </div>
           </div>
@@ -31,12 +46,13 @@
   <div class="infz wide row">
     <div class="l col f1">
       <a
-      [routerLink]="[item.url.toLowerCase()]"
-      routerLinkActive="selected"
-      [routerLinkActiveOptions]="{exact:true}"
-      class="item blue"
-      *ngFor="let item of menu">
-        {{item.name}}
+        [routerLink]="[item.url.toLowerCase()]"
+        routerLinkActive="selected"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="item blue"
+        *ngFor="let item of menu"
+      >
+        {{ item.name }}
       </a>
     </div>
     <div class="content f3">
@@ -44,28 +60,45 @@
     </div>
   </div>
   <div class="cta wide row">
-    <div class="btn btn1 blue-bg" (click)="takeThisCourse()">Take this course</div>
+    <div class="btn btn1 blue-bg" (click)="takeThisCourse()">
+      Take this course
+    </div>
     <div class="btn btn2 blue" (click)="addToCart()">Add to Cart</div>
   </div>
 
-  <div class="related wide col">
+  <!-- <div class="related wide col">
     <strong class="blue head">Related Courses</strong>
     <div class="items row">
-      <div class="item sha1" *ngFor="let i of [1,1,1,1]"><app-course></app-course></div>
+      <div class="item sha1" *ngFor="let i of [1, 1, 1, 1]">
+        <app-course></app-course>
+      </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <div class="modal col" *ngIf="showPaymentModal">
   <div class="col ctr">
     <div class="row close">
       <div class="flex-grow"></div>
-      <img src="/assets/icons/utility/close2.png" alt="" (click)="this.showPaymentModal = false">
+      <img
+        src="/assets/icons/utility/close2.png"
+        alt=""
+        (click)="this.showPaymentModal = false"
+      />
     </div>
-    <strong>You have {{cartData.length}} more item<span *ngIf="cartData.length > 1">s</span> in your cart</strong>
+    <strong
+      >You have {{ cartData.length }} more item<span *ngIf="cartData.length > 1"
+        >s</span
+      >
+      in your cart</strong
+    >
     <div class="row btns">
-      <div class="btn blue-bg white" (click)="proceedToPay()">Proceed To Pay</div>
-      <div class="btn blue-ot blue" (click)="modalGoToCart()">Continue to Cart</div>
+      <div class="btn blue-bg white" (click)="proceedToPay()">
+        Proceed To Pay
+      </div>
+      <div class="btn blue-ot blue" (click)="modalGoToCart()">
+        Continue to Cart
+      </div>
     </div>
   </div>
 </div>

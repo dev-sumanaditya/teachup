@@ -1,21 +1,21 @@
-<div class="col" *ngIf="defaultData">
+<div class="col" *ngIf="data">
   <div class="inf">
     <h2 class="blue">
-      {{ defaultData.title }}
+      {{ data.title }}
     </h2>
     <strong
-      ><small class="">By - {{ defaultData.author }}</small></strong
+      ><small class="">By - {{ data.author.user.displayName }}</small></strong
     >
   </div>
   <div class="top row">
     <div class="itm col">
       <img src="/assets/icons/courses/level.png" alt="" />
       <small
-        ><strong>{{ defaultData.level }} Level</strong></small
+        ><strong>{{ data.level }} Level</strong></small
       >
     </div>
     <div class="itm col">
-      <h2 class="blue">{{ defaultData.studentCount }}</h2>
+      <h2 class="blue">{{ data.studentCount }}</h2>
       <small><strong>Learners</strong></small>
     </div>
     <div class="flex-grow"></div>
@@ -24,18 +24,18 @@
   <div class="price col">
     <div class="row item">
       <img src="/assets/icons/utility/square.png" alt="" />
-      <span style="color: #0052cc;">Rs {{ defaultData.price }}.00</span>
+      <span style="color: #0052cc;">Rs {{ data.price }}.00</span>
     </div>
     <div class="row item">
       <img src="/assets/icons/utility/square.png" alt="" />
       <span style="color: #0053cc;"
-        >Course starts - {{ defaultData.startDate }}</span
+        >Course starts - {{ data.startDate | date: "shortDate" }}</span
       >
     </div>
   </div>
   <div class="deta">
-    <strong>{{ defaultData.header }}</strong>
-    <p>{{ defaultData.description }}</p>
+    <strong>{{ data.header }}</strong>
+    <p>{{ data.description }}</p>
   </div>
   <div class="options row">
     <div class="option blue-ot" (click)="addToCart()">Add to Cart</div>
@@ -47,28 +47,22 @@
     <div class="avatar row">
       <div class="l">
         <div
+          *ngIf="data.author.user.photoURL"
           class="img"
-          [style.backgroundImage]="'url(' + instructor.img + ')'"
+          [style.backgroundImage]="'url(' + data.author.user.photoURL + ')'"
         ></div>
       </div>
       <div class="r">
         <div class="row">
           <a
-            routerLink="/profile/instructor/{{ instructor.id }}"
+            routerLink="/profile/instructor/{{ data.author.id }}"
             class="link blue"
-            ><strong>{{ instructor.name }}</strong></a
+            ><strong>{{ data.author.user.displayName }}</strong></a
           >
           <div class="tag">Instructor</div>
         </div>
-        <small class="about">{{ instructor.about }}</small>
-        <div class="text col">
-          I’m an author, YouTuber, and speaker who is passionate about helping
-          students succeed. Most of my work today is done at College Info Geek –
-          a site I created in 2010 in order to share my experiments in becoming
-          a more effective student. Today, College Info Geek is one of the
-          world’s largest and best-loved resources for students, and includes a
-          blog, podcast, and a YouTube channel with over 1 million subscribers.
-        </div>
+        <small class="about">{{ data.author.shortDescription }}</small>
+        <div class="text col">{{ data.author.about }}</div>
       </div>
     </div>
   </div>

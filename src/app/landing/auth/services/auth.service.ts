@@ -5,7 +5,6 @@ import { shareReplay } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase";
-import { Router } from "@angular/router";
 import { Store } from "@ngxs/store";
 import { CartState } from "../../store/states/cart.state";
 
@@ -24,28 +23,23 @@ export class AuthService {
     private store: Store,
     private ngZone: NgZone
   ) {
-    this.afAuth.onAuthStateChanged(async (user) =>
-      this.ngZone.run(async () => {
-        if (user) {
-          this.jwtToken = await (await this.afAuth.currentUser).getIdToken(
-            true
-          );
-        } else {
-          this.jwtToken = "";
+    // this.afAuth.authState.subscribe((data) => console.log(data));
+    this.afAuth.authState.subscribe(async (user) => {
+      try {
+        if (!user) {
+          throw new Error("User not found");
         }
-        try {
-          // tslint:disable-next-line:max-line-length
-          const data = await this.http
-            .post<any>(environment.apiUrl + "/user", user, {
-              headers: { Authorization: `${this.jwtToken}` },
-            })
-            .toPromise();
-          this.currentUserSubject.next(data.data);
-        } catch (err) {
-          this.currentUserSubject.next(null);
-        }
-      })
-    );
+        this.jwtToken = await (await this.afAuth.currentUser).getIdToken(true);
+        const data = await this.http
+          .post<any>(environment.apiUrl + "/user", user, {
+            headers: { Authorization: `${this.jwtToken}` },
+          })
+          .toPromise();
+        this.currentUserSubject.next(data.data);
+      } catch (err) {
+        this.currentUserSubject.next(null);
+      }
+    });
   }
 
   async setAuthPersistance() {
@@ -54,6 +48,7 @@ export class AuthService {
   async login(email: string, password: string) {
     await this.setAuthPersistance();
     const user = await this.afAuth.signInWithEmailAndPassword(email, password);
+    this.jwtToken = await (await this.afAuth.currentUser).getIdToken(true);
     return await this.http
       .get<any>(environment.apiUrl + "/user/" + user.user.uid)
       .toPromise();
@@ -96,11 +91,15 @@ export class AuthService {
   }
 
   async updateUser(user) {
-    user = await this.http
+    const { data } = await this.http
       .put<any>(environment.apiUrl + "/user", user, {
         headers: { Authorization: `${this.jwtToken}` },
       })
       .toPromise();
-    this.currentUserSubject.next(user);
+    let u;
+    await this.currentUser.subscribe((data) => (u = data));
+    console.log({ ...u, data });
+    this.currentUserSubject.next({ ...u, data });
+    return;
   }
 }

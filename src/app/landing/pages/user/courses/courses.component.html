@@ -4,23 +4,21 @@
     <h2>My Courses</h2>
   </div>
   <div class="notCourses col" *ngIf="items.length === 0">
-    <img src="/assets/images/user/course.png" alt="">
+    <img src="/assets/images/user/course.png" alt="" />
     <strong>Your enrolled courses will appear here</strong>
   </div>
 
   <div class="cont row" *ngIf="items.length > 0">
     <div class="item row" *ngFor="let i of items">
       <div class="img">
-        <img src="/assets/images/demo/course.png" alt="">
+        <img [src]="i.image" alt="" />
       </div>
-      <div class="ct flex-grow">
-        <h4>Some name of the course</h4>
-        <strong class="blue athr">By Makr Frank</strong>
-        <p class="time">Starts: 12 July 2021</p>
+      <div class="ct">
+        <h4>{{ i.title }}</h4>
+        <small class="blue athr">By {{ i.author.user.displayName }}</small>
+        <p class="time">Starts: {{ i.startDate | date: "mediumDate" }}</p>
         <div class="details blue">View Details</div>
       </div>
     </div>
   </div>
 </div>
-
-

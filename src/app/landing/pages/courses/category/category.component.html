@@ -1,23 +1,40 @@
-<div class="wide">
+<div class="loadin wide" *ngIf="loading">
+  loading data..
+</div>
+<div class="error wide" *ngIf="error && !loading">
+  <small class="danger">Error loading data.. {{ error.code }}</small>
+</div>
+<div class="wide" *ngIf="data && !loading">
   <div class="catname">
-    <div class="row"><div class="bar blue-bg"></div><h1>Website Development</h1></div>
+    <div class="row">
+      <div class="bar blue-bg"></div>
+      <h1>{{ data.name }}</h1>
+    </div>
   </div>
   <div class="featured">
     <strong>Featured</strong>
     <div class="banner row sha1">
       <div class="l">
         <div class="image">
-          <div class="img" [style.background]="'url(/assets/images/demo/featured.jpg)'"></div>
+          <div
+            class="img"
+            [style.background]="'url(/assets/images/demo/featured.jpg)'"
+          ></div>
         </div>
       </div>
       <div class="r col">
-        <a routerLink="/courses/course/:id" class="title">The Complete Guide - Zero to Hero in Business analysis</a>
+        <a routerLink="/courses/course/:id" class="title"
+          >The Complete Guide - Zero to Hero in Business analysis</a
+        >
         <small>By Amithabh kanth</small>
         <strong><small>4 Hrs &nbsp; | &nbsp; 2 Lectures</small></strong>
-        <p>Become a Salesforce Developer by learning Apex Programming. Learn about Integration, REST webservices, Testing framework</p>
+        <p>
+          Become a Salesforce Developer by learning Apex Programming. Learn
+          about Integration, REST webservices, Testing framework
+        </p>
         <div class="flex-grow"></div>
         <div class="row">
-          <a routerLink="/courses/course/:id" class="btn blue-bg" >Enroll Now</a>
+          <a routerLink="/courses/course/:id" class="btn blue-bg">Enroll Now</a>
           <div class="flex-grow"></div>
           <strong>Rs 7,999</strong>
         </div>
@@ -28,8 +45,8 @@
   <div class="popular">
     <strong>Popular Courses</strong>
     <div class="items row">
-      <div class="item sha1" *ngFor="let i of [1,1,1,1]">
-        <app-course></app-course>
+      <div class="item sha1" *ngFor="let i of data.courses">
+        <app-course [data]="i"></app-course>
       </div>
     </div>
   </div>

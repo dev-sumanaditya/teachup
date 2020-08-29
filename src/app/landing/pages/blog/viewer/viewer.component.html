@@ -1,20 +1,21 @@
 <div class="wide col">
-  <div class="image">
+  <div class="image" [class.animated-background]="!data">
     <div
       class="img"
-      [style.background]="'url(/assets/images/demo/banner.jpg)'"
+      *ngIf="data"
+      [style.background]="'url(' + data.image + ')'"
     ></div>
   </div>
+  <h1 class="head" *ngIf="data">
+    {{ data.title }}
+  </h1>
   <div class="row">
     <div class="tag">
       Teachup Blog
     </div>
   </div>
-  <h1 class="head">
-    17 Blogging Mistakes to Avoid in 2020, According to HubSpot Bloggers
-  </h1>
-  <p class="time">Updated 6 days ago</p>
-  <div class="htmlContent">
-    some html content
-  </div>
+  <p *ngIf="data" class="time">
+    Last Updated - {{ getDate(data) | date: "mediumDate" }}
+  </p>
+  <div *ngIf="data" class="htmlContent" [innerHTML]="data.content"></div>
 </div>

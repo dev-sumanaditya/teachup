@@ -1,23 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.scss']
+  selector: "app-course",
+  templateUrl: "./course.component.html",
+  styleUrls: ["./course.component.scss"],
 })
 export class CourseComponent implements OnInit {
+  @Input() data;
 
-  public course = {
-    imageUrl: 'assets/images/demo/course.png'
-  }
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   openCourse() {
-    this.router.navigate(['/courses', 'course', ':id']);
+    this.router.navigate(["/courses", "course", this.data.id]);
   }
 }

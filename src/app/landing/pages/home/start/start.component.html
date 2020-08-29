@@ -69,7 +69,7 @@
     <!-- signedin views -->
     <div
       class="bannerImg col"
-      [style.background]="'url(/assets/images/demo/cover-background.jpg)'"
+      [style.background]="'url(/assets/images/home/bg1.jpg)'"
       *ngIf="user"
     >
       <div class="cont col">
@@ -83,10 +83,10 @@
       <h3 class="dark">Topics Recommended for you</h3>
       <div class="topics row">
         <a
-          routerLink="/courses/category/:id"
+          [routerLink]="['/courses', 'category', i.id]"
           class="topic blue col"
-          *ngFor="let i of [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]"
-          ><span>Web Development</span></a
+          *ngFor="let i of categories"
+          ><span>{{ i.name }}</span></a
         >
       </div>
     </div>
@@ -94,7 +94,9 @@
     <div class="popular">
       <div class="head blue">Popular Courses</div>
       <div class="items row" *ngIf="!static">
-        <div class="itm" *ngFor="let i of dummy"><app-course></app-course></div>
+        <div class="itm" *ngFor="let i of courses">
+          <app-course [data]="i"></app-course>
+        </div>
       </div>
       <div class="col static" *ngIf="static">
         <img src="/assets/images/home/courses.png" alt="" />
@@ -102,17 +104,17 @@
       </div>
     </div>
 
-    <div class="popular" style="margin-top: 40px;" *ngIf="!static">
+    <!-- <div class="popular" style="margin-top: 40px;">
       <div class="head blue">Editors Pick</div>
       <div class="items row">
         <div class="itm" *ngFor="let i of dummy"><app-course></app-course></div>
       </div>
-    </div>
+    </div> -->
 
     <div class="updates" *ngIf="!static">
       <div class="head blue"><strong>Latest Updates</strong></div>
       <div class="items row">
-        <div class="item" *ngFor="let i of dummy2">
+        <div class="item" *ngFor="let i of blogs">
           <app-updates [data]="i"></app-updates>
         </div>
       </div>
@@ -132,7 +134,7 @@
       </div>
     </div>
 
-    <div class="instructors col">
+    <div class="instructors col" *ngIf="instructors.length > 0">
       <h3 class="dark head">Meet Our Instructors</h3>
       <div class="slider">
         <ngx-slick-carousel
@@ -140,32 +142,44 @@
           #slickModal="slick-carousel"
           [config]="slideConfig"
         >
-          <div
-            ngxSlickItem
-            *ngFor="let slide of [1, 2, 3, 4]"
-            class="slide col"
-          >
+          <div ngxSlickItem *ngFor="let i of instructors" class="slide col">
             <div class="ct col">
-              <img src="/assets/images/demo/avatar2.webp" alt="" />
-              <a routerLink="/profile/instructor/:id" class="blue name"
-                >Thomas Frank</a
+              <img [src]="i.user.photoURL" alt="" />
+              <a
+                [routerLink]="['/profile', 'instructor', i.id]"
+                class="blue name"
+                >{{ i.user.displayName }}</a
               >
-              <small class="dark des">YouTuber, Author, Entrepreneur</small>
+              <small class="dark des"
+                >{{ i.about }} <span *ngIf="!i.about">..</span>
+              </small>
               <div class="row social">
                 <a
-                  href="http://www.linkedin.com/company/deltacodes"
+                  href="{{ i.fbProfile }}"
+                  *ngIf="i.fbProfile !== null"
                   target="_blank"
-                  rel=""
                 >
                   <img src="/assets/icons/social/fb.png" alt="" />
                 </a>
-                <a target="_blank" rel="noopener noreferrer">
+                <a
+                  href="{{ i.instaProfile }}"
+                  *ngIf="i.instaProfile !== null"
+                  target="_blank"
+                >
                   <img src="/assets/icons/social/insta.png" alt="" />
                 </a>
-                <a target="_blank" rel="noopener noreferrer">
+                <a
+                  href="{{ i.linkedinProfile }}"
+                  *ngIf="i.linkedinProfile !== null"
+                  target="_blank"
+                >
                   <img src="/assets/icons/social/linkedin.png" alt="" />
                 </a>
-                <a target="_blank" rel="noopener noreferrer">
+                <a
+                  href="{{ i.twitterProfile }}"
+                  *ngIf="i.twitterProfile !== null"
+                  target="_blank"
+                >
                   <img src="/assets/icons/social/twitter.png" alt="" />
                 </a>
               </div>

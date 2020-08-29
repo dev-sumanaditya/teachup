@@ -1,12 +1,11 @@
 .ctr {
-  background-image: url('/assets/images/auth/loginbg.png');
+  background-image: url("/assets/images/auth/loginbg.png");
   background-size: cover;
   background-position: center;
   height: 100vh;
-  padding: 0px 150px;
+  padding: 0px 10vw;
   align-items: center;
   .l {
-
     .brand {
       font-weight: 800;
       font-size: 40px;
@@ -30,6 +29,8 @@
     box-shadow: 0px 1px 10px -6px #444;
     background-color: white;
     padding: 40px;
+    min-width: 300px;
+    margin-left: 20px;
 
     strong {
       margin-bottom: 30px;
@@ -89,30 +90,47 @@
   z-index: 5001;
 }
 
-
-
-
-
-
-
-
-
-
 /* Desktop */
 @media (min-width: 1025px) and (max-width: 1280px) {
-
 }
-
 
 /* Tab */
 @media (min-width: 768px) and (max-width: 1024px) {
-
+  .ctr {
+    padding: 40px;
+  }
 }
-
 
 /* tab/cellphone */
 @media (min-width: 481px) and (max-width: 767px) {
+  .ctr {
+    background-position: center;
+    height: auto;
+    padding: 20px;
+    flex-direction: column;
+    .l {
+      margin-bottom: 20px;
+      .brand {
+        font-weight: 800;
+        font-size: 32px;
+      }
+      h2 {
+        font-size: 28px;
+        width: 100%;
+      }
+      strong {
+        margin-top: 10px;
+      }
+    }
 
+    .r {
+      width: 100%;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      min-width: 50px;
+      margin-left: 0px;
+    }
+  }
 }
 
 /* Smartphone */
@@ -141,6 +159,8 @@
       width: 100%;
       padding: 30px 20px;
       box-sizing: border-box;
+      min-width: 50px;
+      margin-left: 0px;
     }
   }
 }

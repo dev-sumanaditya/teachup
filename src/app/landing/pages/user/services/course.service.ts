@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Course } from "src/app/landing/store/models/course.model";
 import { ReplaySubject } from "rxjs";
-import { shareReplay } from "rxjs/operators";
+import { shareReplay, tap } from "rxjs/operators";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -13,8 +14,12 @@ export class CourseService {
 
   constructor(private http: HttpClient) {}
 
-  getDefaultData() {
-    return this.http.get<Course>("http://localhost:3000/course");
+  getDefaultData(id) {
+    return this.http.get<any>(environment.apiUrl + "/course/" + id).pipe(
+      tap((data) => {
+        this.passData(data.data);
+      })
+    );
   }
 
   passData(data) {

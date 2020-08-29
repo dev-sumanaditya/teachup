@@ -32,12 +32,16 @@
       img {
         width: 220px;
         margin-right: 15px;
+        background-color: #ddd;
       }
     }
     .ct {
       h4 {
         margin: 0;
         font-size: 16px;
+      }
+      .time {
+        margin: 5px 0;
       }
       .details {
         cursor: pointer;
@@ -49,23 +53,16 @@
   }
 }
 
-
-
 /* Desktop */
 @media (min-width: 1025px) and (max-width: 1280px) {
-
 }
-
 
 /* Tab */
 @media (min-width: 768px) and (max-width: 1024px) {
-
 }
-
 
 /* tab/cellphone */
 @media (min-width: 481px) and (max-width: 767px) {
-
 }
 
 /* Smartphone */

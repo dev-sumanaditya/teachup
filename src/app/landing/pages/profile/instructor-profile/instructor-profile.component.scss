@@ -1,5 +1,5 @@
-.top{
-  .info{
+.top {
+  .info {
     padding: 20px;
     align-items: center;
     width: 280px;
@@ -39,7 +39,7 @@
         font-size: 12px;
         padding: 2px 7px;
         background-color: #333;
-        color: #00FF84;
+        color: #00ff84;
         margin: 2px;
         border-radius: 4px;
       }
@@ -101,41 +101,66 @@
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Desktop */
 @media (min-width: 1025px) and (max-width: 1280px) {
-
 }
-
 
 /* Tab */
 @media (min-width: 768px) and (max-width: 1024px) {
-
 }
-
 
 /* tab/cellphone */
 @media (min-width: 481px) and (max-width: 767px) {
+  .top {
+    flex-direction: column;
+    .info {
+      padding: 0;
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+      .profileImg {
+        height: 110px;
+        width: 110px;
+        min-height: 110px;
+        min-width: 110px;
+        margin-bottom: 20px;
+      }
+      .count {
+        width: auto;
+        padding: 0px;
+        align-items: center;
+        margin-top: 10px;
+        strong {
+          text-align: center;
+        }
+      }
+      .social {
+        padding: 0px;
+        margin-bottom: 20px;
+      }
+    }
 
+    .content {
+      .to {
+        .list {
+          flex-wrap: wrap;
+          margin-top: 20px;
+          .item {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+  }
 }
 
 /* Smartphone */
 @media (min-width: 320px) and (max-width: 480px) {
-  .top{
+  .top {
     flex-direction: column;
-    .info{
+    .info {
       padding: 0;
       width: 100%;
       margin-right: 0;

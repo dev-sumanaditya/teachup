@@ -1,29 +1,49 @@
 <div class="loading hide" #loading></div>
- <!-- side menu -->
+<!-- side menu -->
 <div class="sidemenu col" [class.shrinked]="!sidemenu">
   <div class="row tp">
     <div class="col">
       <a routerLink="/" class="link blue">Teachup.io</a>
-      <small *ngIf="user">{{user.displayName}}</small>
+      <small *ngIf="user">{{ user.displayName }}</small>
     </div>
     <div class="flex-grow"></div>
-    <img (click)="closeSideMenu()" src="/assets/icons/utility/close2.png" alt="">
+    <img
+      (click)="closeSideMenu()"
+      src="/assets/icons/utility/close2.png"
+      alt=""
+    />
   </div>
   <div class="col menu">
     <a routerLink="/courses" (click)="closeSideMenu()" class="link">Courses</a>
     <a routerLink="/about" (click)="closeSideMenu()" class="link">About Us</a>
-    <a routerLink="/webinars" (click)="closeSideMenu()" class="link">Webinars</a>
+    <a routerLink="/webinars" (click)="closeSideMenu()" class="link"
+      >Webinars</a
+    >
   </div>
   <div class="col menu2" *ngIf="!user">
     <a [routerLink]="['/auth']" (click)="closeSideMenu()" class="link">Login</a>
-    <a routerLink="/auth/signup" (click)="closeSideMenu()" class="link">Sign up</a>
+    <a routerLink="/auth/signup" (click)="closeSideMenu()" class="link"
+      >Sign up</a
+    >
   </div>
   <div class="col menu2" *ngIf="user">
-    <a routerLink="/user/courses" (click)="closeSideMenu()" class="link">My Courses</a>
+    <a routerLink="/user/courses" (click)="closeSideMenu()" class="link"
+      >My Courses</a
+    >
     <a routerLink="/user/cart" (click)="closeSideMenu()" class="link">Cart</a>
-    <a routerLink="/user/wishlist" (click)="closeSideMenu()" class="link">My Wishlist</a>
-    <a routerLink="/user" (click)="closeSideMenu()" class="link">Account Settings</a>
-    <a routerLink="/instructor" class="link" (click)="closeSideMenu()" *ngIf="isInstructor">Instructor Panel</a>
+    <a routerLink="/user/wishlist" (click)="closeSideMenu()" class="link"
+      >My Wishlist</a
+    >
+    <a routerLink="/user" (click)="closeSideMenu()" class="link"
+      >Account Settings</a
+    >
+    <a
+      routerLink="/instructor"
+      class="link"
+      (click)="closeSideMenu()"
+      *ngIf="isInstructor"
+      >Instructor Panel</a
+    >
     <a class="link danger" (click)="logout2()">Logout</a>
   </div>
 </div>
@@ -34,12 +54,15 @@
     <div class="navs row">
       <a class="nav" (click)="showdrop()" #dropmenu>
         <span>Courses</span>
-        <img class="dropic" src="/assets/icons/utility/down.png" alt="">
-        <div class="dropdown"  [class.showDrop]="dropdown">
+        <img class="dropic" src="/assets/icons/utility/down.png" alt="" />
+        <div class="dropdown" [class.showDrop]="dropdown">
           <div class="content col">
-            <div class="row" style="border-bottom: 2px solid #eee; margin-bottom: 5px;">
+            <div
+              class="row"
+              style="border-bottom: 2px solid #eee; margin-bottom: 5px;"
+            >
               <a routerLink="/courses" class="item link row">
-                <img src="/assets/icons/courses/all.png" alt="">
+                <img src="/assets/icons/courses/all.png" alt="" />
                 <div class="text">
                   <h4>Explore All Courses</h4>
                   <p>Explore all our courses in various categories</p>
@@ -47,15 +70,25 @@
               </a>
             </div>
             <div class="row">
-              <a routerLink="/courses/category/:id" class="item link row">
-                <img src="/assets/icons/courses/1.png" alt="">
+              <a
+                routerLink="/courses/category/212d9595-5cda-4b97-aff7-f56bffff6488"
+                class="item link row"
+              >
+                <img src="/assets/icons/courses/1.png" alt="" />
                 <div class="text">
                   <h4>Courses in Technology</h4>
                   <p>C++ | Java | Python | Javascript | Robotics</p>
                 </div>
               </a>
-              <a class="item row link">
-                <img src="/assets/icons/courses/3.png" alt="">
+              <a
+                [routerLink]="[
+                  '/courses',
+                  'category',
+                  '2e269098-c418-47fc-a60d-c46934994891'
+                ]"
+                class="item row link"
+              >
+                <img src="/assets/icons/courses/3.png" alt="" />
                 <div class="text">
                   <h4>Courses in Management</h4>
                   <p>Business Management | Marketting</p>
@@ -63,18 +96,34 @@
               </a>
             </div>
             <div class="row">
-              <a class="item row link">
-                <img src="/assets/icons/courses/art.png" alt="">
+              <a
+                [routerLink]="[
+                  '/courses',
+                  'category',
+                  'a56a6048-c7f6-4d5e-ba96-67ff3b8dad83'
+                ]"
+                class="item row link"
+              >
+                <img src="/assets/icons/courses/art.png" alt="" />
                 <div class="text">
                   <h4>Courses in Art</h4>
                   <p>Cooking | Illustration | Fashion Design</p>
                 </div>
               </a>
-              <a class="item row link">
-                <img src="/assets/icons/courses/4.png" alt="">
+              <a
+                [routerLink]="[
+                  '/courses',
+                  'category',
+                  '94605eb2-3262-42fe-a283-8481c46d927b'
+                ]"
+                class="item row link"
+              >
+                <img src="/assets/icons/courses/4.png" alt="" />
                 <div class="text">
                   <h4>Courses in finance</h4>
-                  <p>Financial Analysis | Capital Markets | Data visualization</p>
+                  <p>
+                    Financial Analysis | Capital Markets | Data visualization
+                  </p>
                 </div>
               </a>
             </div>
@@ -89,10 +138,6 @@
       <a routerLink="/webinars" class="nav">
         <span>Webinars</span>
       </a>
-
-      <!-- <a routerLink="/faq" class="nav">
-        <span>FAQs</span>
-      </a> -->
     </div>
 
     <div class="flex-grow"></div>
@@ -102,36 +147,40 @@
         <span>login</span>
       </a>
       <a class="nav account" *ngIf="user" (click)="showAccount()" #accountMenu>
-        <span><strong>{{user.displayName}}</strong></span>
-        <img class="dropic" src="/assets/icons/utility/down.png" alt="">
+        <span
+          ><strong>{{ user.displayName }}</strong></span
+        >
+        <img class="dropic" src="/assets/icons/utility/down.png" alt="" />
         <div class="dropdown" [class.showDrop]="showAcc">
           <div class="col">
             <a routerLink="/user/courses" class="link">My Courses</a>
             <a routerLink="/user/wishlist" class="link">Wishlist</a>
             <a routerLink="/user/cart" class="link">My Cart</a>
             <a routerLink="/user" class="link">Account Settings</a>
-            <a routerLink="/instructor" class="link" *ngIf="isInstructor">Instructor Panel</a>
+            <a routerLink="/instructor" class="link" *ngIf="isInstructor"
+              >Instructor Panel</a
+            >
             <a routerLink="" class="link logout" (click)="logout()">Logout</a>
           </div>
         </div>
       </a>
       |
       <a routerLink="/user/cart" class="navbtn" *ngIf="user">
-        <img src="/assets/icons/utility/cart.png" alt="">
+        <img src="/assets/icons/utility/cart.png" alt="" />
       </a>
       <a class="navbtn">
-        <img src="/assets/icons/utility/search.png" alt="">
+        <img src="/assets/icons/utility/search.png" alt="" />
       </a>
     </div>
     <div class="navs2 row">
       <div class="nav" (click)="openSideMenu()">
-        <img src="/assets/icons/utility/menu.png" alt="">
+        <img src="/assets/icons/utility/menu.png" alt="" />
       </div>
     </div>
   </div>
 </nav>
 <div style="margin-top: 120px; min-height: 90vh;" class="outlet">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 
 <div class="footer">

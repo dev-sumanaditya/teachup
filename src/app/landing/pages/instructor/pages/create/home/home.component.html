@@ -1,26 +1,72 @@
-<div class="col main">
+<form [formGroup]="createForm" (ngSubmit)="onSubmit2()" class="col main">
   <div class="formItem col">
-    <label for="" class="blue">Title</label>
-    <input type="text" placeholder="Course Title">
+    <label for="" class="blue">course Title</label>
+    <input
+      type="text"
+      placeholder="Course Title"
+      formControlName="title"
+      [class.formError]="CreateFormControl.title.errors && createFormSubmitted"
+    />
   </div>
   <div class="formItem col">
     <label for="" class="blue">Sub Title</label>
-    <input type="text" placeholder="Sub Title">
+    <input
+      type="text"
+      formControlName="header"
+      placeholder="Sub Title"
+      [class.formError]="CreateFormControl.header.errors && createFormSubmitted"
+    />
+  </div>
+  <div class="formItem col">
+    <label for="" class="blue">Short Description</label>
+    <textarea
+      cols="30"
+      [class.formError]="
+        CreateFormControl.description.errors && createFormSubmitted
+      "
+      rows="6"
+      placeholder="Short description about this course.."
+      formControlName="description"
+    ></textarea>
   </div>
   <div class="formItem col">
     <label for="" class="blue">Lesson Plan</label>
     <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()" class="row lssn">
-      <input type="text" [class.formError]="LessonFormControl.lessonName.errors && lessonSubmitted" formControlName="lessonName" class="flex-grow" placeholder="Lesson name max-60" maxlength="60">
-      <input type="number" [class.formError]="LessonFormControl.lessonDuration.errors && lessonSubmitted" formControlName="lessonDuration" placeholder="Duration in mins">
+      <input
+        type="text"
+        [class.formError]="
+          LessonFormControl.lessonName.errors && lessonSubmitted
+        "
+        formControlName="lessonName"
+        class="flex-grow"
+        placeholder="Lesson name max-60"
+        maxlength="60"
+      />
+      <input
+        type="number"
+        [class.formError]="
+          LessonFormControl.lessonDuration.errors && lessonSubmitted
+        "
+        formControlName="lessonDuration"
+        placeholder="Duration in mins"
+      />
       <button class="btn blue-bg white" type="Submit">Add</button>
     </form>
-    <small class="danger" *ngIf="LessonFormControl.lessonDuration.errors && lessonSubmitted">Only multiples of 10 is allowed. Max 360 mins | Min 10 mins</small>
+    <small
+      class="danger"
+      *ngIf="LessonFormControl.lessonDuration.errors && lessonSubmitted"
+      >Only multiples of 10 is allowed. Max 360 mins | Min 10 mins</small
+    >
     <div class="lessons col" *ngIf="lessons.length >= 1">
       <div class="lesson row" *ngFor="let item of lessons; let i = index">
-        <h4>{{i}}</h4>
-        <div class="flex-grow">{{item.name}}</div>
-        <div class="duration">{{item.duration}}</div>
-        <img (click)="removeLesson(item.id)" src="/assets/icons/utility/delete2.png" alt="">
+        <h4>{{ i }}</h4>
+        <div class="flex-grow">{{ item.name }}</div>
+        <div class="duration">{{ item.duration }}</div>
+        <img
+          (click)="removeLesson(item.id)"
+          src="/assets/icons/utility/delete2.png"
+          alt=""
+        />
       </div>
     </div>
     <div class="lessons" *ngIf="lessons.length === 0">
@@ -28,63 +74,120 @@
     </div>
   </div>
   <div class="formItem col">
-    <label for="" class="blue">Short Description</label>
-    <textarea name="" id="" cols="30" rows="6" placeholder="Short description about this course.."></textarea>
-  </div>
-  <div class="formItem col">
     <label for="" class="blue">Price</label>
-    <input type="number" placeholder="Price in rupees">
+    <input
+      type="number"
+      formControlName="price"
+      placeholder="Price in rupees"
+      [class.formError]="CreateFormControl.price.errors && createFormSubmitted"
+    />
   </div>
   <div class="formItem col">
     <label for="" class="blue">Start Date</label>
-    <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="model" required></my-date-picker>
+    <my-date-picker
+      name="mydate"
+      [options]="myDatePickerOptions"
+      [(ngModel)]="dateModel"
+      [ngModelOptions]="{ standalone: true }"
+      required
+    ></my-date-picker>
+    <small
+      class="danger"
+      *ngIf="CreateFormControl.startDate.errors && createFormSubmitted"
+      >Please select a valid date</small
+    >
   </div>
   <div class="formItem">
     <label for="" class="blue">About Course</label>
     <div class="spacer"></div>
     <div class="quill">
       <quill-editor
-      [styles]="editorStyle"
-      (onEditorChanged)="changedEditor($event)"
-      [(ngModel)]="content"
-      trackChanges="all"
-      [modules]="modules"
-      placeholder="A detailed explation about your course in not more than 1500 words"
-    ></quill-editor>
+        [styles]="editorStyle"
+        formControlName="longDescription"
+        trackChanges="all"
+        [modules]="modules"
+        placeholder="A detailed explation about your course in not more than 1500 words"
+      ></quill-editor>
+      <small
+        class="danger"
+        *ngIf="CreateFormControl.longDescription.errors && createFormSubmitted"
+        >Please enter valid details</small
+      >
     </div>
+  </div>
+  <div class="formItem col">
+    <label for="" class="blue">Select Category</label>
+    <select
+      formControlName="categories"
+      [class.formError]="
+        CreateFormControl.categories.errors && createFormSubmitted
+      "
+    >
+      <option [ngValue]="i" *ngFor="let i of categories">{{ i.name }}</option>
+    </select>
+  </div>
+  <div class="formItem col">
+    <label for="" class="blue">Level of Course</label>
+    <select
+      formControlName="level"
+      [class.formError]="CreateFormControl.level.errors && createFormSubmitted"
+    >
+      <option value="Beginner">Beginner</option>
+      <option value="Intermediate">Intermediate</option>
+      <option value="Advanced">Advanced</option>
+    </select>
   </div>
   <div class="formItem">
     <label for="" class="blue">Cover Image</label>
     <div class="ct">
       <div class="image">
-        <div class="ctr" [style.background]="" *ngIf="croppedImage && !uploading">
-
-        </div>
+        <div
+          class="ctr"
+          [style.background]=""
+          *ngIf="croppedImage && !uploading"
+        ></div>
         <div class="ctr add col" *ngIf="!croppedImage && !uploading">
-          <div class="btn blue-bg white" (click)="upload.click()">Upload Image</div>
+          <div class="btn blue-bg white" (click)="upload.click()">
+            Upload Image
+          </div>
         </div>
         <div class="ctr add col" *ngIf="uploading">
           <strong class="blue">Uploading 44%</strong>
         </div>
       </div>
-      <input #upload type="file" style="display: none;" (change)="fileChangeEvent($event)">
+      <small
+        class="danger"
+        *ngIf="CreateFormControl.title.errors && createFormSubmitted"
+        >Please select a cover image</small
+      >
+      <input
+        #upload
+        type="file"
+        style="display: none;"
+        (change)="fileChangeEvent($event)"
+      />
     </div>
   </div>
-  <br>
-  <div class="btn blue-bg white">Upload Course</div>
-</div>
+  <br />
+  <button type="submit" class="btn blue-bg white">
+    <span *ngIf="!loading">Upload Course</span>
+    <span *ngIf="loading">Uploading - please wait</span>
+  </button>
+  <small class="danger" *ngIf="createFormError">{{ createFormError }}</small>
+</form>
 
 <div class="modal col" *ngIf="imageChangedEvent">
   <div class="content" style="max-width: 70%; max-height: 60%;">
     <image-cropper
-        [imageChangedEvent]="imageChangedEvent"
-        [maintainAspectRatio]="true"
-        [aspectRatio]="16 / 9"
-        format="png"
-        (imageCropped)="imageCropped($event)"
-        (loadImageFailed)="loadImageFailed()"
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="16 / 9"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+      (loadImageFailed)="loadImageFailed()"
     ></image-cropper>
   </div>
-  <br>
-  <div class="btn blue-bg white" (click)="uploadImage()">Upload Image</div>
+  <br />
+  <div class="btn blue-bg white" (click)="selectImage()">Upload Image</div>
+  <div class="btn white" (click)="imageChangedEvent = ''">Cancel</div>
 </div>

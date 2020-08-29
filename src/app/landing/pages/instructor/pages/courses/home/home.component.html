@@ -1,6 +1,32 @@
 <div class="col">
-  <div class="not col">
-    <img src="/assets/icons/instructor/items.png" alt="">
+  <div class="col loading" *ngIf="loading">
+    <img src="/assets/icons/utility/spinner.png" class="spin" alt="" />
+  </div>
+  <div class="not col" *ngIf="courses.length === 0 && !loading">
+    <img src="/assets/icons/instructor/items.png" alt="" />
     <h2 class="dark">Your course list is empty</h2>
+  </div>
+  <div class="col items" *ngIf="courses.length > 0">
+    <div class="head blue">All Courses</div>
+    <div class="item row" *ngFor="let i of courses">
+      <div class="f2">
+        <div class="image">
+          <div class="img" [style.background]="'url(' + i.image + ')'"></div>
+        </div>
+      </div>
+      <div class="content f4 col">
+        <strong class="dark title">{{ i.title }}</strong>
+        <strong class="blue date"
+          >Start Date - {{ i.startDate | date: "shortDate" }}</strong
+        >
+        <strong class="price">RS {{ i.price }}.00</strong>
+        <div class="row">
+          <a class="link blue">Manage this Course</a>
+          <a [routerLink]="['/courses', 'course', i.id]" class="blue"
+            >View Course</a
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </div>

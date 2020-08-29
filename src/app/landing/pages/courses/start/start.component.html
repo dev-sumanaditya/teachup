@@ -2,9 +2,13 @@
   <div class="categories">
     <strong>Categories</strong>
     <div class="items row">
-      <a class="item row sha1" *ngFor="let i of categories" routerLink="/courses/category/:id">
-        <img [src]="['/assets/icons/courses/'+ i.img +'.png']" alt="">
-        <span>{{i.name}}</span>
+      <a
+        class="item row sha1"
+        *ngFor="let i of categories"
+        [routerLink]="['/courses', 'category', i.id]"
+      >
+        <img [src]="i.image" alt="" />
+        <span>{{ i.name }}</span>
       </a>
     </div>
   </div>
@@ -12,20 +16,23 @@
   <div class="popular">
     <strong>Popular Courses</strong>
     <div class="items row" *ngIf="!static">
-      <div class="item sha1" *ngFor="let i of [1,1,1,1,1,1,7,8]"><app-course></app-course></div>
+      <div class="item sha1" *ngFor="let i of courses">
+        <app-course [data]="i"></app-course>
+      </div>
     </div>
     <!--  when no courses -->
     <div class="static col" *ngIf="static">
-      <img src="/assets/images/user/course.png" alt="">
+      <img src="/assets/images/user/course.png" alt="" />
       <p>Upcoming courses will appear here</p>
     </div>
   </div>
 
-  <div class="popular" *ngIf="!static">
+  <!-- <div class="popular" *ngIf="">
     <strong>Most Recent</strong>
     <div class="items row">
-      <div class="item sha1" *ngFor="let i of [1,1,1]"><app-course></app-course></div>
+      <div class="item sha1" *ngFor="let i of [1, 1, 1]">
+        <app-course></app-course>
+      </div>
     </div>
-  </div>
-
+  </div> -->
 </div>

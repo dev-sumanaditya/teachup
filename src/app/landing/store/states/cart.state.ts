@@ -1,21 +1,19 @@
-import {State, Action, StateContext, Selector} from '@ngxs/store';
-import { CourseMin } from '../models/cart.model';
-import * as CartActions from '../actions/cart.action';
-import { CartService } from '../../services/cart.service';
-import {tap} from 'rxjs/operators';
-import { Injectable } from '@angular/core';
+import { State, Action, StateContext, Selector } from "@ngxs/store";
+import * as CartActions from "../actions/cart.action";
+import { CartService } from "../../services/cart.service";
+import { tap } from "rxjs/operators";
+import { Injectable } from "@angular/core";
 
 export class CartStateModel {
-  courses: CourseMin[];
+  courses: any[];
 }
 
 @State<CartStateModel>({
-  name: 'cart',
+  name: "cart",
   defaults: {
-      courses: [],
-  }
+    courses: [],
+  },
 })
-
 @Injectable()
 export class CartState {
   constructor(private cartService: CartService) {}
@@ -27,35 +25,50 @@ export class CartState {
 
   // Cart reducers
   @Action(CartActions.GetCartItems)
-  getCartItems({getState, setState}: StateContext<CartStateModel>) {
-    return this.cartService.getCartItems().pipe(tap((result) => {
-      const state = getState();
-      setState({
+  getCartItems({ getState, setState }: StateContext<CartStateModel>) {
+    return this.cartService.getCartItems().pipe(
+      tap(({ data }) => {
+        const state = getState();
+        setState({
           ...state,
-          courses: result,
-      });
-    }));
+          courses: data.courses,
+        });
+      })
+    );
   }
 
   @Action(CartActions.AddCartItem)
-  addCartItem({getState, patchState}: StateContext<CartStateModel>, {payload}: CartActions.AddCartItem) {
-    return this.cartService.addItemToCart(payload).pipe(tap((result) => {
-      const state = getState();
-      patchState({
-          courses: [...state.courses, payload]
-      });
-    }));
+  addCartItem(
+    { getState, patchState }: StateContext<CartStateModel>,
+    { payload }: CartActions.AddCartItem
+  ) {
+    return this.cartService.addItemToCart(payload).pipe(
+      tap((result) => {
+        const state = getState();
+        patchState({
+          courses: [
+            ...state.courses.filter((course) => course.id !== payload.id),
+            payload,
+          ],
+        });
+      })
+    );
   }
 
   @Action(CartActions.DeleteCartItem)
-  deleteCartItem({getState, setState}: StateContext<CartStateModel>, {id}: CartActions.DeleteCartItem) {
-    return this.cartService.deleteItemFromCart(id).pipe(tap(() => {
-      const state = getState();
-      const filteredArray = state.courses.filter(item => item.id !== id);
-      setState({
-        ...state,
-        courses: filteredArray
-      });
-    }));
+  deleteCartItem(
+    { getState, setState }: StateContext<CartStateModel>,
+    { id }: CartActions.DeleteCartItem
+  ) {
+    return this.cartService.deleteItemFromCart(id).pipe(
+      tap(() => {
+        const state = getState();
+        const filteredArray = state.courses.filter((item) => item.id !== id);
+        setState({
+          ...state,
+          courses: filteredArray,
+        });
+      })
+    );
   }
 }

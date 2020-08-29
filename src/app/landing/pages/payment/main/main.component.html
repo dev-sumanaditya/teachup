@@ -6,64 +6,143 @@
       <div class="items col">
         <div class="item row" *ngFor="let i of orderDetails">
           <div class="lft">
-            <img src="/assets/images/demo/course.png" alt="">
+            <img [src]="i.image" alt="" />
           </div>
           <div class="ryt flex-grow">
-            <h4 class="name">{{i.name}}</h4>
-            <strong class="author"><small>{{i.authorName}} &nbsp;|&nbsp; {{i.startDate}}</small></strong>
-            <br>
-            <strong><small class="blue price">Rs {{i.price}}</small></strong>
+            <h4 class="name">{{ i.title }}</h4>
+            <strong class="author"
+              ><small> {{ i.startDate | date: "mediumDate" }}</small></strong
+            >
+            <br />
+            <strong
+              ><small class="blue price">Rs {{ i.price }}.00</small></strong
+            >
           </div>
           <div class="end col">
-            <img src="/assets/icons/utility/close2.png" alt="" (click)="deleteItem(i.id)">
+            <!-- <img
+              src="/assets/icons/utility/close2.png"
+              alt=""
+              (click)="deleteItem(i.id)"
+            /> -->
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="r f2 col">
-    <div class="card col">
+    <div class="card col" *ngIf="!paymentSuccessful">
       <h2>Order Summary</h2>
       <div class="prices col">
         <div class="price row">
           <div class="tx">Original price:</div>
           <div class="flex-grow"></div>
-          <div class="amt">Rs 18,240</div>
+          <div class="amt">Rs {{ price }}.00</div>
         </div>
-        <div class="price row">
+        <div class="price row" *ngIf="appliedCoupon">
           <div class="tx">Coupon discounts:</div>
           <div class="flex-grow"></div>
-          <div class="amt">-Rs 17,240</div>
+          <div class="amt">
+            -Rs
+            {{
+              couponResponse.order.totalAmount -
+                couponResponse.order.paidAmount
+            }}.00
+          </div>
         </div>
       </div>
       <div class="total row">
         <strong>Total:</strong>
         <div class="flex-grow"></div>
-        <strong>Rs 1000.00</strong>
+        <strong
+          >Rs <span *ngIf="!appliedCoupon">{{ price }}</span
+          ><span *ngIf="appliedCoupon">{{
+            couponResponse.order.paidAmount
+          }}</span
+          >.00</strong
+        >
       </div>
-      <div class="btn blue-bg white" (click)="completePayment()">Complete Payment</div>
+      <div class="coupons col">
+        <div class="row applied" *ngIf="appliedCoupon">
+          <small class="flex-grow"
+            >Coupon Applied - {{ appliedCoupon.code }}</small
+          >
+          <img
+            src="/assets/icons/utility/close2.png"
+            (click)="removeCoupon()"
+            alt=""
+          />
+        </div>
+        <div
+          class="row applied"
+          *ngIf="!appliedCoupon && couponSubmitted && !couponLoading"
+        >
+          <small class="danger">Coupon Invalid</small>
+        </div>
+
+        <form
+          [formGroup]="couponForm"
+          (ngSubmit)="couponSubmit()"
+          class="row apply"
+          *ngIf="!appliedCoupon"
+        >
+          <input
+            type="text"
+            formControlName="couponCode"
+            placeholder="Apply Coupon"
+            [class.inputError]="
+              couponFormControl.couponCode.errors && couponSubmitted
+            "
+          />
+          <button
+            *ngIf="!couponLoading"
+            type="submit"
+            class="btn blue-bg white"
+          >
+            <span>apply</span>
+          </button>
+          <img
+            class="spin"
+            style="height: 20px; width: 20px; margin-left: 20px;"
+            *ngIf="couponLoading"
+            src="/assets/icons/utility/spinner.png"
+            alt=""
+          />
+        </form>
+      </div>
+      <div class="btn blue-bg white" (click)="completePayment()">
+        <span *ngIf="!paymentProcessing">Complete Payment</span>
+        <img
+          style="height: 20px; width: 20px;"
+          class="spin"
+          *ngIf="paymentProcessing"
+          src="/assets/icons/utility/spinner-white.png"
+          alt=""
+        />
+      </div>
     </div>
-    <div class="card">
+    <div class="card" *ngIf="paymentSuccessful">
       <h2 class="success">Order Successful</h2>
       <div class="prices col">
         <div class="price row">
           <div class="tx">Order Id:</div>
           <div class="flex-grow"></div>
-          <div class="amt">12bdeh33</div>
+          <div class="amt">{{ paymentData.id }}</div>
         </div>
         <div class="price row">
           <div class="tx">Number of items:</div>
           <div class="flex-grow"></div>
-          <div class="amt">1</div>
+          <div class="amt">{{ paymentData.courses.length }}</div>
         </div>
         <div class="price row">
           <div class="tx">Ammount Paid:</div>
           <div class="flex-grow"></div>
-          <div class="amt">Rs 17,240</div>
+          <div class="amt">Rs {{ paymentData.paidAmount }}.00</div>
         </div>
       </div>
-      <br>
-      <a href=""><strong class="blue">Continue to courses</strong></a>
+      <br />
+      <a routerLink="user/courses"
+        ><strong class="blue">Continue to courses</strong></a
+      >
     </div>
   </div>
 </div>

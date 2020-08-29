@@ -21,7 +21,7 @@ export class MainComponent implements OnInit {
     id: ":id",
   };
 
-  public defaultData: Course;
+  public data;
   public user: null;
   public courseId;
 
@@ -38,24 +38,24 @@ export class MainComponent implements OnInit {
       this.user = data;
     });
     this.courseService.dataObs.subscribe((data) => {
-      this.defaultData = data;
+      this.data = data;
     });
   }
 
   addToCart() {
     if (this.user) {
-      const dat: CourseMin = {
-        id: "someid",
-        name: "Some title",
-        image: "",
-        authorName: "some author name",
-        startDate: "12 July 2022",
-        price: 7833.0,
+      const payload: CourseMin = {
+        id: this.data.id,
+        name: this.data.title,
+        image: this.data.image,
+        authorName: this.data.author.displayName,
+        startDate: this.data.startDate,
+        price: this.data.price,
       };
-      this.store.dispatch(new AddCartItem(dat));
+      this.store.dispatch(new AddCartItem(payload));
     } else {
       this.router.navigate(["/auth"], {
-        queryParams: { returnUrl: "/courses/course/" + this.defaultData.id },
+        queryParams: { returnUrl: "/courses/course/" + this.data.id },
       });
     }
   }
@@ -63,18 +63,18 @@ export class MainComponent implements OnInit {
   takeThisCourse() {
     if (this.user) {
       const payload: CourseMin = {
-        id: this.defaultData.id,
-        name: this.defaultData.title,
-        image: this.defaultData.image,
-        authorName: this.defaultData.author,
-        startDate: this.defaultData.startDate,
-        price: this.defaultData.price,
+        id: this.data.id,
+        name: this.data.title,
+        image: this.data.image,
+        authorName: this.data.author.user.diaplayName,
+        startDate: this.data.startDate,
+        price: this.data.price,
       };
       this.orderService.setState([payload]);
       this.router.navigate(["/payment"]);
     } else {
       this.router.navigate(["/auth"], {
-        queryParams: { returnUrl: "/courses/course/" + this.defaultData.id },
+        queryParams: { returnUrl: "/courses/course/" + this.data.id },
       });
     }
   }

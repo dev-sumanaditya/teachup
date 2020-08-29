@@ -1,21 +1,21 @@
 <div class="wide row main main-ctr">
   <div class="left col">
     <div class="card">
-      <img src="/assets/images/demo/avatar2.webp" alt="">
+      <img [src]="user.photoURL" alt="" />
     </div>
-    <strong class="name">{{user.displayName}}</strong>
-    <p class="about">YouTuber, Author, Entrepreneur</p>
-    <div class="details col">
+    <strong class="name">{{ user.displayName }}</strong>
+    <p class="about">{{ user.info }}</p>
+    <div class="details col" *ngIf="courses">
       <h5 class="hd">Active Courses:</h5>
-      <h2 class="blue">12 active courses</h2>
-      <br>
+      <h2 class="blue">{{ courses.length }} active courses</h2>
+      <br />
       <h5 class="hd">Total Students:</h5>
-      <h2 class="blue">2200 Learners</h2>
+      <h2 class="blue">// Learners</h2>
     </div>
     <div class="topics col">
       <strong class="dark">Badges:</strong>
       <div class="items row">
-        <div class="item" *ngFor="let i of [1,1,1,1,1]">Verified</div>
+        <div class="item" *ngFor="let i of [1]">Verified</div>
       </div>
     </div>
   </div>
@@ -24,16 +24,33 @@
       <a class="head blue" routerLink="/instructor">Instructor Panel</a>
       <div class="flex-grow"></div>
       <div class="navs row">
-        <a routerLink="/instructor/" routerLinkActive="navActive" class="nav blue" [routerLinkActiveOptions]="{ exact: true }">
+        <a
+          routerLink="/instructor/"
+          routerLinkActive="navActive"
+          class="nav blue"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <span>Home</span>
         </a>
-        <a routerLink="/instructor/create" routerLinkActive="navActive" class="nav blue">
+        <a
+          routerLink="/instructor/create"
+          routerLinkActive="navActive"
+          class="nav blue"
+        >
           <span>Create New</span>
         </a>
-        <a routerLink="/instructor/courses" routerLinkActive="navActive" class="nav blue">
+        <a
+          routerLink="/instructor/courses"
+          routerLinkActive="navActive"
+          class="nav blue"
+        >
           <span>My Courses</span>
         </a>
-        <a routerLink="/instructor/profile" routerLinkActive="navActive" class="nav blue">
+        <a
+          routerLink="/instructor/profile"
+          routerLinkActive="navActive"
+          class="nav blue"
+        >
           <span>Edit Profile</span>
         </a>
       </div>

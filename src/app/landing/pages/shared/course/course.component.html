@@ -1,13 +1,24 @@
-<div class="ctrr col">
+<div class="ctrr col" *ngIf="data">
   <div class="image">
-    <div class="img" [style.backgroundImage]="'url('+ course.imageUrl +')'"></div>
+    <div class="img" [style.backgroundImage]="'url(' + data.image + ')'"></div>
     <div class="overlay"></div>
   </div>
   <div class="info col">
-    <a [routerLink]="['/courses','course','id']" class="title">The Python Bible™ | Everything You Need to Program in Python</a>
-    <small class="author">By Amitabh Kant</small>
-    <strong class="price">Rs 10,999.00</strong>
-    <small class="time">12:00 hrs | 24 July 2020</small>
-    <a (click)="openCourse()" routerLinkActive="router-link-active"   class="btn blue-bg">Enroll Now</a>
+    <a [routerLink]="['/courses', 'course', data.id]" class="title">{{
+      data.title
+    }}</a>
+    <small class="author" *ngIf="data.author.user"
+      >By {{ data.author.user.displayName }}</small
+    >
+    <strong class="price">Rs {{ data.price }}.00</strong>
+    <small class="time"
+      >Start Date - {{ data.startDate | date: "mediumDate" }}</small
+    >
+    <a
+      (click)="openCourse()"
+      routerLinkActive="router-link-active"
+      class="btn blue-bg"
+      >Enroll Now</a
+    >
   </div>
 </div>

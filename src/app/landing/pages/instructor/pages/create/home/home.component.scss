@@ -55,11 +55,6 @@
       margin-left: 5px;
       border: none;
     }
-    .formError {
-      border: 2px solid crimson !important;
-      box-sizing: border-box;
-      outline: none;
-    }
   }
   .lessons {
     background-color: #eee;
@@ -80,9 +75,14 @@
         margin-left: 15px;
         cursor: pointer;
         &:hover {
-          filter: grayscale(100)
+          filter: grayscale(100);
         }
       }
     }
   }
+}
+.formError {
+  border: 2px solid crimson !important;
+  box-sizing: border-box;
+  outline: none;
 }

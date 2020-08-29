@@ -1,0 +1,20 @@
+<div class="wide">
+  <div class="row cat">
+    <div class="bar blue-bg"></div>
+    <h2>Edit Profile</h2>
+  </div>
+  <div class="image row">
+    <div class="img col">
+      <img class="profileImage" *ngIf="imageSRC" [src]="imageSRC" />
+      <img
+        (click)="image.click()"
+        class="edit"
+        src="/assets/icons/utility/edit.png"
+        alt=""
+      />
+    </div>
+    <input type="file" #image style="display: none;" />
+  </div>
+  <app-edit-form [data]="nameOptions"></app-edit-form>
+  <app-edit-form [data]="phoneOptions"></app-edit-form>
+</div>

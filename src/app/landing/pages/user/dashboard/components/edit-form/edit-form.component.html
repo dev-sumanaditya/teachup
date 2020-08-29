@@ -1,0 +1,33 @@
+<div class="sec row" *ngIf="data">
+  <label class="blue">{{ data.label }}:</label>
+  <input
+    #input
+    type="{{ data.type }}"
+    class="input"
+    placeholder="{{ data.placeHolder }}"
+    [(ngModel)]="value"
+    [disabled]="disabled"
+    [class.active]="!disabled"
+    [class.disabled]="disabled"
+  />
+  <img
+    *ngIf="disabled && !loading"
+    (click)="edit()"
+    class="edit"
+    src="/assets/icons/utility/edit.png"
+  />
+  <img
+    *ngIf="!disabled && !loading"
+    (click)="submit()"
+    src="/assets/icons/utility/save.png"
+    class="edit"
+  />
+  <img
+    *ngIf="loading"
+    class="edit spin"
+    style="background-color: transparent; cursor: default;"
+    src="/assets/icons/utility/spinner.png"
+    alt=""
+  />
+</div>
+<small class="danger" *ngIf="error && submitted">{{ error }}</small>

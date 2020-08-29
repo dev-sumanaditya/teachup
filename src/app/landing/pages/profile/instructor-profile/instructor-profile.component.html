@@ -1,33 +1,62 @@
 <div class="col wide" style="padding-bottom: 30px;">
-  <div class="top row">
+  <div class="top row" *ngIf="data">
     <div class="info col">
-      <img class="profileImg" src="/assets/images/demo/avatar2.webp" alt="">
-      <h3 class="name blue">John Doe</h3>
-      <p class="about">Youtuber | Author | Entrepreneur</p>
-      <a href="" class="blue website">www.mywebsite.com</a>
+      <img class="profileImg" [src]="data.user.photoURL" alt="" />
+      <h3 class="name blue">{{ data.user.displayName }}</h3>
+      <p class="about">
+        {{ data.intro }} <span *ngIf="data.intro === null">..</span>
+      </p>
+      <!-- <a href="" class="blue website">www.mywebsite.com</a> -->
       <div class="tags row">
-        <div class="tag" *ngFor="let i of [1,1,1,1]">Verified</div>
+        <div class="tag" *ngIf="data.approved">Verified</div>
       </div>
       <div class="count col">
-        <strong>Students: 49K</strong>
-        <strong>Categories - Photography</strong>
+        <!-- <strong>Students: Coming Soon</strong> -->
+        <strong>Expertise - {{ data.areaOfExpertise }}</strong>
       </div>
       <div class="social row">
-        <img src="/assets/icons/social/fb.png" alt="">
-        <img src="/assets/icons/social/linkedin.png" alt="">
-        <img src="/assets/icons/social/insta.png" alt="">
-        <img src="/assets/icons/social/twitter.png" alt="">
+        <a
+          href="{{ data.fbProfile }}"
+          *ngIf="data.fbProfile !== null"
+          target="_blank"
+          target="_blank"
+        >
+          <img src="/assets/icons/social/fb.png" alt="" />
+        </a>
+        <a
+          href="{{ data.instaProfile }}"
+          *ngIf="data.instaProfile !== null"
+          target="_blank"
+        >
+          <img src="/assets/icons/social/insta.png" alt="" />
+        </a>
+        <a
+          href="{{ data.linkedinProfile }}"
+          *ngIf="data.linkedinProfile !== null"
+          target="_blank"
+        >
+          <img src="/assets/icons/social/linkedin.png" alt="" />
+        </a>
+        <a
+          href="{{ data.twitterProfile }}"
+          *ngIf="data.twitterProfile !== null"
+          target="_blank"
+        >
+          <img src="/assets/icons/social/twitter.png" alt="" />
+        </a>
       </div>
     </div>
     <div class="content f1 col">
       <div class="card on">
         <div class="head blue">About Me</div>
-        <p class="text">I’m an author, YouTuber, and speaker who is passionate about helping students succeed. Most of my work today is done at College Info Geek – a site I created in 2010 in order to share my experiments in becoming a more effective student. Today, College Info Geek is one of the world’s largest and best-loved resources for students, and includes a blog, podcast, and a YouTube channel with over 1 million subscribers.</p>
+        <p class="text">{{ data.about }}</p>
       </div>
       <div class="card to">
         <div class="head blue">Courses</div>
         <div class="list row">
-          <div class="item" *ngFor="let i of [1,1,1,1,1,1,1]"><app-course></app-course></div>
+          <div class="item" *ngFor="let i of data.courses">
+            <app-course [data]="i"></app-course>
+          </div>
         </div>
       </div>
     </div>

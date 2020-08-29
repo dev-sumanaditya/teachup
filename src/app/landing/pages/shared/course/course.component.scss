@@ -21,8 +21,13 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgb(0,0,0);
-      background: linear-gradient(0deg, rgba(0,0,0,0.1) 8%, rgba(0,0,0,0.2984944319524685) 77%, rgba(0,0,0,0.5598389697675946) 100%);
+      background: rgb(0, 0, 0);
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 8%,
+        rgba(0, 0, 0, 0.2984944319524685) 77%,
+        rgba(0, 0, 0, 0.5598389697675946) 100%
+      );
     }
   }
   .info {
@@ -33,10 +38,10 @@
       font-weight: 600;
       word-wrap: break-word;
       color: #333;
-      width: 100%;
-      white-space: pre-wrap;       /* css-3 */
-      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-      white-space: -pre-wrap;      /* Opera 4-6 */
+      width: max-content;
+      white-space: pre-wrap; /* css-3 */
+      white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+      white-space: -pre-wrap; /* Opera 4-6 */
       white-space: -o-pre-wrap;
       &:hover {
         color: #0052cc;

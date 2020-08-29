@@ -45,6 +45,12 @@
         </div>
         <p class="primary" *ngIf="mailSent">Mail Sent</p>
       </div>
+      <div class="edit">
+        <br />
+        <a routerLink="/user/edit" class="blue btn btn-sm blue-ot"
+          >Edit Profile</a
+        >
+      </div>
     </div>
   </div>
   <div class="card enrolled">
@@ -99,7 +105,7 @@
     /></a>
   </div>
 
-  <div class="card coupons">
+  <!-- <div class="card coupons">
     <strong class="blue">My Coupons</strong>
     <div class="items row">
       <div class="item sha1 col" *ngFor="let i of [1]">
@@ -109,7 +115,7 @@
         <br />
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <div class="modal col" *ngIf="imageChangedEvent">

@@ -1,9 +1,9 @@
 // colors
 .blue {
-  color: #0052CC;
+  color: #0052cc;
 }
 .blue-bg {
-  background-color: #0052CC;
+  background-color: #0052cc;
 }
 .blue-ot {
   border: 1px solid #0053cc;
@@ -20,8 +20,6 @@
 .dark {
   color: #444;
 }
-
-
 
 // layout
 .wide {
@@ -59,7 +57,6 @@
 .f6 {
   flex: 6;
 }
-
 
 // components
 .btn {
@@ -101,21 +98,41 @@
   height: 50px;
 }
 @keyframes rotating {
-    from{
-        -webkit-transform: rotate(0deg);
-    }
-    to{
-        -webkit-transform: rotate(360deg);
-    }
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
+// Ghost background
+.animated-background {
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: loading;
+  animation-timing-function: linear;
+  background: fff;
+  background: linear-gradient(to right, #ccc 8%, #bdbdbd 28%, #ccc 43%);
+  -webkit-backface-visibility: hidden;
+}
+@keyframes loading {
+  0% {
+    background-position: 0px 0;
+  }
+  100% {
+    background-position: 100em 0;
+  }
+}
 
 // shadow
 .sha1 {
-  box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+  box-shadow: 0 0 1px 1px rgba(20, 23, 28, 0.1),
+    0 3px 1px 0 rgba(20, 23, 28, 0.1);
   transition-duration: 0.3s;
   &:hover {
-    box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);
+    box-shadow: 0 2px 8px 2px rgba(20, 23, 28, 0.15);
   }
 }
 
@@ -126,9 +143,10 @@ a {
 }
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-body,html {
+body,
+html {
   margin: 0;
   padding: 0;
   // scroll-behavior: smooth;
@@ -142,18 +160,13 @@ img {
   -ms-user-select: none;
 }
 
-
-
-
-
-
-
-
 /* Desktop */
 @media (min-width: 1025px) and (max-width: 1280px) {
-
+  .wide {
+    margin: 0 auto !important;
+    width: 1080px;
+  }
 }
-
 
 /* Tab */
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -162,7 +175,6 @@ img {
     width: auto;
   }
 }
-
 
 /* tab/cellphone */
 @media (min-width: 481px) and (max-width: 767px) {

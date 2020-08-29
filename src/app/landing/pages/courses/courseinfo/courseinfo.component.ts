@@ -37,7 +37,7 @@ export class CourseinfoComponent implements OnInit {
 
   public user = null;
   public showPaymentModal = false;
-  public courseData: Course;
+  public courseData = null;
   public cartData: CourseMin[];
   public courseID;
   @Select(CartState.getCartItems) cartItems: Observable<CourseMin[]>;
@@ -56,21 +56,21 @@ export class CourseinfoComponent implements OnInit {
     this.auth.currentUser.subscribe((data) => {
       this.user = data;
     });
-    this.cService.getDefaultData().subscribe((data) => {
-      this.courseData = data[0];
-      this.cService.passData(data[0]);
+
+    this.cService.getDefaultData(this.courseID).subscribe(({ data }) => {
+      this.courseData = data;
     });
     this.cartItems.subscribe((data) => (this.cartData = data));
   }
 
   addToCart() {
     if (this.user) {
-      const payload: CourseMin = {
+      const payload: any = {
         id: this.courseData.id,
-        name: this.courseData.title,
-        image: "",
-        authorName: this.courseData.author,
-        startDate: "16 Feb 2045",
+        title: this.courseData.title,
+        image: this.courseData.image,
+        authorName: this.courseData.author.user.displayName,
+        startDate: this.courseData.startdate,
         price: this.courseData.price,
       };
       this.store.dispatch(new AddCartItem(payload));
@@ -99,12 +99,12 @@ export class CourseinfoComponent implements OnInit {
     this.router.navigate(["/user", "cart"]);
   }
   proceedToPay() {
-    const payload: CourseMin = {
+    const payload: any = {
       id: this.courseData.id,
-      name: this.courseData.title,
-      image: "",
-      authorName: this.courseData.author,
-      startDate: "16 Feb 2045",
+      title: this.courseData.title,
+      image: this.courseData.image,
+      authorName: this.courseData.author.displayName,
+      startDate: this.courseData.startDate,
       price: this.courseData.price,
     };
     this.orderService.setState([payload]);

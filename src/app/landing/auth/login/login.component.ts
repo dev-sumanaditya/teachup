@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { AuthService } from "../services/auth.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
   selector: "app-login",
@@ -80,19 +79,13 @@ export class LoginComponent implements OnInit {
   }
 
   async loginWithGoogle() {
+    const { user } = await this.authService.loginWithGoogle();
+    this.authService.currentUserSubject.next(user);
     this.loading = true;
-    try {
-      const { user } = await this.authService.loginWithGoogle();
-      this.authService.currentUserSubject.next(user);
-      this.loading = false;
-      if (this.returnUrl) {
-        this.router.navigate([this.returnUrl]);
-      } else {
-        this.router.navigate(["/"]);
-      }
-    } catch (error) {
-      this.error = error;
-      this.loading = false;
+    if (this.returnUrl) {
+      this.router.navigate([this.returnUrl]);
+    } else {
+      this.router.navigate(["/"]);
     }
   }
 }
