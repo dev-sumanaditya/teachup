@@ -18,7 +18,19 @@
   color: white;
 }
 .dark {
-  color: #444;
+  color: #444 !important;
+}
+.black {
+  color: #111 !important;
+}
+.highlightGreen {
+  color: #6de610;
+}
+.highlightGreenBg {
+  background-color: #6de610;
+}
+.highlightGreenBorder {
+  border: 1px solid #6de610;
 }
 
 // layout

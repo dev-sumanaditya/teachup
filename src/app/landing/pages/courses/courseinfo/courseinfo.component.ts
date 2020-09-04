@@ -95,7 +95,6 @@ export class CourseinfoComponent implements OnInit {
           items.forEach((el) => {
             if (el.id === this.courseData.id) {
               this.addedToCart = true;
-              this.cService.setAddedToCart(true);
             }
           });
         })

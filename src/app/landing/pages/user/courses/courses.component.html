@@ -9,21 +9,22 @@
   </div>
 
   <div class="cont row" *ngIf="items.length > 0">
-    <div class="item row" *ngFor="let i of items">
+    <a
+      class="item row"
+      [routerLink]="['/courses', 'course', i.id]"
+      *ngFor="let i of items"
+    >
       <div class="img">
         <img [src]="i.image" alt="" />
       </div>
       <div class="ct">
-        <h4>{{ i.title }}</h4>
+        <h4 class="blue">{{ i.title }}</h4>
         <small class="blue athr">By {{ i.author.user.displayName }}</small>
         <p class="time">Starts: {{ i.startDate | date: "mediumDate" }}</p>
-        <div
-          class="details blue"
-          [routerLink]="['/user', 'courses', 'details', i.id]"
+        <span class="highlightGreen" style="font-weight: 600"
+          >View Details</span
         >
-          View Details
-        </div>
       </div>
-    </div>
+    </a>
   </div>
 </div>

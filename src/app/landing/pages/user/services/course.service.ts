@@ -12,9 +12,6 @@ export class CourseService {
   dataSubject = new ReplaySubject<any>(1);
   dataObs = this.dataSubject.asObservable();
 
-  addedToCartSubject = new ReplaySubject<any>(1);
-  addedToCartObs = this.addedToCartSubject.asObservable();
-
   constructor(private http: HttpClient) {}
 
   getDefaultData(id) {
@@ -23,10 +20,6 @@ export class CourseService {
         this.passData(data.data);
       })
     );
-  }
-
-  setAddedToCart(data) {
-    this.addedToCartSubject.next(data);
   }
 
   passData(data) {

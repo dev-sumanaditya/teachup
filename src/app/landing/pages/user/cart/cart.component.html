@@ -20,7 +20,7 @@
             <img [src]="i.image" />
           </div>
           <div class="flex-grow col content">
-            <strong class="title">{{ i.title }}</strong>
+            <strong class="title">{{ i.title }}{{ i.name }}</strong>
             <small class="tm"> {{ i.startDate | date: "mediumDate" }}</small>
             <strong
               ><small class="blue price">Rs {{ i.price }}.00</small></strong

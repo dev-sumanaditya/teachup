@@ -1,12 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { CourseService } from "src/app/landing/pages/user/services/course.service";
-import { Store } from "@ngxs/store";
+import { Store, Select } from "@ngxs/store";
 import { AddCartItem } from "src/app/landing/store/actions/cart.action";
 import { CourseMin } from "src/app/landing/store/models/cart.model";
 import { AuthService } from "src/app/landing/auth/services/auth.service";
 import { Router } from "@angular/router";
 import { OrderService } from "src/app/landing/services/order.service";
 import { tap, filter, switchMap, map } from "rxjs/operators";
+import { CartState } from "src/app/landing/store/states/cart.state";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-main",
@@ -27,7 +29,11 @@ export class MainComponent implements OnInit {
   public addingToCart = false;
   public addedToCart = false;
 
+  public cartData = null;
+
   public enrolled = "null";
+
+  @Select(CartState.getCartItems) cartItems: Observable<CourseMin[]>;
 
   constructor(
     private courseService: CourseService,
@@ -58,13 +64,21 @@ export class MainComponent implements OnInit {
         tap(({ data }) => {
           this.enrolled = data.enrolled;
           console.log(data);
+        }),
+        switchMap(() => {
+          return this.cartItems;
+        }),
+        tap((items) => {
+          this.cartData = items;
+          console.log(items);
+          items.forEach((el) => {
+            if (el.id === this.data.id) {
+              this.addedToCart = true;
+            }
+          });
         })
       )
       .subscribe();
-    this.courseService.addedToCartObs.subscribe((data) => {
-      console.log(data);
-      this.addedToCart = data;
-    });
     this.cd.detectChanges();
   }
 

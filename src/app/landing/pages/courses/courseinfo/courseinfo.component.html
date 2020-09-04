@@ -64,7 +64,7 @@
   </div>
   <div
     class="cta wide row"
-    style="margin-bottom: 20px !important;"
+    style="margin-bottom: 20px !important"
     *ngIf="enrolled !== 0"
   >
     <div class="btn btn1 blue-bg" (click)="takeThisCourse()" *ngIf="!enrolled">
@@ -81,13 +81,13 @@
       <img
         src="/assets/icons/utility/spinner-white.png"
         class="spin"
-        style="height: 20px; width: 20px;"
+        style="height: 20px; width: 20px"
         alt=""
         *ngIf="addingToCart"
       />
     </div>
     <div
-      class="btn btn1 blue-bg"
+      class="btn btn1 highlightGreenBg dark"
       *ngIf="enrolled"
       [routerLink]="['/user', 'courses', 'details', courseData.id]"
     >
