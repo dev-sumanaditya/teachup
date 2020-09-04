@@ -36,11 +36,11 @@
         </div>
         <div class="row">
           <div class="flex-grow"></div>
-          <button type="submit" class="btn blue-bg" *ngIf="!loading">
+          <button type="submit" class="btn blue-bg" *ngIf="!loading && user">
             Continue
           </button>
           <img
-            *ngIf="loading"
+            *ngIf="loading || !user"
             class="spin"
             src="/assets/icons/utility/spinner.png"
             alt=""

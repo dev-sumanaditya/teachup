@@ -9,6 +9,8 @@ import { Observable } from "rxjs";
 import { OrderService } from "src/app/landing/services/order.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "src/app/landing/auth/services/auth.service";
+import { database } from "firebase";
+import { tap, filter, switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-courseinfo",
@@ -25,14 +27,14 @@ export class CourseinfoComponent implements OnInit {
       name: "About",
       url: "about",
     },
-    {
-      name: "Discussions",
-      url: "discussions",
-    },
-    {
-      name: "Reviews",
-      url: "reviews",
-    },
+    // {
+    //   name: "Discussions",
+    //   url: "discussions",
+    // },
+    // {
+    //   name: "Reviews",
+    //   url: "reviews",
+    // },
   ];
 
   public user = null;
@@ -40,6 +42,12 @@ export class CourseinfoComponent implements OnInit {
   public courseData = null;
   public cartData: CourseMin[];
   public courseID;
+
+  public addingToCart = false;
+  public addedToCart = false;
+
+  public enrolled = 0;
+
   @Select(CartState.getCartItems) cartItems: Observable<CourseMin[]>;
 
   constructor(
@@ -53,28 +61,68 @@ export class CourseinfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseID = this.route.snapshot.params.id;
-    this.auth.currentUser.subscribe((data) => {
-      this.user = data;
-    });
 
-    this.cService.getDefaultData(this.courseID).subscribe(({ data }) => {
-      this.courseData = data;
-    });
-    this.cartItems.subscribe((data) => (this.cartData = data));
+    this.auth.currentUser
+      .pipe(
+        tap((data) => {
+          this.user = data;
+        }),
+        filter((data) => !!data.id),
+        switchMap(() => {
+          return this.cService.chechEnrolled(this.courseID);
+        }),
+        tap(({ data }) => {
+          this.enrolled = data.enrolled;
+          console.log(data);
+        })
+      )
+      .subscribe();
+
+    this.cService
+      .getDefaultData(this.courseID)
+      .pipe(
+        tap(({ data }) => {
+          this.courseData = data;
+        }),
+        filter(() => !!this.courseData),
+        switchMap(() => {
+          return this.cartItems;
+        }),
+        tap((items) => {
+          this.cartData = items;
+          console.log(items);
+          console.log(this.courseData);
+          items.forEach((el) => {
+            if (el.id === this.courseData.id) {
+              this.addedToCart = true;
+              this.cService.setAddedToCart(true);
+            }
+          });
+        })
+      )
+      .subscribe();
   }
-
   addToCart() {
-    if (this.user) {
+    if (this.user && !this.addedToCart) {
+      this.addingToCart = true;
       const payload: any = {
         id: this.courseData.id,
         title: this.courseData.title,
         image: this.courseData.image,
         authorName: this.courseData.author.user.displayName,
-        startDate: this.courseData.startdate,
+        startDate: this.courseData.startDate,
         price: this.courseData.price,
       };
-      this.store.dispatch(new AddCartItem(payload));
-    } else {
+      this.store.dispatch(new AddCartItem(payload)).subscribe(
+        (data) => {
+          this.addingToCart = false;
+          this.addedToCart = true;
+        },
+        (error) => {
+          this.addingToCart = false;
+        }
+      );
+    } else if (!this.user) {
       this.router.navigate(["/auth"], {
         queryParams: { returnUrl: "/courses/course/" + this.courseData.id },
       });

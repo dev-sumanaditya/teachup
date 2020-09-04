@@ -1,7 +1,12 @@
 <div class="wide row main main-ctr">
   <div class="left col">
     <div class="card">
-      <img [src]="user.photoURL" alt="" />
+      <div
+        class="img"
+        [ngStyle]="{
+          background: user.photoURL ? 'url(' + user.photoURL + ')' : '#eee'
+        }"
+      ></div>
     </div>
     <strong class="name">{{ user.displayName }}</strong>
     <p class="about">{{ user.info }}</p>
@@ -10,7 +15,7 @@
       <h2 class="blue">{{ courses.length }} active courses</h2>
       <br />
       <h5 class="hd">Total Students:</h5>
-      <h2 class="blue">// Learners</h2>
+      <h2 class="blue"></h2>
     </div>
     <div class="topics col">
       <strong class="dark">Badges:</strong>

@@ -5,7 +5,7 @@
   </div>
   <div class="image row">
     <div class="img col">
-      <img class="profileImage" *ngIf="imageSRC" [src]="imageSRC" />
+      <img class="profileImage" *ngIf="user.photoURL" [src]="user.photoURL" />
       <img
         (click)="image.click()"
         class="edit"
@@ -13,8 +13,29 @@
         alt=""
       />
     </div>
-    <input type="file" #image style="display: none;" />
+    <input
+      type="file"
+      (change)="fileChangeEvent($event)"
+      #image
+      style="display: none;"
+    />
   </div>
   <app-edit-form [data]="nameOptions"></app-edit-form>
-  <app-edit-form [data]="phoneOptions"></app-edit-form>
+  <!-- <app-edit-form [data]="phoneOptions"></app-edit-form> -->
+</div>
+
+<div class="modal col" *ngIf="imageChangedEvent">
+  <div class="content">
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="1 / 1"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+      (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+  </div>
+  <br />
+  <div class="btn blue-bg white" (click)="upload()">Upload Image</div>
+  <div class="btn blue-bg white" (click)="imageChangedEvent = null">Cancel</div>
 </div>

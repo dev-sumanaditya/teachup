@@ -180,6 +180,12 @@
   }
 }
 
+.disabled {
+  user-select: none;
+  cursor: default !important;
+  filter: grayscale(50);
+}
+
 /* Desktop */
 @media (min-width: 1025px) and (max-width: 1280px) {
 }

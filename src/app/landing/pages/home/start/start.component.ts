@@ -88,7 +88,7 @@ export class StartComponent implements OnInit, OnDestroy {
       .subscribe();
 
     this.http
-      .get<any>(environment.apiUrl + "/instructor")
+      .get<any>(environment.apiUrl + "/instructor/top")
       .subscribe(({ data }) => {
         this.instructors = data;
       });

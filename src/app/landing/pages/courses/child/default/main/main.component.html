@@ -1,4 +1,4 @@
-<div class="col" *ngIf="data">
+<div class="col" *ngIf="data && enrolled !== 'null'">
   <div class="inf">
     <h2 class="blue">
       {{ data.title }}
@@ -19,7 +19,10 @@
       <small><strong>Learners</strong></small>
     </div>
     <div class="flex-grow"></div>
-    <a (click)="takeThisCourse()" class="btn blue-bg">Take this course</a>
+    <a (click)="takeThisCourse()" *ngIf="!enrolled" class="btn blue-bg"
+      >Take this course</a
+    >
+    <a *ngIf="enrolled" class="btn blue-bg">View Course Details</a>
   </div>
   <div class="price col">
     <div class="row item">
@@ -38,18 +41,46 @@
     <p>{{ data.description }}</p>
   </div>
   <div class="options row">
-    <div class="option blue-ot" (click)="addToCart()">Add to Cart</div>
-    <div class="option blue-ot">Save Course</div>
-    <div class="option blue-ot">Share</div>
+    <div
+      class="option blue-ot row"
+      (click)="addToCart()"
+      style="width: 130px;"
+      [class.disabled]="addedToCart"
+      *ngIf="!enrolled"
+    >
+      <span *ngIf="!addedToCart && !addingToCart">Add to Cart</span
+      ><span *ngIf="addedToCart">Added to Cart</span>
+      <img
+        *ngIf="addingToCart && !addedToCart"
+        src="/assets/icons/utility/spinner.png"
+        style="height: 20px; width: 20px;"
+        class="spin"
+        alt=""
+      />
+    </div>
+    <div *ngIf="!enrolled" class="option blue-ot" (click)="takeThisCourse()">
+      Continue to Pay
+    </div>
+    <div
+      *ngIf="enrolled"
+      class="option blue-ot"
+      [routerLink]="['/user', 'courses', 'details', data.id]"
+    >
+      View Course Details
+    </div>
+    <!-- <div class="option blue-ot">Share</div> -->
   </div>
 
   <div class="instructor col">
     <div class="avatar row">
       <div class="l">
         <div
-          *ngIf="data.author.user.photoURL"
           class="img"
-          [style.backgroundImage]="'url(' + data.author.user.photoURL + ')'"
+          [ngStyle]="{
+            background: data.author.user.photoURL
+              ? 'url(' + data.author.user.photoURL + ')'
+              : '#eee'
+          }"
         ></div>
       </div>
       <div class="r">

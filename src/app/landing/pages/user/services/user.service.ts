@@ -1,28 +1,28 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { AuthService } from 'src/app/landing/auth/services/auth.service';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { AuthService } from "src/app/landing/auth/services/auth.service";
+import { switchMap } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UserService {
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
-  constructor(private http: HttpClient, private auth: AuthService) {
-  }
+  uploadUserImage(data) {}
 
-  uploadImage(data) {
-    const uploadData = new FormData();
-    let uuid;
-    this.auth.currentUser.subscribe(
-      dat => uuid = dat.uuid,
-      err => console.log(err)
-    );
-    uploadData.append('userImage', data, uuid);
+  makeblob(dataURL) {
+    const BASE64_MARKER = ";base64,";
+    const parts = dataURL.split(BASE64_MARKER);
+    const contentType = parts[0].split(":")[1];
+    const raw = window.atob(parts[1]);
+    const rawLength = raw.length;
+    const uInt8Array = new Uint8Array(rawLength);
 
-    return this.http.post<any>(environment.apiUrl + '/userimage', uploadData, {
-      reportProgress: true,
-      observe: 'events'
-    });
+    for (let i = 0; i < rawLength; ++i) {
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
+    return new Blob([uInt8Array], { type: contentType });
   }
 }

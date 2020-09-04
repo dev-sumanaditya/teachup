@@ -1,25 +1,76 @@
-<div class="ctr col">
+<div class="ctr col" *ngIf="instructor">
   <div class="top row">
-    <div class="image col">
-      <img src="/assets/images/demo/avatar2.webp" alt="">
-      <small class="btn">Change</small>
-    </div>
     <div class="flex-grow"></div>
-    <div class="btn blue-ot blue">Profile Preview</div>
+    <a
+      class="btn blue-ot blue"
+      [routerLink]="['/profile', 'instructor', instructor.id]"
+      target="_blank"
+    >
+      Profile Preview
+    </a>
   </div>
-  <div class="form col">
+  <form [formGroup]="editform" (ngSubmit)="submit()" class="form col">
     <div class="formItem col">
-      <label for="" class="blue">Name</label>
-      <input type="text" placeholder="Your name">
+      <label for="" class="blue">Intro</label>
+      <input
+        formControlName="intro"
+        type="text"
+        placeholder="About yourself (80 characters max)"
+      />
     </div>
     <div class="formItem col">
       <label for="" class="blue">About</label>
-      <input type="text" placeholder="About yourself (80 characters max)">
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="10"
+        placeholder="Write something about yourself in not more than 600 chars"
+        formControlName="about"
+      ></textarea>
     </div>
     <div class="formItem col">
-      <label for="" class="blue">Short Description</label>
-      <textarea name="" id="" cols="30" rows="10" placeholder="Write something about yourself in not more than 600 chars"></textarea>
+      <label for="" class="blue">Facebook profile</label>
+      <input
+        formControlName="fbProfile"
+        type="text"
+        placeholder="Profile Url"
+      />
     </div>
-    <div class="btn blue-bg white">Update Profile</div>
-  </div>
+    <div class="formItem col">
+      <label for="" class="blue">Linkedin profile</label>
+      <input
+        formControlName="linkedinProfile"
+        type="text"
+        placeholder="Profile Url"
+      />
+    </div>
+    <div class="formItem col">
+      <label for="" class="blue">Twitter profile</label>
+      <input
+        formControlName="twitterProfile"
+        type="text"
+        placeholder="Profile Url"
+      />
+    </div>
+    <div class="formItem col">
+      <label for="" class="blue">Instagram profile</label>
+      <input
+        formControlName="instaProfile"
+        type="text"
+        placeholder="Profile Url"
+      />
+    </div>
+    <button type="submit" class="btn blue-bg white">
+      <span *ngIf="!loading">Update Profile</span>
+      <img
+        src="/assets/icons/utility/spinner.png"
+        class="spin"
+        style="height: 20px; width: 20px;"
+        *ngIf="loading"
+      />
+    </button>
+
+    <small class="danger" *ngIf="error">{{ error }}</small>
+  </form>
 </div>

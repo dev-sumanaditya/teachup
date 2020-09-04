@@ -144,7 +144,14 @@
         >
           <div ngxSlickItem *ngFor="let i of instructors" class="slide col">
             <div class="ct col">
-              <img [src]="i.user.photoURL" alt="" />
+              <div
+                class="img"
+                [ngStyle]="{
+                  background: i.user.photoURL
+                    ? 'url(' + i.user.photoURL + ')'
+                    : '#eee'
+                }"
+              ></div>
               <a
                 [routerLink]="['/profile', 'instructor', i.id]"
                 class="blue name"

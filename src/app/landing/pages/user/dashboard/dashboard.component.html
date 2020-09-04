@@ -27,7 +27,7 @@
       </div>
       <div class="uploading col" *ngIf="uploading">
         <img class="spin" src="/assets/icons/utility/spinner.png" alt="" />
-        <small>Uploading</small>
+        <small>Uploading {{ uploadPercentage }}%</small>
       </div>
     </div>
     <div class="cnt col">
@@ -131,4 +131,5 @@
   </div>
   <br />
   <div class="btn blue-bg white" (click)="upload()">Upload Image</div>
+  <div class="btn blue-bg white" (click)="imageChangedEvent = null">Cancel</div>
 </div>

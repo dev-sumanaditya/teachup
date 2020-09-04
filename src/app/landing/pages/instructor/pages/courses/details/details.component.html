@@ -1,0 +1,24 @@
+<div class="formItem col">
+  <strong class="blue">Name of the course.............</strong>
+  <br />
+  <strong for="" class="dark"
+    >Please enter relevent details about the course for enrolled users. <br />
+    (ex: How to join course, where to get all the details, method of
+    communication, etc.)</strong
+  >
+  <br />
+  <div class="quill">
+    <quill-editor
+      [styles]="editorStyle"
+      formControlName="longDescription"
+      trackChanges="all"
+      [modules]="modules"
+      placeholder="A detailed explation about your course in not more than 1500 words"
+    ></quill-editor>
+  </div>
+  <br /><br />
+  <div class="row">
+    <div class="flex-grow"></div>
+    <div class="btn blue-bg white">Update</div>
+  </div>
+</div>

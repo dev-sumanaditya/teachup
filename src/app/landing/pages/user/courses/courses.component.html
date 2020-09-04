@@ -17,7 +17,12 @@
         <h4>{{ i.title }}</h4>
         <small class="blue athr">By {{ i.author.user.displayName }}</small>
         <p class="time">Starts: {{ i.startDate | date: "mediumDate" }}</p>
-        <div class="details blue">View Details</div>
+        <div
+          class="details blue"
+          [routerLink]="['/user', 'courses', 'details', i.id]"
+        >
+          View Details
+        </div>
       </div>
     </div>
   </div>

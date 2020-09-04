@@ -96,10 +96,7 @@ export class AuthService {
         headers: { Authorization: `${this.jwtToken}` },
       })
       .toPromise();
-    let u;
-    await this.currentUser.subscribe((data) => (u = data));
-    console.log({ ...u, data });
-    this.currentUserSubject.next({ ...u, data });
+    this.currentUserSubject.next({ ...data });
     return;
   }
 }

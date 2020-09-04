@@ -1,7 +1,14 @@
 <div class="col wide" style="padding-bottom: 30px;">
-  <div class="top row" *ngIf="data">
+  <div class="top row" *ngIf="data && data.user">
     <div class="info col">
-      <img class="profileImg" [src]="data.user.photoURL" alt="" />
+      <div
+        class="profileImg"
+        [ngStyle]="{
+          background: data.user.photoURL
+            ? 'url(' + data.user.photoURL + ')'
+            : '#eee'
+        }"
+      ></div>
       <h3 class="name blue">{{ data.user.displayName }}</h3>
       <p class="about">
         {{ data.intro }} <span *ngIf="data.intro === null">..</span>

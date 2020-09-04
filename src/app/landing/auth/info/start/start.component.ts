@@ -27,6 +27,7 @@ export class StartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.auth.currentUser.subscribe((data) => {
       this.user = data;
+      console.log(this.user);
       if (this.user.displayName) {
         this.router.navigate(["/"]);
       }

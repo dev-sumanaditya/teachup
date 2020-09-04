@@ -3,11 +3,11 @@
     <div class="img" [style.backgroundImage]="'url(' + data.image + ')'"></div>
     <div class="overlay"></div>
   </div>
-  <div class="info col">
+  <div class="info col" *ngIf="data">
     <a [routerLink]="['/courses', 'course', data.id]" class="title">{{
       data.title
     }}</a>
-    <small class="author" *ngIf="data.author.user"
+    <small class="author" *ngIf="data.author"
       >By {{ data.author.user.displayName }}</small
     >
     <strong class="price">Rs {{ data.price }}.00</strong>

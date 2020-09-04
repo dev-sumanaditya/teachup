@@ -21,7 +21,11 @@
         >
         <strong class="price">RS {{ i.price }}.00</strong>
         <div class="row">
-          <a class="link blue">Manage this Course</a>
+          <a
+            class="link blue"
+            [routerLink]="['/instructor', 'courses', 'manage', i.id]"
+            >Manage this Course</a
+          >
           <a [routerLink]="['/courses', 'course', i.id]" class="blue"
             >View Course</a
           >
