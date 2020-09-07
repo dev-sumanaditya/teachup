@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public mailSent = false;
   public uploading = false;
 
-  public slides = [1, 1, 1, 1, 1, 1, 1];
+  public slides = [];
   public isInstructor = false;
 
   public instructorStatus;
@@ -34,6 +34,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     pauseOnDotsHover: false,
     speed: 500,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   sub;
@@ -62,6 +76,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .get<any>(environment.apiUrl + "/instructor/is-instructor")
       .subscribe((data) => {
         this.instructorStatus = data.data.status;
+      });
+
+    this.http
+      .get<any>(environment.apiUrl + "/course/user")
+      .subscribe(({ data }) => {
+        this.slides = data;
       });
   }
 

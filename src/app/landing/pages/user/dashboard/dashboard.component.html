@@ -20,7 +20,7 @@
         <input
           #fileInput
           type="file"
-          style="display: none;"
+          style="display: none"
           (change)="fileChangeEvent($event)"
         />
         <small>Add Image</small>
@@ -53,7 +53,7 @@
       </div>
     </div>
   </div>
-  <div class="card enrolled">
+  <div class="card enrolled" *ngIf="slides.length > 0">
     <strong class="blue">Enrolled Courses</strong>
     <div class="slider">
       <ngx-slick-carousel
@@ -61,17 +61,35 @@
         #slickModal="slick-carousel"
         [config]="slideConfig"
       >
-        <div ngxSlickItem *ngFor="let slide of slides" class="slide col sha1">
-          <div class="img"></div>
-          <h4>Python crash course for beginners</h4>
-          <small>By Amithabh Kanth</small><br />
-          <strong class="blue"><small>Complete</small></strong>
-        </div>
+        <a
+          ngxSlickItem
+          *ngFor="let slide of slides"
+          class="slide col sha1"
+          [routerLink]="['/courses', 'course', slide.id]"
+        >
+          <div
+            class="img"
+            [ngStyle]="{
+              background: slide.image ? 'url(' + slide.image + ')' : '#eee'
+            }"
+          ></div>
+          <h4 class="title blue">{{ slide.title }}</h4>
+          <small class="dark">By {{ slide.author.user.displayName }}</small
+          ><br />
+        </a>
       </ngx-slick-carousel>
-      <div class="arrow al" (click)="slickModal.slickPrev()">
+      <div
+        class="arrow al"
+        (click)="slickModal.slickPrev()"
+        *ngIf="slides.length > 1"
+      >
         <img src="/assets/icons/courses/left.png" alt="" />
       </div>
-      <div class="arrow ar" (click)="slickModal.slickNext()">
+      <div
+        class="arrow ar"
+        (click)="slickModal.slickNext()"
+        *ngIf="slides.length > 1"
+      >
         <img src="/assets/icons/courses/right.png" alt="" />
       </div>
     </div>

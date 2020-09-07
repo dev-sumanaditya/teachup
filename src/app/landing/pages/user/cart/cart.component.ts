@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from "@angular/core";
 import { Select, Store } from "@ngxs/store";
 import { CartState } from "src/app/landing/store/states/cart.state";
 import { Observable } from "rxjs";
@@ -12,21 +12,24 @@ import { Router } from "@angular/router";
   templateUrl: "./cart.component.html",
   styleUrls: ["./cart.component.scss"],
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
   @Select(CartState.getCartItems) cartItems: Observable<CourseMin[]>;
 
   public cartData: any[];
   public loading = true;
   public price = null;
 
+  public sub;
+
   constructor(
     private store: Store,
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.cartItems.subscribe(
+    this.sub = this.cartItems.subscribe(
       (data) => {
         this.price = 0;
         this.loading = false;
@@ -42,6 +45,7 @@ export class CartComponent implements OnInit {
         console.error(error);
       }
     );
+    this.cd.detectChanges();
   }
 
   deleteItem(id): void {
@@ -51,5 +55,9 @@ export class CartComponent implements OnInit {
   proceedToPaymentPage() {
     this.orderService.setState(this.cartData);
     this.router.navigate(["/payment"]);
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

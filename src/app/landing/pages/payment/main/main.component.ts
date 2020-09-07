@@ -6,13 +6,18 @@ import {
   ChangeDetectorRef,
 } from "@angular/core";
 import { WindowRefService } from "src/app/landing/services/window-ref.service";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 import { OrderService } from "src/app/landing/services/order.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/landing/auth/services/auth.service";
+import { Select, Store } from "@ngxs/store";
+import { CartState } from "src/app/landing/store/states/cart.state";
+import { CourseMin } from "src/app/landing/store/models/cart.model";
+import { CartService } from "src/app/landing/services/cart.service";
+import { DeleteCartItem } from "src/app/landing/store/actions/cart.action";
 
 @Component({
   selector: "app-main",
@@ -20,6 +25,8 @@ import { AuthService } from "src/app/landing/auth/services/auth.service";
   styleUrls: ["./main.component.scss"],
 })
 export class MainComponent implements OnInit, OnDestroy {
+  @Select(CartState.getCartItems) cartItems: Observable<CourseMin[]>;
+
   private subscription: Subscription;
   public orderDetails: any[] = [];
   public price = 0;
@@ -39,6 +46,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
   public user;
 
+  public cartData;
+
+  public sub;
+
   constructor(
     private winRef: WindowRefService,
     private orderServ: OrderService,
@@ -46,7 +57,9 @@ export class MainComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private router: Router,
     private auth: AuthService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private cartService: CartService,
+    private store: Store
   ) {}
 
   get couponFormControl() {
@@ -63,9 +76,9 @@ export class MainComponent implements OnInit, OnDestroy {
       // set price for state.
     });
 
-    // this.http.get<any>(environment.apiUrl + "/order/user").subscribe((data) => {
-    //   console.log(data);
-    // });
+    this.sub = this.cartItems.subscribe((data) => {
+      this.cartData = data;
+    });
 
     this.couponForm = this.fb.group({
       couponCode: [null, [Validators.required]],
@@ -183,6 +196,16 @@ export class MainComponent implements OnInit, OnDestroy {
           this.paymentProcessing = false;
           this.paymentSuccessful = true;
           this.paymentData = data;
+          this.orderDetails.forEach((el) => {
+            console.log(this.orderDetails);
+            this.cartData.forEach((item) => {
+              console.log(this.cartData);
+              if (item.id === el.id) {
+                console.log("removing from cart");
+                this.store.dispatch(new DeleteCartItem(el.id));
+              }
+            });
+          });
           this.cd.detectChanges();
         });
       // call your backend api to verify payment signature & capture transaction
@@ -201,11 +224,11 @@ export class MainComponent implements OnInit, OnDestroy {
     const rzp = new this.winRef.nativeWindow.Razorpay(options);
     rzp.open();
   }
-  deleteItem(id) {
-    this.orderServ.deleteItemFromList(id);
-    // recreate order on backend and refetch data;
-  }
+  // deleteItem(id) {
+  //   this.orderServ.deleteItemFromList(id);
+  // }
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.sub.unsubscribe();
   }
 }

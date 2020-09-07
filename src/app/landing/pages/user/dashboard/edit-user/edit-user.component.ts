@@ -44,6 +44,8 @@ export class EditUserComponent implements OnInit {
   uploadPercentage = 0;
   uploading = false;
 
+  error = null;
+
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -94,40 +96,51 @@ export class EditUserComponent implements OnInit {
     });
 
     formData.append("file", image);
-    const res = await this.http
-      .post<any>(data.url, formData, {
-        reportProgress: true,
-        observe: "events",
-      })
-      .pipe(
-        tap((event: HttpEvent<any> & { loaded: number; total: number }) => {
-          switch (event.type) {
-            case HttpEventType.Sent:
-              break;
-            case HttpEventType.Response: {
-              this.uploading = false;
-              break;
-            }
-            case 1: {
-              if (
-                Math.round(this.uploadPercentage) !==
-                Math.round((event.loaded / event.total) * 100)
-              ) {
-                this.uploadPercentage =
-                  Math.round(event.loaded / event.total) * 100;
-              }
-              break;
-            }
-          }
+    try {
+      const res = await this.http
+        .post<any>(data.url, formData, {
+          reportProgress: true,
+          observe: "events",
         })
-      )
-      .toPromise();
+        .pipe(
+          tap((event: HttpEvent<any> & { loaded: number; total: number }) => {
+            switch (event.type) {
+              case HttpEventType.Sent:
+                break;
+              case HttpEventType.Response: {
+                this.uploading = false;
+                break;
+              }
+              case 1: {
+                if (
+                  Math.round(this.uploadPercentage) !==
+                  Math.round((event.loaded / event.total) * 100)
+                ) {
+                  this.uploadPercentage =
+                    Math.round(event.loaded / event.total) * 100;
+                }
+                break;
+              }
+            }
+          })
+        )
+        .toPromise();
+    } catch (error) {
+      this.error = "Upload failed";
+    }
 
-    await this.auth.updateUser({
-      id: this.user.id,
-      uid: this.user.uid,
-      photoURL:
-        "https://teachup-space.sgp1.digitaloceanspaces.com/" + data.fields.key,
-    });
+    try {
+      const c = await this.auth.updateUser({
+        id: this.user.id,
+        uid: this.user.uid,
+        photoURL:
+          "https://teachup-space.sgp1.digitaloceanspaces.com/" +
+          data.fields.key,
+      });
+      console.log(c);
+      this.error = null;
+    } catch (error) {
+      this.error = error;
+    }
   }
 }

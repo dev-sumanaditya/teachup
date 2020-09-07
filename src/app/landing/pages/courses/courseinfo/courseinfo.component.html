@@ -88,7 +88,7 @@
     </div>
     <div
       class="btn btn1 highlightGreenBg dark"
-      *ngIf="enrolled"
+      *ngIf="enrolled == true && courseData"
       [routerLink]="['/user', 'courses', 'details', courseData.id]"
     >
       View Course Details

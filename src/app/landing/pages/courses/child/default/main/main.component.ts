@@ -31,7 +31,7 @@ export class MainComponent implements OnInit {
 
   public cartData = null;
 
-  public enrolled = "null";
+  public enrolled = null;
 
   @Select(CartState.getCartItems) cartItems: Observable<CourseMin[]>;
 
@@ -50,8 +50,12 @@ export class MainComponent implements OnInit {
       .pipe(
         tap((data) => {
           this.user = data;
+          if (!data) {
+            this.enrolled = false;
+            this.fetchData();
+          }
         }),
-        filter((data) => !!data.id),
+        filter((data) => !!data && !!data.id),
         switchMap(() => {
           return this.getData();
         }),
@@ -62,15 +66,17 @@ export class MainComponent implements OnInit {
           return this.courseService.chechEnrolled(this.data.id);
         }),
         tap(({ data }) => {
-          this.enrolled = data.enrolled;
-          console.log(data);
+          if (data.enrolled) {
+            this.enrolled = true;
+          } else {
+            this.enrolled = false;
+          }
         }),
         switchMap(() => {
           return this.cartItems;
         }),
         tap((items) => {
           this.cartData = items;
-          console.log(items);
           items.forEach((el) => {
             if (el.id === this.data.id) {
               this.addedToCart = true;
@@ -84,6 +90,10 @@ export class MainComponent implements OnInit {
 
   getData() {
     return this.courseService.dataObs;
+  }
+
+  fetchData() {
+    this.courseService.dataObs.subscribe((data) => (this.data = data));
   }
 
   addToCart() {

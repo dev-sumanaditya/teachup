@@ -39,28 +39,9 @@
   }
 }
 
-.phone {
-  align-items: center;
-  label {
-    font-weight: 500;
-    width: 90px;
-    margin-right: 10px;
-  }
-  select {
-    width: 70px;
-    font-size: 14px;
-    padding: 5px;
-    border: 1px solid #ddd;
-  }
-  .input {
-    font-size: 14px;
-    padding: 5px;
-    border: 1px solid #ddd;
-  }
-  .code {
-    width: 30px;
-  }
-  .number {
-    width: 150px;
+.modal {
+  .content {
+    max-height: 80vh !important;
+    max-width: 80vw !important;
   }
 }

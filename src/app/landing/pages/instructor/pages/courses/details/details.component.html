@@ -1,4 +1,4 @@
-<div class="formItem col">
+<Form [formGroup]="secretForm" (ngSubmit)="submit()" class="formItem col">
   <strong class="blue">Name of the course.............</strong>
   <br />
   <strong for="" class="dark"
@@ -10,15 +10,16 @@
   <div class="quill">
     <quill-editor
       [styles]="editorStyle"
-      formControlName="longDescription"
+      formControlName="secret"
       trackChanges="all"
       [modules]="modules"
-      placeholder="A detailed explation about your course in not more than 1500 words"
+      placeholder="Share details about how to join the course for enrolled users."
     ></quill-editor>
   </div>
   <br /><br />
+  <small class="danger" *ngIf="error">{{ error }}</small>
   <div class="row">
     <div class="flex-grow"></div>
-    <div class="btn blue-bg white">Update</div>
+    <button type="submit" class="btn blue-bg white">Update</button>
   </div>
-</div>
+</Form>

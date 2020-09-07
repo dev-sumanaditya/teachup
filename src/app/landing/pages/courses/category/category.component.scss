@@ -8,7 +8,14 @@
     margin: 0;
   }
 }
-
+.soon {
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 200px;
+    max-width: 200px;
+  }
+}
 .featured {
   margin-bottom: 40px;
   .banner {
@@ -17,9 +24,9 @@
     .l {
       .image {
         position: relative;
-        min-width: 30vw;
+        min-width: 300px !important;
         padding-top: 56.25%;
-        .img{
+        .img {
           position: absolute;
           top: 0;
           bottom: 0;
@@ -42,9 +49,9 @@
         font-weight: 700;
         word-wrap: break-word !important;
         width: 100%;
-        white-space: pre-wrap;       /* css-3 */
-        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: pre-wrap; /* css-3 */
+        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+        white-space: -pre-wrap; /* Opera 4-6 */
         white-space: -o-pre-wrap;
       }
       .row {
@@ -54,7 +61,7 @@
           color: white;
         }
         strong {
-          color: #45AAB5;
+          color: #45aab5;
           font-size: 18px;
         }
       }
@@ -75,25 +82,16 @@
   }
 }
 
-
-
-
-
 /* Desktop */
 @media (min-width: 1025px) and (max-width: 1280px) {
-
 }
-
 
 /* Tab */
 @media (min-width: 768px) and (max-width: 1024px) {
-
 }
-
 
 /* tab/cellphone */
 @media (min-width: 481px) and (max-width: 767px) {
-
 }
 
 /* Smartphone */

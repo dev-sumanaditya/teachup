@@ -3,14 +3,34 @@
     <h1 class="blue">Course Details</h1>
   </div>
   <br /><br />
-  <strong class="blue">Some course name.................</strong>
-  <br /><br />
-  <div class="content">
-    some html content
-  </div>
-  <div class="row">
-    <div class="flex-grow"></div>
+  <div class="col" *ngIf="secret">
+    <div class="top col">
+      <small class="black highlightGreenBg tag">Purchased</small>
+      <h3 class="blue title">{{ secret.title }}</h3>
+    </div>
     <br /><br />
-    <div class="btn blue" (click)="goback()">Go back to courses</div>
+    <div
+      class="content"
+      *ngIf="secret.details"
+      [innerHTML]="secret.details"
+    ></div>
+    <div class="soon col" *ngIf="!secret.details">
+      <img src="/assets/images/instructor/pending.png" alt="" />
+      <p>All the required details will be updated soon.</p>
+      <br />
+      <small
+        >For any help, contact us at
+        <a href="mailto:support@teachup.io">support@teachup.io</a></small
+      >
+    </div>
+    <div class="row">
+      <div class="flex-grow"></div>
+      <div class="btn blue" (click)="goback()" style="margin-right: 20px">
+        Back to courses
+      </div>
+      <div class="btn blue" [routerLink]="['/user', 'courses']">
+        View all Enrolled Courses
+      </div>
+    </div>
   </div>
 </div>

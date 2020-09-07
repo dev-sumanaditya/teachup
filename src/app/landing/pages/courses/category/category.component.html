@@ -1,51 +1,59 @@
-<div class="loadin wide" *ngIf="loading">
-  loading data..
-</div>
+<div class="loadin wide" *ngIf="loading">loading data..</div>
 <div class="error wide" *ngIf="error && !loading">
   <small class="danger">Error loading data.. {{ error.code }}</small>
 </div>
-<div class="wide" *ngIf="data && !loading">
+<div class="wide" *ngIf="categoryData && !loading && !error">
   <div class="catname">
     <div class="row">
       <div class="bar blue-bg"></div>
-      <h1>{{ data.name }}</h1>
+      <h1>{{ categoryData.name }}</h1>
     </div>
   </div>
-  <div class="featured">
+  <div class="soon col" *ngIf="!featured">
+    <br />
+    <img src="/assets/images/instructor/creating.png" />
+    <span>New Courses Coming Soon..</span>
+  </div>
+  <div class="featured" *ngIf="featured">
     <strong>Featured</strong>
     <div class="banner row sha1">
       <div class="l">
-        <div class="image">
+        <div class="image animated-background">
           <div
             class="img"
-            [style.background]="'url(/assets/images/demo/featured.jpg)'"
+            [style.background]="'url(' + featured.image + ')'"
           ></div>
         </div>
       </div>
-      <div class="r col">
-        <a routerLink="/courses/course/:id" class="title"
-          >The Complete Guide - Zero to Hero in Business analysis</a
+      <div class="r col flex-grow">
+        <a [routerLink]="['/courses', 'course', featured.id]" class="title">{{
+          featured.title
+        }}</a>
+        <small>By {{ featured.author.user.displayName }}</small>
+        <strong
+          >Start Date - {{ featured.startDate | date: "mediumDate" }}</strong
         >
-        <small>By Amithabh kanth</small>
-        <strong><small>4 Hrs &nbsp; | &nbsp; 2 Lectures</small></strong>
-        <p>
-          Become a Salesforce Developer by learning Apex Programming. Learn
-          about Integration, REST webservices, Testing framework
+        <p style="font-size: 12px">
+          {{ featured.description.substring(0, 120).trim() }}...
         </p>
         <div class="flex-grow"></div>
         <div class="row">
-          <a routerLink="/courses/course/:id" class="btn blue-bg">Enroll Now</a>
+          <a
+            class="btn blue-bg"
+            [routerLink]="['/courses', 'course', featured.id]"
+            >Enroll Now</a
+          >
           <div class="flex-grow"></div>
-          <strong>Rs 7,999</strong>
+          <strong class="blue">Rs {{ featured.price }}.00</strong>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="popular">
+  <div class="popular" *ngIf="courses.length > 0">
     <strong>Popular Courses</strong>
     <div class="items row">
-      <div class="item sha1" *ngFor="let i of data.courses">
+      <div class="item sha1" *ngFor="let i of courses">
         <app-course [data]="i"></app-course>
       </div>
     </div>

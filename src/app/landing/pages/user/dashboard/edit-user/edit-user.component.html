@@ -17,9 +17,13 @@
       type="file"
       (change)="fileChangeEvent($event)"
       #image
-      style="display: none;"
+      style="display: none"
     />
   </div>
+  <small class="dark" *ngIf="uploading"
+    >Uploading - {{ uploadPercentage }}%</small
+  >
+  <small class="danger" *ngIf="error">{{ error }}</small>
   <app-edit-form [data]="nameOptions"></app-edit-form>
   <!-- <app-edit-form [data]="phoneOptions"></app-edit-form> -->
 </div>

@@ -46,7 +46,7 @@ export class CourseinfoComponent implements OnInit {
   public addingToCart = false;
   public addedToCart = false;
 
-  public enrolled = 0;
+  public enrolled = null;
 
   @Select(CartState.getCartItems) cartItems: Observable<CourseMin[]>;
 
@@ -66,14 +66,16 @@ export class CourseinfoComponent implements OnInit {
       .pipe(
         tap((data) => {
           this.user = data;
+          if (!data) {
+            this.enrolled = false;
+          }
         }),
-        filter((data) => !!data.id),
+        filter((data) => !!data && !!data.id),
         switchMap(() => {
           return this.cService.chechEnrolled(this.courseID);
         }),
         tap(({ data }) => {
           this.enrolled = data.enrolled;
-          console.log(data);
         })
       )
       .subscribe();
@@ -84,14 +86,12 @@ export class CourseinfoComponent implements OnInit {
         tap(({ data }) => {
           this.courseData = data;
         }),
-        filter(() => !!this.courseData),
+        filter(() => !!this.courseData && !!this.user),
         switchMap(() => {
           return this.cartItems;
         }),
         tap((items) => {
           this.cartData = items;
-          console.log(items);
-          console.log(this.courseData);
           items.forEach((el) => {
             if (el.id === this.courseData.id) {
               this.addedToCart = true;
