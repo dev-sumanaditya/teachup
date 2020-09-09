@@ -17,6 +17,9 @@ export class AuthService {
   public userInfo;
   jwtToken = "";
 
+  homePageSignupSubject = new ReplaySubject<any>(1);
+  signupEmail = this.homePageSignupSubject.asObservable();
+
   constructor(
     private http: HttpClient,
     private afAuth: AngularFireAuth,
@@ -59,6 +62,11 @@ export class AuthService {
     return await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
   }
 
+  async loginWithFacebook() {
+    await this.setAuthPersistance();
+    return await this.afAuth.signInWithPopup(new auth.FacebookAuthProvider());
+  }
+
   async registerUser(email: string, password: string) {
     await this.afAuth.createUserWithEmailAndPassword(email, password);
     const user = await this.afAuth.currentUser;
@@ -98,5 +106,14 @@ export class AuthService {
       .toPromise();
     this.currentUserSubject.next({ ...data });
     return;
+  }
+
+  async sendEmailVerification() {
+    const user = await this.afAuth.currentUser;
+    return await user.sendEmailVerification();
+  }
+
+  async setSignupEmail(data: string) {
+    this.homePageSignupSubject.next(data);
   }
 }

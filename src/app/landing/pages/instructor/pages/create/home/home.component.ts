@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject, PLATFORM_ID } from "@angular/core";
 import { IMyDpOptions } from "mydatepicker";
 import { ImageCroppedEvent } from "ngx-image-cropper";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { HttpClient, HttpEventType, HttpEvent } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { tap } from "rxjs/operators";
+import { isPlatformBrowser } from "@angular/common";
 
 @Component({
   selector: "app-home",
@@ -57,7 +58,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId
   ) {}
 
   ngOnInit(): void {
@@ -217,17 +219,19 @@ export class HomeComponent implements OnInit {
     this.imageChangedEvent = null;
   }
   makeblob(dataURL) {
-    const BASE64_MARKER = ";base64,";
-    const parts = dataURL.split(BASE64_MARKER);
-    const contentType = parts[0].split(":")[1];
-    const raw = window.atob(parts[1]);
-    const rawLength = raw.length;
-    const uInt8Array = new Uint8Array(rawLength);
+    if (isPlatformBrowser(this.platformId)) {
+      const BASE64_MARKER = ";base64,";
+      const parts = dataURL.split(BASE64_MARKER);
+      const contentType = parts[0].split(":")[1];
+      const raw = window.atob(parts[1]);
+      const rawLength = raw.length;
+      const uInt8Array = new Uint8Array(rawLength);
 
-    for (let i = 0; i < rawLength; ++i) {
-      uInt8Array[i] = raw.charCodeAt(i);
+      for (let i = 0; i < rawLength; ++i) {
+        uInt8Array[i] = raw.charCodeAt(i);
+      }
+      return new Blob([uInt8Array], { type: contentType });
     }
-    return new Blob([uInt8Array], { type: contentType });
   }
 
   changedEditor($event) {

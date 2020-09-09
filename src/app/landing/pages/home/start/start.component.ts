@@ -10,6 +10,8 @@ import { AuthService } from "src/app/landing/auth/services/auth.service";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { tap, switchMap } from "rxjs/operators";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-start",
@@ -70,9 +72,20 @@ export class StartComponent implements OnInit, OnDestroy {
   public blogs = [];
   public courses = [];
 
-  constructor(private authService: AuthService, private http: HttpClient) {}
+  public signupForm: FormGroup;
+
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.signupForm = this.fb.group({
+      email: [null, [Validators.required, Validators.email]],
+    });
+
     // this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {});
     this.authService.currentUser
       .pipe(
@@ -100,6 +113,14 @@ export class StartComponent implements OnInit, OnDestroy {
     this.http.get<any>(environment.apiUrl + "/course").subscribe(({ data }) => {
       this.courses = data;
     });
+  }
+
+  signupWithEmail() {
+    if (this.signupForm.invalid) {
+      return;
+    }
+    this.authService.setSignupEmail(this.signupForm.value.email);
+    this.router.navigate(["/auth", "signup"]);
   }
 
   ngOnDestroy(): void {

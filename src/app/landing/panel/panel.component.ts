@@ -58,16 +58,18 @@ export class PanelComponent implements OnInit, AfterViewInit, OnDestroy {
     private store: Store,
     @Inject(PLATFORM_ID) private platformId
   ) {
-    renderer.listen("window", "click", (e: Event) => {
-      if (!this.drop.nativeElement.contains(e.target)) {
-        this.dropdown = false;
-      }
-      if (this.user) {
-        if (!this.accMenu.nativeElement.contains(e.target)) {
-          this.showAcc = false;
+    if (isPlatformBrowser(this.platformId)) {
+      renderer.listen("window", "click", (e: Event) => {
+        if (!this.drop.nativeElement.contains(e.target)) {
+          this.dropdown = false;
         }
-      }
-    });
+        if (this.user) {
+          if (!this.accMenu.nativeElement.contains(e.target)) {
+            this.showAcc = false;
+          }
+        }
+      });
+    }
   }
 
   ngOnInit(): void {

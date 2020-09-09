@@ -4,6 +4,8 @@ import {
   OnDestroy,
   ɵConsole,
   ChangeDetectorRef,
+  PLATFORM_ID,
+  Inject,
 } from "@angular/core";
 import { WindowRefService } from "src/app/landing/services/window-ref.service";
 import { Subscription, Observable } from "rxjs";
@@ -18,6 +20,7 @@ import { CartState } from "src/app/landing/store/states/cart.state";
 import { CourseMin } from "src/app/landing/store/models/cart.model";
 import { CartService } from "src/app/landing/services/cart.service";
 import { DeleteCartItem } from "src/app/landing/store/actions/cart.action";
+import { isPlatformBrowser } from "@angular/common";
 
 @Component({
   selector: "app-main",
@@ -59,7 +62,8 @@ export class MainComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private cd: ChangeDetectorRef,
     private cartService: CartService,
-    private store: Store
+    private store: Store,
+    @Inject(PLATFORM_ID) private platformId
   ) {}
 
   get couponFormControl() {
@@ -221,8 +225,10 @@ export class MainComponent implements OnInit, OnDestroy {
         });
     };
 
-    const rzp = new this.winRef.nativeWindow.Razorpay(options);
-    rzp.open();
+    if (isPlatformBrowser(this.platformId)) {
+      const rzp = new this.winRef.nativeWindow.Razorpay(options);
+      rzp.open();
+    }
   }
   // deleteItem(id) {
   //   this.orderServ.deleteItemFromList(id);

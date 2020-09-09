@@ -179,20 +179,14 @@ export class RegisterComponent implements OnInit {
         map((event) => {
           switch (event.type) {
             case HttpEventType.Sent:
-              console.log("Request has been made!");
               break;
             case HttpEventType.ResponseHeader:
-              console.log("Response header has been received!");
               break;
             case HttpEventType.UploadProgress:
               this.progress = Math.round((event.loaded / event.total) * 100);
-              console.log(`Uploaded! ${this.progress}%`);
               break;
             case HttpEventType.Response:
-              console.log("User successfully created!", event.body);
-              setTimeout(() => {
-                this.progress = 0;
-              }, 1500);
+              this.progress = 0;
           }
         })
       )

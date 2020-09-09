@@ -41,6 +41,11 @@ export class SignupComponent implements OnInit {
         ],
       ],
     });
+
+    this.authService.signupEmail.subscribe((data) => {
+      console.log(data);
+      this.signupForm.patchValue({ email: data });
+    });
   }
 
   onSubmit() {

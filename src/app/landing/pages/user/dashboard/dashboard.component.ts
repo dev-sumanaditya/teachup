@@ -66,6 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.auth.currentUser.subscribe((data) => {
       this.user = data;
+      console.log(this.user);
       const roles = data.roles;
       if (roles.some((e) => e.name === "INSTRUCTOR")) {
         this.isInstructor = true;
@@ -157,8 +158,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  sendMail() {
-    this.mailSent = true;
+  async sendMail() {
+    const user = await this.auth.currentUser;
+    try {
+      await this.auth.sendEmailVerification();
+      this.mailSent = true;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   ngOnDestroy() {

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Inject, PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
 
 @Component({
   selector: "app-updates",
@@ -10,14 +11,16 @@ export class UpdatesComponent implements OnInit {
 
   public demourl = "/assets/images/demo/updates.png";
 
-  constructor() {}
+  constructor(@Inject(PLATFORM_ID) private platformId) {}
 
   ngOnInit(): void {}
 
   extractContent(s) {
-    const span = document.createElement("span");
-    span.innerHTML = s;
-    const str = span.textContent || span.innerText;
-    return str.substring(0, 120);
+    if (isPlatformBrowser(this.platformId)) {
+      const span = document.createElement("span");
+      span.innerHTML = s;
+      const str = span.textContent || span.innerText;
+      return str.substring(0, 120);
+    }
   }
 }

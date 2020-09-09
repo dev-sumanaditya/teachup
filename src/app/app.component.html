@@ -1,1 +1,21 @@
 <router-outlet></router-outlet>
+<div id="loader" #loader>
+  <style>
+    .application-loading-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .application-loading-box {
+      margin: 5px;
+      text-align: center;
+    }
+  </style>
+  <div class="application-loading-container">
+    <div class="application-loading-box">
+      <span>Teachup.io</span>
+    </div>
+  </div>
+</div>

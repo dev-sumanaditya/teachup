@@ -24,7 +24,6 @@ const routes: Routes = [
     path: "challenge",
     loadChildren: () =>
       import("./challenge/challenge.module").then((m) => m.ChallengeModule),
-    canActivate: [AntiAuthGuard],
   },
   { path: "", component: LoginComponent, canActivate: [AntiAuthGuard] },
 ];

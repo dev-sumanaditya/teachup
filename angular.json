@@ -17,17 +17,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sohoLearn",
+            "outputPath": "dist/sohoLearn/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/_redirects"
-            ],
+            "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
             "styles": [
               "./node_modules/video.js/dist/video-js.min.css",
               "./node_modules/slick-carousel/slick/slick.scss",
@@ -99,11 +95,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/_redirects"
-            ],
+            "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
             "styles": [
               "src/styles.scss",
               "./node_modules/quill/dist/quill.core.css",
@@ -127,9 +119,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -143,8 +133,84 @@
               "devServerTarget": "sohoLearn:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/sohoLearn/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "externalDependencies": [
+              "@firebase/analytics",
+              "@firebase/analytics-types",
+              "@firebase/app",
+              "@firebase/app-types",
+              "@firebase/auth",
+              "@firebase/auth-interop-types",
+              "@firebase/auth-types",
+              "@firebase/component",
+              "@firebase/database",
+              "@firebase/database-types",
+              "@firebase/firestore",
+              "@firebase/firestore-types",
+              "@firebase/functions",
+              "@firebase/functions-types",
+              "@firebase/installations",
+              "@firebase/installations-types",
+              "@firebase/logger",
+              "@firebase/messaging",
+              "@firebase/messaging-types",
+              "@firebase/performance",
+              "@firebase/performance-types",
+              "@firebase/polyfill",
+              "@firebase/remote-config",
+              "@firebase/remote-config-types",
+              "@firebase/storage",
+              "@firebase/storage-types",
+              "@firebase/util",
+              "@firebase/webchannel-wrapper"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "sohoLearn:build",
+            "serverTarget": "sohoLearn:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sohoLearn:build:production",
+              "serverTarget": "sohoLearn:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "sohoLearn:build:production",
+            "serverTarget": "sohoLearn:server:production",
+            "routes": ["/"]
+          },
+          "configurations": {
+            "production": {}
+          }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "sohoLearn"
 }
