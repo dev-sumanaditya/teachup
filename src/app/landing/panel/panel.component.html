@@ -1,5 +1,46 @@
 <div class="container-main">
   <div class="loading hide" #loading></div>
+
+  <!-- Search page -->
+  <div class="search-ctr row" [class.hideSearch]="!searchPage">
+    <div class="flex-grow" (click)="closeSearch()"></div>
+    <div class="searchTab col">
+      <div class="row">
+        <div class="flex-grow"></div>
+        <img
+          src="/assets/icons/utility/close2.png"
+          class="close"
+          (click)="closeSearch()"
+        />
+      </div>
+      <div class="col inp">
+        <input
+          #input
+          type="text"
+          class="search"
+          spellcheck="false"
+          placeholder="Search"
+          maxlength="140"
+        />
+        <img
+          *ngIf="searchSpinner"
+          class="spin spinner"
+          src="/assets/icons/utility/spinner-grey.png"
+        />
+      </div>
+      <div class="col noResults" *ngIf="noResult">
+        <img src="/assets/images/utility/search-img.svg" alt="" />
+        <p class="text">Search for your favourite topic or instructor</p>
+      </div>
+      <div class="result col flex-grow" *ngIf="!noResult">
+        <h3>Search is down.</h3>
+        <p class="text">
+          Our best minds are working to improve your search experience.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- side menu -->
   <div class="sidemenu col" [class.shrinked]="!sidemenu">
     <div class="row tp">
@@ -182,8 +223,8 @@
         <a routerLink="/user/cart" class="navbtn" *ngIf="user">
           <img src="/assets/icons/utility/cart.png" alt="" />
         </a>
-        <a class="navbtn">
-          <img src="/assets/icons/utility/search.png" alt="" />
+        <a class="navbtn" (click)="openSearch()" style="cursor: pointer">
+          <img src="/assets/icons/utility/search.png" />
         </a>
       </div>
       <div class="navs2 row">
@@ -198,12 +239,18 @@
   </div>
 
   <div class="footer">
-    <div class="wide row">
-      <div class="sec">
-        <h2>Teachup.io</h2>
+    <div class="wide row ctr">
+      <div class="sec row">
+        <a class="brand" [routerLink]="['/']">Teachup.io</a>
       </div>
-      <div class="sec"></div>
-      <div class="sec"></div>
+      <div class="flex-grow"></div>
+      <div class="sec row">
+        <a [routerLink]="['/terms-and-conditions']" class="n"
+          >Terms & Conditions</a
+        >
+        <a [routerLink]="['/privacy-policy']" class="n">Privacy Policy</a>
+        <a [routerLink]="['/help']" class="n">Help</a>
+      </div>
     </div>
   </div>
 </div>

@@ -38,6 +38,7 @@ export class AuthService {
             headers: { Authorization: `${this.jwtToken}` },
           })
           .toPromise();
+        this.updateUser({ ...user });
         this.currentUserSubject.next(data.data);
       } catch (err) {
         this.currentUserSubject.next(null);

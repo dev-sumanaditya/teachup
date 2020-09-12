@@ -15,15 +15,7 @@ export class ForgotComponent implements OnInit {
   public error = "";
   public success = false;
 
-  constructor(
-    private authService: AuthService,
-    public fb: FormBuilder,
-    private router: Router
-  ) {
-    if (localStorage.getItem("currentUser")) {
-      this.router.navigate(["/"]);
-    }
-  }
+  constructor(private authService: AuthService, public fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.ForgotForm = this.fb.group({

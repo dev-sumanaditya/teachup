@@ -88,4 +88,15 @@ export class LoginComponent implements OnInit {
       this.router.navigate(["/"]);
     }
   }
+
+  async loginWithFacebook() {
+    const { user } = await this.authService.loginWithFacebook();
+    this.authService.currentUserSubject.next(user);
+    this.loading = true;
+    if (this.returnUrl) {
+      this.router.navigate([this.returnUrl]);
+    } else {
+      this.router.navigate(["/"]);
+    }
+  }
 }

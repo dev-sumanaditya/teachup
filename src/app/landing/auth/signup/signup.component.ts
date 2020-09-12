@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { AuthService } from "../services/auth.service";
 import { Router } from "@angular/router";
@@ -8,12 +8,14 @@ import { Router } from "@angular/router";
   templateUrl: "./signup.component.html",
   styleUrls: ["./signup.component.scss"],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
   public submitted = false;
   public signupForm: FormGroup;
   public loading = false;
   public returnUrl: string;
   public error = "";
+
+  public sub;
 
   constructor(
     private authService: AuthService,
@@ -42,7 +44,7 @@ export class SignupComponent implements OnInit {
       ],
     });
 
-    this.authService.signupEmail.subscribe((data) => {
+    this.sub = this.authService.signupEmail.subscribe((data) => {
       console.log(data);
       this.signupForm.patchValue({ email: data });
     });
@@ -77,8 +79,27 @@ export class SignupComponent implements OnInit {
 
   async googleLogin() {
     const { user } = await this.authService.loginWithGoogle();
-    localStorage.setItem("currentUser", JSON.stringify(user));
     this.authService.currentUserSubject.next(user);
-    this.router.navigate(["/"]);
+    this.loading = true;
+    if (this.returnUrl) {
+      this.router.navigate([this.returnUrl]);
+    } else {
+      this.router.navigate(["/"]);
+    }
+  }
+
+  async loginWithFacebook() {
+    const { user } = await this.authService.loginWithFacebook();
+    this.authService.currentUserSubject.next(user);
+    this.loading = true;
+    if (this.returnUrl) {
+      this.router.navigate([this.returnUrl]);
+    } else {
+      this.router.navigate(["/"]);
+    }
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

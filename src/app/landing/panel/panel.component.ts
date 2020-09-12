@@ -23,6 +23,13 @@ import {
 } from "@angular/router";
 import { Store } from "@ngxs/store";
 import { GetCartItems } from "../store/actions/cart.action";
+import { fromEvent } from "rxjs";
+import {
+  filter,
+  debounceTime,
+  distinctUntilChanged,
+  tap,
+} from "rxjs/operators";
 
 @Component({
   selector: "app-panel",
@@ -39,6 +46,10 @@ export class PanelComponent implements OnInit, AfterViewInit, OnDestroy {
   public user;
   public isInstructor;
 
+  public searchPage = false;
+  public searchSpinner = false;
+  public noResult = true;
+
   @ViewChild("dropmenu") drop: ElementRef;
   @ViewChild("accountMenu") accMenu: ElementRef;
   @ViewChild("loading", { static: true }) loader: ElementRef;
@@ -49,12 +60,13 @@ export class PanelComponent implements OnInit, AfterViewInit, OnDestroy {
     this.checkScrollTop();
   }
 
+  @ViewChild("input") input: ElementRef;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
     private store: Store,
     @Inject(PLATFORM_ID) private platformId
   ) {
@@ -117,7 +129,28 @@ export class PanelComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions = [...this.subscriptions, sub];
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    // server-side search
+    fromEvent(this.input.nativeElement, "keyup")
+      .pipe(
+        filter(Boolean),
+        debounceTime(700),
+        distinctUntilChanged(),
+        tap((event: KeyboardEvent) => {
+          if (event.isTrusted) {
+            if (this.input.nativeElement.value.length < 1) {
+              this.searchSpinner = false;
+              this.noResult = true;
+              return;
+            }
+            this.searchSpinner = true;
+            console.log(this.input.nativeElement.value);
+            this.noResult = false;
+          }
+        })
+      )
+      .subscribe();
+  }
 
   showdrop() {
     this.dropdown = !this.dropdown;
@@ -151,6 +184,15 @@ export class PanelComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   closeSideMenu() {
     this.sidemenu = false;
+  }
+
+  openSearch() {
+    this.searchPage = true;
+    this.renderer.addClass(document.body, "ovh");
+  }
+  closeSearch() {
+    this.searchPage = false;
+    this.renderer.removeClass(document.body, "ovh");
   }
 
   ngOnDestroy() {

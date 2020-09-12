@@ -13,6 +13,25 @@ const routes: Routes = [
     component: PanelComponent,
     children: [
       {
+        path: "help",
+        loadChildren: () =>
+          import("./pages/public/help/help.module").then((m) => m.HelpModule),
+      },
+      {
+        path: "terms-and-conditions",
+        loadChildren: () =>
+          import("./pages/public/terms/terms.module").then(
+            (m) => m.TermsModule
+          ),
+      },
+      {
+        path: "privacy-policy",
+        loadChildren: () =>
+          import("./pages/public/privacy-policy/privacy-policy.module").then(
+            (m) => m.PrivacyPolicyModule
+          ),
+      },
+      {
         path: "blog/:id",
         loadChildren: () =>
           import("./pages/blog/blog.module").then((m) => m.BlogModule),

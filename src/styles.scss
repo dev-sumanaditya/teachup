@@ -163,13 +163,17 @@ html {
   padding: 0;
   // scroll-behavior: smooth;
 }
-
 img {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+}
+// hide scroll on model open
+.ovh {
+  height: 100vh !important;
+  overflow-y: hidden !important;
 }
 
 /* Desktop */

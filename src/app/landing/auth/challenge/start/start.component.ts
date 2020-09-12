@@ -92,9 +92,9 @@ export class StartComponent implements OnInit {
   }
 
   async VerifyEmail() {
-    console.log(this.code);
     try {
       await this.authService.verifyEmail(this.code);
+      // this.authService.updateUser({ emailVerified: true });
       this.emailVerified = true;
     } catch (err) {
       this.error = err;

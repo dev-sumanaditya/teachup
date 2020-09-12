@@ -12,6 +12,6 @@ export const environment = {
     measurementId: "G-XQPX2TL30L",
   },
   razorpay: {
-    key: "rzp_test_P6uPgkr7E6dyKu",
+    key: "rzp_live_LmH6x6Ki0FHZSD",
   },
 };
