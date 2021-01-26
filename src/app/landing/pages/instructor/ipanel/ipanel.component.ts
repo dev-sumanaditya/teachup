@@ -10,14 +10,18 @@ import { environment } from "src/environments/environment";
 })
 export class IpanelComponent implements OnInit {
   public user;
+  public instructor;
   public courses = null;
 
   constructor(private auth: AuthService, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.auth.currentUser.subscribe((data) => {
-      this.user = data;
-    });
+    this.http
+      .get<any>(environment.apiUrl + "/instructor/is-instructor/")
+      .subscribe(({ data }) => {
+        this.instructor = data.instructor;
+        this.user = data.instructor.user;
+      });
 
     this.http.get<any>(environment.apiUrl + "/course/own").subscribe((data) => {
       this.courses = data.data;

@@ -20,7 +20,7 @@
 
     <div class="cta col" *ngIf="!user">
       <h2>
-        Register now and get <span class="blue">40% off</span> on your first
+        Register now and get started with your first
         course.
       </h2>
       <form [formGroup]="signupForm" (ngSubmit)="signupWithEmail()" class="row">
@@ -67,11 +67,7 @@
     </div>
 
     <!-- signedin views -->
-    <div
-      class="bannerImg col"
-      [style.background]="'url(/assets/images/home/bg1.jpg)'"
-      *ngIf="user"
-    >
+    <div class="bannerImg col" [style.background]="'url(/assets/images/home/bg1.jpg)'" *ngIf="user">
       <div class="cont col">
         <h1>Bringing top instructors at your doorstep</h1>
         <p>It’s your journey. Keep going with courses as low as ₹1900</p>
@@ -82,12 +78,8 @@
       <h2 class="dark">What to learn next</h2>
       <h3 class="dark">Topics Recommended for you</h3>
       <div class="topics row">
-        <a
-          [routerLink]="['/courses', 'category', i.id]"
-          class="topic blue col"
-          *ngFor="let i of categories"
-          ><span>{{ i.name }}</span></a
-        >
+        <a [routerLink]="['/courses', 'category', i.id]" class="topic blue col" *ngFor="let i of categories"><span>{{
+            i.name }}</span></a>
       </div>
     </div>
 
@@ -127,7 +119,7 @@
     </div>
 
     <div class="cta2 col" *ngIf="!user">
-      <h2>Register now and get 40% off on your first course</h2>
+      <h2></h2>
       <div class="btns">
         <a href="/auth/signup" class="btn blue-bg">Register Now</a>
         <a href="/courses" class="btn blue-ot">Explore Courses</a>
@@ -137,56 +129,28 @@
     <div class="instructors col" *ngIf="instructors.length > 0">
       <h3 class="dark head">Meet Our Instructors</h3>
       <div class="slider">
-        <ngx-slick-carousel
-          class="carousel"
-          #slickModal="slick-carousel"
-          [config]="slideConfig"
-        >
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
           <div ngxSlickItem *ngFor="let i of instructors" class="slide col">
             <div class="ct col">
-              <div
-                class="img"
-                [ngStyle]="{
+              <div class="img" [ngStyle]="{
                   background: i.user.photoURL
                     ? 'url(' + i.user.photoURL + ')'
                     : '#eee'
-                }"
-              ></div>
-              <a
-                [routerLink]="['/profile', 'instructor', i.id]"
-                class="blue name"
-                >{{ i.user.displayName }}</a
-              >
-              <small class="dark des"
-                >{{ i.about }} <span *ngIf="!i.about">..</span>
+                }"></div>
+              <a [routerLink]="['/profile', 'instructor', i.id]" class="blue name">{{ i.user.displayName }}</a>
+              <small class="dark des">{{ i.intro }} <span *ngIf="!i.intro">..</span>
               </small>
               <div class="row social">
-                <a
-                  href="{{ i.fbProfile }}"
-                  *ngIf="i.fbProfile !== null"
-                  target="_blank"
-                >
+                <a href="{{ i.fbProfile }}" *ngIf="i.fbProfile !== null" target="_blank">
                   <img src="/assets/icons/social/fb.png" alt="" />
                 </a>
-                <a
-                  href="{{ i.instaProfile }}"
-                  *ngIf="i.instaProfile !== null"
-                  target="_blank"
-                >
+                <a href="{{ i.instaProfile }}" *ngIf="i.instaProfile !== null" target="_blank">
                   <img src="/assets/icons/social/insta.png" alt="" />
                 </a>
-                <a
-                  href="{{ i.linkedinProfile }}"
-                  *ngIf="i.linkedinProfile !== null"
-                  target="_blank"
-                >
+                <a href="{{ i.linkedinProfile }}" *ngIf="i.linkedinProfile !== null" target="_blank">
                   <img src="/assets/icons/social/linkedin.png" alt="" />
                 </a>
-                <a
-                  href="{{ i.twitterProfile }}"
-                  *ngIf="i.twitterProfile !== null"
-                  target="_blank"
-                >
+                <a href="{{ i.twitterProfile }}" *ngIf="i.twitterProfile !== null" target="_blank">
                   <img src="/assets/icons/social/twitter.png" alt="" />
                 </a>
               </div>

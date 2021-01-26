@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Pipe, PipeTransform } from "@angular/core";
 import { Course } from "src/app/landing/store/models/course.model";
 import { CourseService } from "../../user/services/course.service";
 import { CourseMin } from "src/app/landing/store/models/cart.model";
@@ -156,5 +156,21 @@ export class CourseinfoComponent implements OnInit {
     };
     this.orderService.setState([payload]);
     this.router.navigate(["/payment"]);
+  }
+}
+
+
+
+@Pipe({
+  name: 'myTime'
+})
+export class MyTimePipe implements PipeTransform {
+  transform(value: number): string {
+     if(value > 0 && value/60 < 1) {
+       return value + ' m';
+
+     } else {
+       return value/60 + ' h';
+     }
   }
 }

@@ -1,6 +1,10 @@
 .ctrr {
   border-radius: 5px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100%;
   .image {
     position: relative;
     padding-top: 56.3%;
@@ -32,17 +36,15 @@
   }
   .info {
     padding: 5px 10px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     .title {
       font-size: 13px;
       margin: 0;
       font-weight: 600;
-      word-wrap: break-word;
       color: #333;
-      width: max-content;
-      white-space: pre-wrap; /* css-3 */
-      white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-      white-space: -pre-wrap; /* Opera 4-6 */
-      white-space: -o-pre-wrap;
+      text-overflow: ellipsis;
       &:hover {
         color: #0052cc;
       }

@@ -4,21 +4,13 @@
     <div class="overlay"></div>
   </div>
   <div class="info col" *ngIf="data">
-    <a [routerLink]="['/courses', 'course', data.id]" class="title">{{
-      data.title
-    }}</a>
-    <small class="author" *ngIf="data.author"
-      >By {{ data.author.user.displayName }}</small
-    >
+    <p style="margin: 0; padding: 0;">
+      <a [routerLink]="['/courses', 'course', data.id]" class="title">{{data.title}}</a>
+    </p>
+    <small class="author" *ngIf="data.author">By {{ data.author.user.displayName }}</small>
     <strong class="price">Rs {{ data.price }}.00</strong>
-    <small class="time"
-      >Start Date - {{ data.startDate | date: "mediumDate" }}</small
-    >
-    <a
-      (click)="openCourse()"
-      routerLinkActive="router-link-active"
-      class="btn blue-bg"
-      >Enroll Now</a
-    >
+    <small class="time">Start Date - {{ data.startDate | date: "mediumDate" }}</small>
+    <div style="flex-grow: 2;"></div>
+    <a (click)="openCourse()" routerLinkActive="router-link-active" class="btn blue-bg">Enroll Now</a>
   </div>
 </div>
